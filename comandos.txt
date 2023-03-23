@@ -1,0 +1,6 @@
+npm run dev
+cortar conexión (ctrl + c)
+npm install ejs
+npm install body-parser
+
+ <!-- <%= empieza el código de programación*/ -->
