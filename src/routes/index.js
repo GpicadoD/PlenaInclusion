@@ -1,6 +1,6 @@
 import express from 'express';
 import { AddActivities, GetActivities } from '../controllers/activities.js';
-import { GetUsers, Register } from '../controllers/users.js';
+import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -24,8 +24,8 @@ router.get('/despedida', (req, res) => {
     );
 });
 
-router.post('/login', (req, res) => {
-    console.log(req.body);
+//router.post('/login', (req, res) => {
+    //console.log(req.body);
     //req es request y se puede poner después del body un .username o .password ya que lee las clases
     //del ejs y luego las muestra en la terminal cuando se hace una nueva carga de datos en el login
     /*res.json(
@@ -33,12 +33,12 @@ router.post('/login', (req, res) => {
             "Title": "¡Funciona!"
         }
     );*/
-    res.render('pages/show_info', {
-        username: req.body.username,
-        password: req.body.password
-    })
+    //res.render('pages/show_info', {
+        //username: req.body.username,
+       // password: req.body.password
+    //})
     //Son variables que están conectadas con el html
-});
+//});
 
 router.post('/mostrarLista', (req, res) => {
     var lista = ["Álvaro", "Paula", "Alberto"];
@@ -52,5 +52,7 @@ router.post('/getUsers', GetUsers);
 
 router.post('/getActivities', GetActivities);
 router.post('/addActivities', AddActivities);
+
+router.post('/login', GetUsersPassHash);
 
 export default router;

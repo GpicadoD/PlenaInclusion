@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
-export const User = sequelize.define('Users', { name: DataTypes.STRING });
-export const Activity = sequelize.define('Activities', { name: DataTypes.STRING });
+export const User = Sequelize.define('Users', { name: DataTypes.STRING });
+export const Activity = Sequelize.define('Activities', { name: DataTypes.STRING });
 const UserActs = sequelize.define('UserActs', {
   UserId: {
     type: DataTypes.INTEGER,

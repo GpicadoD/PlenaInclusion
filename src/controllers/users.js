@@ -1,14 +1,14 @@
 import Users from "../models/userModel.js";
-import bcrypt from "bcrypt";
+import bcrypt, { compare } from "bcrypt";
 
 // npm install bcrypt
 
 export const GetUsers  = async(req, res) => {
     try {
-        const users = await Users.findAll({
+        let usersData = await Users.findAll({
             attributes:['id', 'name', 'password']
         });
-        res.json(users);
+        res.json(usersData);
     } catch (error) {
         console.log(error);
     }
@@ -26,6 +26,32 @@ export const Register = async(req, res) => {
             password: hashPassword
         });
         res.json({msg: "Registration Successful"});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const GetUsersPassHash  = async(req, res) => {
+    const {username, password} = req.body;
+    try {
+        let users = await Users.findOne ({username});
+        debugger;
+        console.log(users)
+        if(users.name != username){
+            res.status(404);
+            res.json({msg: "Not user found"});
+            return;
+        } else {
+            const checkPass = await bcrypt.compare(password, users.password);
+
+            if(!checkPass){
+                res.json({msg: "Invalid Password"});
+            } else {
+                res.json({msg: "Logged Succesfully"});
+            }
+            users = null;
+
+        }
     } catch (error) {
         console.log(error);
     }
