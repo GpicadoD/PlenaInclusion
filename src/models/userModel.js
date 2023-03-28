@@ -4,12 +4,12 @@ import db from "../config/database.js";
 const {DataTypes} = Sequelize;
 
 const Users = db.define('users', {
-    id: {
+    userId:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    nameUser:{
+    name:{
         type: DataTypes.STRING
     },
     password:{
@@ -22,5 +22,4 @@ const Users = db.define('users', {
 (async () => {
     await db.sync();
 })();
-
 export default Users;
