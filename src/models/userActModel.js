@@ -1,23 +1,33 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
+import Users from "./userModel.js";
+import Activities from "./activityModel.js";
 
-export const User = Sequelize.define('Users', { name: DataTypes.STRING });
-export const Activity = Sequelize.define('Activities', { name: DataTypes.STRING });
-const UserActs = sequelize.define('UserActs', {
-  UserId: {
+const { DataTypes } = Sequelize;
+
+const UserActs = db.define('UserActs', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  userId: {
     type: DataTypes.INTEGER,
     references: {
-      model: User,
+      model: Users,
       key: 'id'
     }
   },
-  ActivityId: {
+  activityId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Activity,
+      model: Activities,
       key: 'id'
     }
   }
 });
-User.belongsToMany(User, { through: UserActs });
-Activity.belongsToMany(Activity, { through: UserActs });
+
+Users.belongsToMany(Activities, { through: UserActs });
+Activities.belongsToMany(Users, { through: UserActs });
+
+export default UserActs;
