@@ -5,9 +5,7 @@ import bcrypt, { compare } from "bcrypt";
 
 export const GetUsers  = async(req, res) => {
     try {
-        let usersData = await Users.findAll({
-            attributes:['id', 'name', 'password']
-        });
+        let usersData = await Users.findAll();
         res.json(usersData);
     } catch (error) {
         console.log(error);
@@ -39,7 +37,7 @@ export const GetUsersPassHash  = async(req, res) => {
         console.log(users)
         if(users.name != username){
             res.status(404);
-            res.json({msg: "Not user found"});
+            res.json({msg: "User Not found"});
             return;
         } else {
             const checkPass = await bcrypt.compare(password, users.password);
