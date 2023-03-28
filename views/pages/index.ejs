@@ -39,6 +39,14 @@
             <form method="post" action="/getActivities">
                 <input type="submit" value="Coger actividades">
             </form>
+            <form action="/addList" method="post">
+                IdAct: <input type="text" name="idAct" value="" /><br><br>
+                IdUser: <input type="text" name="idUser" value="" /><br><br>
+                <input type="submit" value="Añadir a UserAct"/><br><br><hr>
+            </form>
+            <form method="post" action="/getList">
+                <input type="submit" value="Coger UserActs">
+            </form>
         </div>
     </main>
     <footer>
