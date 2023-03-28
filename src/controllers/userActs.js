@@ -1,25 +1,25 @@
-import Activities from "../models/userActModel.js";
+import Activities from "../models/activityModel.js";
+import Users from "../models/userModel.js";
+import UserActs from "../models/userActModel.js";
 
-export const GetActivities = async(req, res) => {
+export const GetList = async(req, res) => {
     try {
-        const activities = await Activities.findAll({
-            attributes:['id', 'name', 'date']
-        });
-        res.json(activities);
+        const userActs = await UserActs.findAll({});
+        res.json(userActs);
     } catch (error) {
         console.log(error);
     }
 }
 
-export const AddActivities = async(req, res) => {
-    const {nameAct, date} = req.body;
-    if(date == null) return res.status(400).json({msg: "There is no date in the activity"});
+export const AddList = async(req, res) => {
+    const {idAct, idUser} = req.body;
     try {
-        await Activities.create({
-            name: nameAct,
-            date: date
-        });
-        res.json({msg: "Activity Registration Successful"});
+        let activity = await Activities.findByPk(idAct);
+        let user = await Users.findByPk(idUser);
+        //console.log(activity);
+        user.addActivities(activity);
+        
+        res.json({msg: "User - Activity Registration Successfully"});
     } catch (error) {
         console.log(error);
     }
