@@ -1,6 +1,7 @@
 import express from 'express';
 import { AddActivities, GetActivities } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
+import { AddList, GetList } from '../controllers/userActs.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -55,4 +56,6 @@ router.post('/addActivities', AddActivities);
 
 router.post('/login', GetUsersPassHash);
 
+router.post('/addList', AddList);
+router.post('/getList', GetList);
 export default router;

@@ -1,10 +1,9 @@
 import Activities from "../models/activityModel.js";
+import Users from "../models/userModel.js";
 
 export const GetActivities = async(req, res) => {
     try {
-        const activities = await Activities.findAll({
-            attributes:['id', 'name', 'date']
-        });
+        const activities = await Activities.findAll({});
         res.json(activities);
     } catch (error) {
         console.log(error);
@@ -17,7 +16,7 @@ export const AddActivities = async(req, res) => {
     try {
         await Activities.create({
             name: nameAct,
-            date: date
+            date: date,
         });
         res.json({msg: "Activity Registration Successful"});
     } catch (error) {
