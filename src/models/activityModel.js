@@ -3,7 +3,7 @@ import db from "../config/database.js";
 
 
 const {DataTypes} = Sequelize;
-
+// Define the "Activities" model using Sequelize
 const Activities = db.define('activities', {
     activityId:{
         type: DataTypes.INTEGER,
@@ -19,8 +19,9 @@ const Activities = db.define('activities', {
 },{
     freezeTableName: true
 });
-
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
+// Export the "Activities" model
 export default Activities;
