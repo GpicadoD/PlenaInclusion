@@ -17,7 +17,8 @@ export const AddList = async(req, res) => {
         let activity = await Activities.findByPk(idAct);
         let user = await Users.findByPk(idUser);
         //console.log(activity);
-        user.addActivities(activity);
+        //user.addActivities(activity);
+        activity.addUsers(user);
         
         res.json({msg: "User - Activity Registration Successfully"});
     } catch (error) {
