@@ -2,13 +2,16 @@ import express from 'express';
 import { AddActivities, GetActivities } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList } from '../controllers/userActs.js';
+
 const router = express.Router();
 
+// Define a route for the home page
 router.get('/', (req, res) => {
     res.render('pages/index');
 });
 
-router.get('/buenastardes', (req, res) => {
+// Define a route for the "buenastardes" endpoint
+router.get('/GoodAfternoon', (req, res) => {
     res.json(
         {
             "Title": "¡Buenas tardes Mundo!"
@@ -17,7 +20,8 @@ router.get('/buenastardes', (req, res) => {
 });
 
 
-router.get('/despedida', (req, res) => {
+// Define a route for the "Goodbye" endpoint
+router.get('/Goobye', (req, res) => {
     res.json(
         {
             "Title": "Adios Mundo"
@@ -41,21 +45,25 @@ router.get('/despedida', (req, res) => {
     //Son variables que están conectadas con el html
 //});
 
-router.post('/mostrarLista', (req, res) => {
-    var lista = ["Álvaro", "Paula", "Alberto"];
-    res.render('pages/lista', {
-        lista: lista,
+// Define a route for the "mostrarLista" endpoint
+router.post('/ShowList', (req, res) => {
+    var list = ["Álvaro", "Paula", "Alberto"];
+    res.render('pages/list', {
+        list: list,
     })
 });
 
+// Define routes for user-related actions
 router.post('/register', Register);
 router.post('/getUsers', GetUsers);
 
 router.post('/getActivities', GetActivities);
 router.post('/addActivities', AddActivities);
 
+// Define routes for activity-related actions
 router.post('/login', GetUsersPassHash);
-
+// Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
+// Export the router object
 export default router;
