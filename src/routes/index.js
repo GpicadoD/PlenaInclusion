@@ -65,6 +65,6 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
-router.post('/getUserActivities', GetUserActivities)
+router.post('/getUserActivities', GetUserActivities);
 // Export the router object
 export default router;

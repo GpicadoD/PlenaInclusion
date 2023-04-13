@@ -31,10 +31,10 @@ export const AddList = async(req, res) => {
 }
 
 export const GetUserActivities = async(req, res) => {
-    const { userId } = req.params; 
+    const { userId } = req.body; 
   
     try {
-      const userActs = await UserActs.findAll({
+      const userActs = await Users.findAll({
         where: {
           userId: userId 
         },
