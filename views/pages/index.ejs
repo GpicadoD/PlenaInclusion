@@ -12,40 +12,49 @@
 </head>
 <body class="container">
     <main>
+        <!-- Main header -->
         <h1>POST TUTORIAL</h1>
         <div class="form">
+            <!-- Login form -->
             <form action="/login" method="post">
                 Username: <input type="text" name="username" value="" /><br><br>
                 Password: <input type="text" name="password" value="" /><br><br>
                 <input type="submit" value="Login"/><br><br><hr>
             </form>
+            <!-- Show list button -->
             <form method="post" action="/mostrarLista">
-                <input type="submit" value="Mostrar lista">
+                <input type="submit" value="Show list">
             </form>
+            <!-- Get users button -->
             <form method="post" action="/getUsers">
-                <input type="submit" value="Coger users">
+                <input type="submit" value="Take users">
             </form>
-            <form action="/register" method="post">
+                <!-- Register form -->
+                <form action="/register" method="post">
                 Username: <input type="text" name="username" value="" /><br><br>
                 Password: <input type="text" name="password" value="" /><br><br>
                 ConfPassword: <input type="text" name="confPassword" value="" /><br><br>
                 <input type="submit" value="Register"/><br><br><hr>
             </form>
+            <!-- Add activity form -->
             <form action="/addActivities" method="post">
                 NameAct: <input type="text" name="nameAct" value="" /><br><br>
                 Date: <input type="text" name="date" value="" /><br><br>
-                <input type="submit" value="Añadir Actividades"/><br><br><hr>
+                <input type="submit" value="Add Activities"/><br><br><hr>
             </form>
+            <!-- Get activities button -->
             <form method="post" action="/getActivities">
-                <input type="submit" value="Coger actividades">
+                <input type="submit" value="Get Activities">
             </form>
+            <!-- Add user activity form -->
             <form action="/addList" method="post">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br>
-                <input type="submit" value="Añadir a UserAct"/><br><br><hr>
+                <input type="submit" value="Add UserAct"/><br><br><hr>
             </form>
+            <!-- Get user activities button -->
             <form method="post" action="/getList">
-                <input type="submit" value="Coger UserActs">
+                <input type="submit" value="Get UserActs">
             </form>
             <form action="/getActByDate" method="post">
                 FirstDate: <input type="text" name="firstDate" value="" /><br><br>
@@ -55,6 +64,7 @@
         </div>
     </main>
     <footer>
+        <!-- Footer -->
         <p class="text-center text-muted">© Copyright 2023</p>
     </footer>
 </body>
