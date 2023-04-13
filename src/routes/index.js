@@ -1,7 +1,7 @@
 import express from 'express';
 import { AddActivities, GetActivities } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
-import { AddList, GetList } from '../controllers/userActs.js';
+import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 
 const router = express.Router();
 
@@ -65,5 +65,6 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
+router.post('/getUserActivities', GetUserActivities)
 // Export the router object
 export default router;
