@@ -2,6 +2,11 @@ import express from 'express';
 import { AddActivities, GetActivities } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList } from '../controllers/userActs.js';
+import { AddnewList, GetComAct } from '../controllers/comAct.js';
+import {  AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
+import { GetNewUser} from '../controllers/newUser.js';
+import { GetCompetitor } from '../controllers/competitor.js';
+import { GetOrganizer } from '../controllers/organizer.js';
 
 const router = express.Router();
 
@@ -65,5 +70,22 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
+
+router.post('/getnewAct', GetnewActivities);
+router.post('/addnewAct', AddnewList);
+
+
+router.post('/newUser', GetNewUser);
+router.post('/newActivities', AddnewActivities);
+
+router.post('/getcompact', GetComAct);
+
+router.post('/getcompetitor', GetCompetitor);
+
+router.post('/getOrganizer', GetOrganizer);
+
+router.post('/getnewlist', AddnewList);
+
+
 // Export the router object
 export default router;
