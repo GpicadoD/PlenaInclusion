@@ -9,6 +9,7 @@ import { GetNewUser} from '../controllers/newUser.js';
 import { GetCompetitor } from '../controllers/competitor.js';
 import { GetOrganizer } from '../controllers/organizer.js';
 
+
 const router = express.Router();
 
 // Define a route for the home page
