@@ -1,0 +1,1 @@
+import PeriodicAct from "../models/periodicActivityModel.js";
