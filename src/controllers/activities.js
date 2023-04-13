@@ -1,6 +1,8 @@
 // This code imports the "Activities" and "Users" models from their respective modules
 import Activities from "../models/activityModel.js";
 import Users from "../models/userModel.js";
+import { Sequelize } from "sequelize";
+
 
 // This code defines a controller function called "GetActivities" that uses the "findAll" method to retrieve all activities from the database
 // It then sends the activities data as a JSON response to the client
@@ -30,23 +32,29 @@ export const AddActivities = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "GetActByDate" that extracts the activity two dates from the request body
+// It then validates that both dates fields are not null, and if those are, it sends a 400 status response to the client with a JSON message indicating that the field is missing
+// If the fields are not missing, it the activities data between those two dates as a JSON response to the client
 export const GetActByDate = async (req, res) => {
     try {
-      const { firstDate, lastDate } = req.query;
+      const { firstDate, lastDate } = req.body;
+      console.log(firstDate);
+      const dateA = new Date(firstDate);
+      const dateB = new Date(lastDate);
 
-      if (!startDate || !endDate) {
+      if (!firstDate || !lastDate) {
         return res.status(400).json({ msg: "Please provide a start date and an end date." });
       }
 
       const activities = await Activities.findAll({
         where: {
           date: {
-            [Op.between]: [firstDate, lastDate],
-          },
+            [Sequelize.Op.between]: [dateA, dateB]
+          }
         },
-        attributes: ["id", "name", "date"],
+        attributes: ["activityId", "name", "date"],
       });
-
+      console.log(activities);
       res.json(activities);
     } catch (error) {
       console.log(error);
