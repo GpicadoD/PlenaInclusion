@@ -84,9 +84,6 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
-<<<<<<< HEAD
-router.post('/getUserActivities', GetUserActivities);
-=======
 
 router.post('/getActByDate', GetActByDate);
 
@@ -107,6 +104,5 @@ router.post('/getOrganizer', GetOrganizer);
 
 router.post('/getnewlist', AddnewList);
 
->>>>>>> 429256d140c41fbb0c238e312b8abd778feff2f2
 // Export the router object
 export default router;
