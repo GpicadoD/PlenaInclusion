@@ -11,6 +11,18 @@ router.get('/', (req, res) => {
     res.render('pages/index');
 });
 
+router.get('/toInsert', (req, res) => {
+    res.render('pages/insertElements');
+});
+
+router.get('/toEdit', (req, res) => {
+    res.render('pages/editElements');
+});
+
+router.get('/toDelete', (req, res) => {
+    res.render('pages/deleteElements');
+});
+
 // Define a route for the "buenastardes" endpoint
 router.get('/GoodAfternoon', (req, res) => {
     res.json(
