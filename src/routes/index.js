@@ -1,9 +1,10 @@
 import express from 'express';
-import { AddActivities, GetActivities } from '../controllers/activities.js';
+import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
+import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddList, GetList } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import {  AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
+import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
 import { GetNewUser} from '../controllers/newUser.js';
 import { GetCompetitor } from '../controllers/competitor.js';
 import { GetOrganizer } from '../controllers/organizer.js';
@@ -13,6 +14,18 @@ const router = express.Router();
 // Define a route for the home page
 router.get('/', (req, res) => {
     res.render('pages/index');
+});
+
+router.get('/toInsert', (req, res) => {
+    res.render('pages/insertElements');
+});
+
+router.get('/toEdit', (req, res) => {
+    res.render('pages/editElements');
+});
+
+router.get('/toDelete', (req, res) => {
+    res.render('pages/deleteElements');
 });
 
 // Define a route for the "buenastardes" endpoint
@@ -71,6 +84,10 @@ router.post('/login', GetUsersPassHash);
 router.post('/addList', AddList);
 router.post('/getList', GetList);
 
+router.post('/getActByDate', GetActByDate);
+
+router.post('/getUserActivities', GetUserActivities)
+
 router.post('/getnewAct', GetnewActivities);
 router.post('/addnewAct', AddnewList);
 
@@ -85,7 +102,6 @@ router.post('/getcompetitor', GetCompetitor);
 router.post('/getOrganizer', GetOrganizer);
 
 router.post('/getnewlist', AddnewList);
-
 
 // Export the router object
 export default router;
