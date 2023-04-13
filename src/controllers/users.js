@@ -1,6 +1,6 @@
 //Imports the "Users" model from the "userModel.js" module, as well as the "bcrypt" library
 import Users from "../models/userModel.js";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 
 // This code defines a controller function called "GetUsers" that retrieves all user records from the database using the "findAll" method
 // It then sends the user data as a JSON response to the client
