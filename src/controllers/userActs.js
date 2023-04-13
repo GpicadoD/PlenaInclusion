@@ -29,3 +29,30 @@ export const AddList = async(req, res) => {
         console.log(error);
     }
 }
+
+export const GetUserActivities = async(req, res) => {
+    const { userId } = req.params; 
+  
+    try {
+      const userActs = await UserActs.findAll({
+        where: {
+          userId: userId 
+        },
+        include: [
+          {
+            model: Activities 
+          }
+        ]
+      });
+      res.json(userActs);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+ 
+  
+  
+  
+  
+  
+  
