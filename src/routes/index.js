@@ -1,5 +1,5 @@
 import express from 'express';
-import { AddActivities, GetActivities } from '../controllers/activities.js';
+import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList } from '../controllers/userActs.js';
 const router = express.Router();
@@ -58,4 +58,6 @@ router.post('/login', GetUsersPassHash);
 
 router.post('/addList', AddList);
 router.post('/getList', GetList);
+
+router.post('/getActByDate', GetActByDate);
 export default router;
