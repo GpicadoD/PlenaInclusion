@@ -1,0 +1,1 @@
+import OrgType from "../models/orgTypeModel.js";

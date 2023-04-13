@@ -30,17 +30,23 @@ export const AddList = async(req, res) => {
     }
 }
 
+
+// This code defines a controller function called "GetUserActivities" that extracts the activity and user IDs from the request body
+// It then uses the "findAll" method to find the corresponding activity and user records in the database
+// The method request's a all activitis that the user is associated with
 export const GetUserActivities = async(req, res) => {
-    const { userId } = req.params; 
-  
+    const { userId } = req.body;
+
     try {
-      const userActs = await UserActs.findAll({
+      const userActs = await Users.findAll({
         where: {
           userId: userId 
         },
         include: [
           {
-            model: Activities 
+
+            model: Activities
+
           }
         ]
       });
@@ -48,11 +54,6 @@ export const GetUserActivities = async(req, res) => {
     } catch (error) {
       console.log(error);
     }
+
   }
- 
-  
-  
-  
-  
-  
-  
+
