@@ -22,7 +22,13 @@ export const AddList = async(req, res) => {
     try {
         let activity = await Activities.findByPk(idAct);
         let user = await Users.findByPk(idUser);
+<<<<<<< HEAD
+        //console.log(activity);
+        //user.addActivities(activity);
+        activity.addUsers(user);
+=======
         user.addActivities(activity);
+>>>>>>> 034c934d132d0ad7e6a1029d10090f27bbe3e27a
         
         res.json({msg: "User - Activity Registration Successfully"});
     } catch (error) {
