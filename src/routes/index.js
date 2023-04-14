@@ -3,15 +3,18 @@ import { AddActivities, GetActivities, GetActByDate } from '../controllers/activ
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
-import { GetNewUser, AddNewUser} from '../controllers/newUser.js';
-import { GetCompetitor, AddCompetitor} from '../controllers/competitor.js';
-import { GetOrganizer, Addneworganizer } from '../controllers/organizer.js';
-import { AddorgType } from '../controllers/orgType.js';
-import { addNewPeriod } from '../controllers/period.js';
+import { AddnewActivities, GetnewActivities,  UpdateActivities} from '../controllers/newActivity.js';
+import { GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
+import { GetCompetitor, UpdateCompetitor, AddCompetitor} from '../controllers/competitor.js';
+import { GetOrganizer, UpdateOrganizer, Addneworganizer} from '../controllers/organizer.js';
+import { UpdateOrgType, AddorgType } from '../controllers/orgType.js';
+import { UpdatePublic, Addnewpublic} from '../controllers/public.js';
+import { UpdatePeriod, addNewPeriod} from '../controllers/period.js';
+import { UpdateTheme, Addnewtheme} from '../controllers/theme.js';
+
+//Add UpdatePeriodictAct
 import { Addnewperiodact } from '../controllers/periodicActivity.js';
-import { Addnewpublic } from '../controllers/public.js';
-import { Addnewtheme } from '../controllers/theme.js';
+
 
 
 
@@ -21,15 +24,15 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('pages/index');
 });
-
+// Define an insert elements for the home page
 router.get('/toInsert', (req, res) => {
     res.render('pages/insertElements');
 });
-
+// Define a edit elements for the home page
 router.get('/toEdit', (req, res) => {
     res.render('pages/editElements');
 });
-
+// Define a rdelete elements for the home page
 router.get('/toDelete', (req, res) => {
     res.render('pages/deleteElements');
 });
@@ -89,11 +92,11 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
-
+// Define routes for get the activity by searching from its date
 router.post('/getActByDate', GetActByDate);
-
+// Define routes for get the user-activity list-related actions
 router.post('/getUserActivities', GetUserActivities)
-
+// Define routes for get activity list-related actions and for adding new ones
 router.post('/getnewAct', GetnewActivities);
 router.post('/AddnewActivities', AddnewActivities);
 
@@ -106,21 +109,38 @@ router.post('/AddnewPeriodActivity', Addnewperiodact);
 router.post('/AddnewPublic', Addnewpublic);
 router.post('/Addnewtheme', Addnewtheme);
 
-
+// Define routes for user list-related actions and for adding new ones
 router.post('/newUser', GetNewUser);
+// Define routes for get the competitor and their activity which is related
 router.post('/AddnewUser', AddNewUser);
-
-
 router.post('/getcompact', GetComAct);
-
+// Define routes for get the competitor by list-related actions
 router.post('/getcompetitor', GetCompetitor);
+
+// Define routes for get the Organizer by list-related actions
+router.post('/getOrganizer', GetOrganizer);
+// Define routes for add new list-related ations
 router.post('/Addcompetitor', AddCompetitor);
 
-router.post('/getOrganizer', GetOrganizer);
 router.post('/Addorganizer', Addneworganizer);
-
-
 router.post('/getnewlist', AddnewList);
+
+router.post('/updateActivities', UpdateActivities);
+
+router.post('/updateUser', UpdateUser);
+
+router.post('/updateOrganizer', UpdateOrganizer);
+
+router.post('/updateCompetitor', UpdateCompetitor);
+
+router.post('/updateOrgType', UpdateOrgType);
+
+router.post('/updatePublic', UpdatePublic);
+
+router.post('/updatePeriod', UpdatePeriod);
+
+router.post('/updateTheme', UpdateTheme);
+
 
 // Export the router object
 export default router;
