@@ -23,7 +23,6 @@ export const AddList = async(req, res) => {
         let activity = await Activities.findByPk(idAct);
         let user = await Users.findByPk(idUser);
         user.addActivities(activity);
-        
         res.json({msg: "User - Activity Registration Successfully"});
     } catch (error) {
         console.log(error);
@@ -56,5 +55,3 @@ export const GetUserActivities = async(req, res) => {
     }
 
   }
-
-c

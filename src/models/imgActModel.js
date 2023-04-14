@@ -24,6 +24,5 @@ const ImgAct = db.define('imgAct', {
 (async () => {
     await db.sync();
 })();
-ImgAct.belongsTo(newActivities, { through: newActivities });
 // Export the "ImgAct" model
 export default ImgAct;

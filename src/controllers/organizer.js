@@ -12,6 +12,27 @@ export const GetOrganizer  = async(req, res) => {
     }
 }
 
+export const DeleteOrganizer = async(req, res) => {
+    const { idOrganizer } = req.body;
+    console.log(idOrganizer);
+    try {
+        let organizers = await Organizer.findByPk(idOrganizer);
+        console.log(organizers);
+        if(!organizers){
+            return res.json({msg: "organizer not found"});  
+        } 
+        else{
+            if(organizers.NifOrg == idOrganizer){
+            await organizers.destroy();
+          
+            return res.json({msg: "organizer successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdateOrganizer = async(req, res) => {
     var {NifOrg, idImgOrg, idtypeProf} = req.body;
     
@@ -31,3 +52,19 @@ export const UpdateOrganizer = async(req, res) => {
         console.log(error);
     }
 }
+
+export const Addneworganizer = async (req, res) => {
+    var { NifOrg , idImgOrg , idtypeProf } = req.body;
+    if(!NifOrg) return res.status(400).json({msg: "Cant update without PK"});
+
+    try {
+      await Organizer.create({
+        NifOrg,
+        idImgOrg,
+        idtypeProf,
+      });
+      res.json({ msg: "Organizer created successfully" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
