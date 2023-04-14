@@ -12,6 +12,9 @@ export const GetOrganizer  = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "UpdateOrganizer" that updates the organizer with the specified "NifOrg" value in the database
+// It updates the "idImgOrg" and "idtypeProf" properties with the values in the request body, if they are provided
+// It then saves the changes to the database and sends a success message as a JSON response to the client
 export const DeleteOrganizer = async(req, res) => {
     const { idOrganizer } = req.body;
     console.log(idOrganizer);
@@ -53,6 +56,9 @@ export const UpdateOrganizer = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "Addneworganizer" that creates a new organizer in the database
+// It extracts the values for "NifOrg", "idImgOrg", and "idtypeProf" from the request body and uses them to create a new organizer
+// It then sends a success message as a JSON response to the client
 export const Addneworganizer = async (req, res) => {
     var { NifOrg , idImgOrg , idtypeProf } = req.body;
     if(!NifOrg) return res.status(400).json({msg: "Cant update without PK"});
