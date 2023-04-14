@@ -14,6 +14,9 @@ export const GetNewUser = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "UpdateUser" that updates the User's nif, lastname, email, birthdate, phonenumber, password and gender from the request body
+// It then uses the "findByPk" method to find the corresponding userNIF record in the database
+// The method request's searches if the characteristics of the user are the same or not in the list to change it
 export const UpdateUser = async(req, res) => {
     var {userNIF, name, lastname, email, birthdate, phoneNumber,
         password, gender} = req.body;
