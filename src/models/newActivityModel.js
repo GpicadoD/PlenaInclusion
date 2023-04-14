@@ -15,7 +15,7 @@ const newActivities = db.define('newactivities', {
     nameAct:{
         type: DataTypes.STRING
     },
-    public:{
+    idPublic:{
         type: DataTypes.DATE
     },
     idTheme:{

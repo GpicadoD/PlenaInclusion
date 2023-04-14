@@ -1,14 +1,22 @@
 import newActivities from "../models/newActivityModel.js";
 
 export const AddnewActivities = async(req, res) => {
-    const {nameAct, date} = req.body;
-    if(date == null) return res.status(400).json({msg: "There is no date in the activity"});
+    var { activityId, nameAct, idPublic, idTheme, idImgAct, startDate, finishDate, idPeriod, idCreator } = req.body;
+    if(!activityId) return res.status(400).json({msg: "Cant update without PK"});
+
     try {
         await newActivities.create({
-            name: nameAct,
-            date: date,
+            activityId,
+            nameAct,
+            idPublic,
+            idTheme,
+            idImgAct,
+            startDate,
+            finishDate,
+            idPeriod,
+            idCreator
         });
-        res.json({msg: "Activity Registration Successful"});
+        res.json({msg: "Activity added successfully!"});
     } catch (error) {
         console.log(error);
     }

@@ -2,12 +2,17 @@ import express from 'express';
 import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
-import { AddList, GetList } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
-import { GetNewUser} from '../controllers/newUser.js';
-import { GetCompetitor } from '../controllers/competitor.js';
-import { GetOrganizer } from '../controllers/organizer.js';
+import { GetNewUser, AddNewUser} from '../controllers/newUser.js';
+import { GetCompetitor, AddCompetitor} from '../controllers/competitor.js';
+import { GetOrganizer, Addneworganizer } from '../controllers/organizer.js';
+import { AddorgType } from '../controllers/orgType.js';
+import { addNewPeriod } from '../controllers/period.js';
+import { Addnewperiodact } from '../controllers/periodicActivity.js';
+import { Addnewpublic } from '../controllers/public.js';
+import { Addnewtheme } from '../controllers/theme.js';
+
 
 
 const router = express.Router();
@@ -90,17 +95,30 @@ router.post('/getActByDate', GetActByDate);
 router.post('/getUserActivities', GetUserActivities)
 
 router.post('/getnewAct', GetnewActivities);
-router.post('/addnewAct', AddnewList);
+router.post('/newActivities', AddnewActivities);
+
+router.post('/AddorgType', AddorgType);
+
+router.post('/AddnewPeriod', addNewPeriod);
+
+router.post('/AddnewPeriodActivity', Addnewperiodact);
+
+router.post('/AddnewPublic', Addnewpublic);
+router.post('/Addnewtheme', Addnewtheme);
 
 
 router.post('/newUser', GetNewUser);
-router.post('/newActivities', AddnewActivities);
+router.post('/AddnewUser', AddNewUser);
+
 
 router.post('/getcompact', GetComAct);
 
 router.post('/getcompetitor', GetCompetitor);
+router.post('/Addcompetitor', AddCompetitor);
 
 router.post('/getOrganizer', GetOrganizer);
+router.post('/Addorganizer', Addneworganizer);
+
 
 router.post('/getnewlist', AddnewList);
 
