@@ -3,25 +3,17 @@ import { AddActivities, GetActivities, GetActByDate } from '../controllers/activ
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
-import { GetNewUser} from '../controllers/newUser.js';
-import { GetCompetitor, UpdateCompetitor } from '../controllers/competitor.js';
-import { GetOrganizer, UpdateOrganizer} from '../controllers/organizer.js';
+import { AddnewActivities, GetnewActivities,  UpdateActivities} from '../controllers/newActivity.js';
+import { GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
+import { GetCompetitor, UpdateCompetitor, AddCompetitor} from '../controllers/competitor.js';
+import { GetOrganizer, UpdateOrganizer, Addneworganizer} from '../controllers/organizer.js';
+import { UpdateOrgType, AddorgType } from '../controllers/orgType.js';
+import { UpdatePublic, Addnewpublic} from '../controllers/public.js';
+import { UpdatePeriod, addNewPeriod} from '../controllers/period.js';
+import { UpdateTheme, Addnewtheme} from '../controllers/theme.js';
 
-import { UpdateOrgType } from '../controllers/orgType.js';
-
-
-import { UpdateActivities } from '../controllers/newActivity.js';
-
-import { UpdateUser } from '../controllers/newUser.js';
-
-import { UpdatePublic } from '../controllers/public.js';
-
-import { UpdatePeriod } from '../controllers/period.js';
-
-import { UpdateTheme } from '../controllers/theme.js';
-
-
+//Add UpdatePeriodictAct
+import { Addnewperiodact } from '../controllers/periodicActivity.js';
 
 
 
@@ -106,18 +98,31 @@ router.post('/getActByDate', GetActByDate);
 router.post('/getUserActivities', GetUserActivities)
 // Define routes for get activity list-related actions and for adding new ones
 router.post('/getnewAct', GetnewActivities);
-router.post('/addnewAct', AddnewList);
+router.post('/AddnewActivities', AddnewActivities);
+
+router.post('/AddorgType', AddorgType);
+
+router.post('/AddnewPeriod', addNewPeriod);
+
+router.post('/AddnewPeriodActivity', Addnewperiodact);
+
+router.post('/AddnewPublic', Addnewpublic);
+router.post('/Addnewtheme', Addnewtheme);
 
 // Define routes for user list-related actions and for adding new ones
 router.post('/newUser', GetNewUser);
-router.post('/newActivities', AddnewActivities);
 // Define routes for get the competitor and their activity which is related
+router.post('/AddnewUser', AddNewUser);
 router.post('/getcompact', GetComAct);
 // Define routes for get the competitor by list-related actions
 router.post('/getcompetitor', GetCompetitor);
+
 // Define routes for get the Organizer by list-related actions
 router.post('/getOrganizer', GetOrganizer);
 // Define routes for add new list-related ations
+router.post('/Addcompetitor', AddCompetitor);
+
+router.post('/Addorganizer', Addneworganizer);
 router.post('/getnewlist', AddnewList);
 
 router.post('/updateActivities', UpdateActivities);

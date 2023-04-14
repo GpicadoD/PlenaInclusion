@@ -15,7 +15,116 @@
         <!-- Main header -->
         <h1>POST TUTORIAL</h1>
         <div class="form">
-            
+            <form method="get" action="/AddorgType">
+                <label for="idTypeOrg">ID Type Org:</label>
+                <input type="text" id="idTypeOrg" name="idTypeOrg"><br><br>
+                
+                <label for="orgType">Org Type:</label>
+                <input type="text" id="orgType" name="orgType"><br><br>
+                
+                <button type="submit">Submit</button>
+              </form>
+              <form method="post" action="//AddnewPeriodActivity">
+                <label for="actDate">Date:</label>
+                <input type="date" id="actDate" name="actDate" required><br><br>
+              
+                <label for="activityId">Activity ID:</label>
+                <input type="number" id="activityId" name="activityId" required><br><br>
+              
+                <label for="orgNif">Organizer NIF:</label>
+                <input type="text" id="orgNif" name="orgNif" required><br><br>
+              
+                <label for="actPlace">Place:</label>
+                <input type="text" id="actPlace" name="actPlace" required><br><br>
+              
+                <input type="submit" value="Add Periodic Activity">
+              </form>
+              <form method="post" action="/AddnewPeriod">
+                <label for="period">Period:</label>
+                <input type="text" id="period" name="period">
+                <input type="submit" value="Submit">
+              </form>
+              <form method="post" action="/AddnewPublic">
+                <label for="publicType">Public Type:</label>
+                <input type="text" id="publicType" name="publicType" required>
+                <br><br>
+                <input type="submit" value="Submit">
+              </form>
+              <form method="post" action="/Addorganizer">
+                <label for="NifOrg">NIF:</label>
+                <input type="text" id="NifOrg" name="NifOrg"><br><br>
+                <label for="idImgOrg">Image ID:</label>
+                <input type="text" id="idImgOrg" name="idImgOrg"><br><br>
+                <label for="idtypeProf">Professional Type ID:</label>
+                <input type="text" id="idtypeProf" name="idtypeProf"><br><br>
+                <input type="submit" value="Add Organizer">
+            </form>
+            <form method="post" action="/AddnewUser">
+                <label for="userNIF">User NIF:</label>
+                <input type="text" id="userNIF" name="userNIF"><br>
+              
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br>
+              
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" name="lastname"><br>
+              
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br>
+              
+                <label for="birthdate">Birthdate:</label>
+                <input type="text" id="birthdate" name="birthdate"><br>
+              
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber"><br>
+              
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br>
+              
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender">><br>
+              
+                <input type="submit" value="Submit">
+              </form>
+              <form method="post" action="/AddnewActivities">
+                <label for="nameAct">Name:</label>
+                <input type="text" id="nameAct" name="nameAct"><br>
+              
+                <label for="public">Public:</label>
+                <input type="text" id="public" name="public"><br>
+              
+                <label for="idTheme">Theme ID:</label>
+                <input type="text" id="idTheme" name="idTheme"><br>
+              
+                <label for="idImgAct">Image ID:</label>
+                <input type="text" id="idImgAct" name="idImgAct"><br>
+              
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate"><br>
+              
+                <label for="finishDate">Finish Date:</label>
+                <input type="text" id="finishDate" name="finishDate"><br>
+              
+                <label for="idPeriod">Period ID:</label>
+                <input type="text" id="idPeriod" name="idPeriod"><br>
+              
+                <label for="idCreator">Creator ID:</label>
+                <input type="text" id="idCreator" name="idCreator"><br>
+              
+                <input type="submit" value="Submit">
+              </form>
+              <form method="post" action="/Addcompetitor">
+                <label for="name">Nombre:</label>
+                <input type="text" name="name" id="name" required>
+                <br>
+                <label for="age">Edad:</label>
+                <input type="text" name="age" id="age" required>
+                <br>
+                <label for="country">País:</label>
+                <input type="text" name="country" id="country" required>
+                <br>
+                <input type="submit" value="Agregar Competidor">
+              </form>
         </div>
     </main>
     <footer>
