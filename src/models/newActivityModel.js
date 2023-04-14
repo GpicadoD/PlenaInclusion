@@ -1,8 +1,9 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
 import CompAct from "./comActModel.js";
-
+// It also imports the "CompAct" model previously defined.
 
 const {DataTypes} = Sequelize;
 // Define the "Activities" model using Sequelize
@@ -15,8 +16,8 @@ const newActivities = db.define('newactivities', {
     nameAct:{
         type: DataTypes.STRING
     },
-    public:{
-        type: DataTypes.DATE
+    idPublicType:{
+        type: DataTypes.INTEGER
     },
     idTheme:{
         type: DataTypes.INTEGER

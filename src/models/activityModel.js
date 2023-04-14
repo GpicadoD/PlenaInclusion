@@ -1,3 +1,4 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 

@@ -16,15 +16,15 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('pages/index');
 });
-
+// Define an insert elements for the home page
 router.get('/toInsert', (req, res) => {
     res.render('pages/insertElements');
 });
-
+// Define a edit elements for the home page
 router.get('/toEdit', (req, res) => {
     res.render('pages/editElements');
 });
-
+// Define a rdelete elements for the home page
 router.get('/toDelete', (req, res) => {
     res.render('pages/deleteElements');
 });
@@ -84,24 +84,24 @@ router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
 router.post('/addList', AddList);
 router.post('/getList', GetList);
-
+// Define routes for get the activity by searching from its date
 router.post('/getActByDate', GetActByDate);
-
+// Define routes for get the user-activity list-related actions
 router.post('/getUserActivities', GetUserActivities)
-
+// Define routes for get activity list-related actions and for adding new ones
 router.post('/getnewAct', GetnewActivities);
 router.post('/addnewAct', AddnewList);
 
-
+// Define routes for user list-related actions and for adding new ones
 router.post('/newUser', GetNewUser);
 router.post('/newActivities', AddnewActivities);
-
+// Define routes for get the competitor and their activity which is related
 router.post('/getcompact', GetComAct);
-
+// Define routes for get the competitor by list-related actions
 router.post('/getcompetitor', GetCompetitor);
-
+// Define routes for get the Organizer by list-related actions
 router.post('/getOrganizer', GetOrganizer);
-
+// Define routes for add new list-related ations
 router.post('/getnewlist', AddnewList);
 
 // Export the router object

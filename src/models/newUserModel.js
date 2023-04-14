@@ -1,8 +1,9 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
 const {DataTypes} = Sequelize;
-
+// Define the "Users" model using Sequelize
 const newUsers = db.define('newusers', {
     userNIF:{
         type: DataTypes.INTEGER,
@@ -32,7 +33,9 @@ const newUsers = db.define('newusers', {
 },{
     freezeTableName: true
 });
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
+// Export the "Users" model
 export default newUsers;
