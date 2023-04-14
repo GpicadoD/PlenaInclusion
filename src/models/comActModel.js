@@ -6,8 +6,6 @@ import Competitor from "../models/competitorModel.js";
 // It also imports the "Competitor" and the "periodicActivities" models previously defined.
 import PeriodicAct from "../models/periodicActivityModel.js";
 const {DataTypes} = Sequelize;
-
-const {DataTypes} = Sequelize;
 // Define the "CompAct" model using Sequelize
 const CompAct = db.define('compact', {
 }, { timestamps: false });

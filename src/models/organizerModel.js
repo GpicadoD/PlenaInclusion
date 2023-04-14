@@ -27,6 +27,5 @@ const Organizer = db.define('organizer', {
     await db.sync();
 })();
 
-Organizer.belongsTo(newActivities, { through: newActivities });
 // Export the "Organizer" model
 export default Organizer;
