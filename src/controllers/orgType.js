@@ -2,6 +2,7 @@
 // This code imports the "OrgType" model from its respective module
 import OrgType from "../models/orgTypeModel.js";
 
+// Get all organization types
 export const GetorgType  = async(req, res) => {
     try {
         let Data = await OrgType.findAll();
@@ -11,6 +12,7 @@ export const GetorgType  = async(req, res) => {
     }
 }
 
+// Update an existing organization type
 export const UpdateOrgType = async(req, res) => {
     var {idTypeOrg, orgType} = req.body;
     
@@ -28,7 +30,7 @@ export const UpdateOrgType = async(req, res) => {
         console.log(error);
     }
 }
-
+// Add a new organization type
 export const AddorgType = async (req, res) => {
     var { idTypeOrg, orgType } = req.body;
     if(!idTypeOrg) return res.status(400).json({msg: "Cant update without PK"});

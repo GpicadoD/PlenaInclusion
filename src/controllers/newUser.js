@@ -14,7 +14,8 @@ export const GetNewUser = async(req, res) => {
     }
 }
 
-
+// This code defines a controller function called "UpdateUser" that updates an existing user in the database based on the provided userNIF (primary key)
+// If any properties are not provided in the request body, they will default to the current values stored in the database
 export const UpdateUser = async(req, res) => {
     var {userNIF, name, lastname, email, birthdate, phoneNumber,
         password, gender} = req.body;
@@ -45,6 +46,7 @@ export const UpdateUser = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "AddNewUser" that adds a new user to the database with the provided properties
 export const AddNewUser = async(req, res) => {
     var { userNIF, name, lastname, email, birthdate, phoneNumber, password, gender } = req.body;
     if(!userNIF) return res.status(400).json({msg: "Cant update without PK"});
