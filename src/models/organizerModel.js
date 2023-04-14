@@ -1,10 +1,12 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
 import newActivities from "./newActivityModel.js";
+// It also imports the "newActivities" model previously defined.
 
 const {DataTypes} = Sequelize;
-
+// Define the "Organizer" model using Sequelize
 const Organizer = db.define('organizer', {
     NifOrg:{
         type: DataTypes.STRING,
@@ -20,9 +22,11 @@ const Organizer = db.define('organizer', {
     freezeTableName: true,
     timestamps: false
 });
-
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
 
+Organizer.belongsTo(newActivities, { through: newActivities });
+// Export the "Organizer" model
 export default Organizer;

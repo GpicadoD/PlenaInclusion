@@ -1,3 +1,4 @@
+// This code imports the "Public" model from its respective module
 import PublicType from "../models/publicModel.js";
 
 export const Getpublic  = async(req, res) => {

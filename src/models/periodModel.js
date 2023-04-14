@@ -1,6 +1,11 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
+
 import newActivities from "./newActivityModel.js";
+// It also imports the "newActivities" model previously defined.
+const {DataTypes} = Sequelize;
+// Define the "Period" model using Sequelize
 const {DataTypes} = Sequelize;
 const Period = db.define('period', {
     idPeriod:{
@@ -15,6 +20,12 @@ const Period = db.define('period', {
     freezeTableName: true,
     timestamps: false
 });
+// Synchronize the model with the database
+(async () => {
+    await db.sync();
+})();
+Period.belongsTo(newActivities, { through: newActivities });
+// Export the "Period" model
 (async () => {
     await db.sync();
 })();
