@@ -13,7 +13,8 @@ const Competitor = db.define('competitor', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {

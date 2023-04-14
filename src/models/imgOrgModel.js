@@ -14,7 +14,8 @@ const ImgOrg = db.define('imgOrg', {
         type: DataTypes.BLOB
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {

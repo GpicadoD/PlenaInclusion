@@ -17,13 +17,13 @@ const ImgAct = db.define('imgAct', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
-
 ImgAct.belongsTo(newActivities, { through: newActivities });
 // Export the "ImgAct" model
 export default ImgAct;

@@ -20,7 +20,8 @@ const PeriodicAct = db.define('periodicAct', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {

@@ -19,7 +19,8 @@ const Organizer = db.define('organizer', {
         type: DataTypes.INTEGER
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {
