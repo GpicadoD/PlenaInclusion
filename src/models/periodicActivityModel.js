@@ -1,8 +1,9 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
 const {DataTypes} = Sequelize;
-
+// Define the "PeriodicAct" model using Sequelize
 const PeriodicAct = db.define('periodicAct', {
     actDate:{
         type: DataTypes.DATE,
@@ -22,9 +23,9 @@ const PeriodicAct = db.define('periodicAct', {
     freezeTableName: true,
     timestamps: false
 });
-
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
-
+// Export the "PeriodicAct" model
 export default PeriodicAct;
