@@ -55,4 +55,3 @@ export const GetUserActivities = async(req, res) => {
     }
 
   }
-

@@ -28,6 +28,7 @@
             <!-- Get users button -->
             <form method="post" action="/getUsers">
                 <input type="submit" value="Take users">
+
             </form>
                 <!-- Register form -->
                 <form action="/register" method="post">
@@ -40,71 +41,77 @@
             <form action="/addActivities" method="post">
                 NameAct: <input type="text" name="nameAct" value="" /><br><br>
                 Date: <input type="text" name="date" value="" /><br><br>
-                <input type="submit" value="Add Activities"/><br><br><hr>
+                <input type="submit" value="Add Activities"/><br><br>
             </form>
+
             <!-- Get activities button -->
             <form method="post" action="/getActivities">
-                <input type="submit" value="Get Activities">
+                <input type="submit" value="Get Activities"><hr>
             </form>
+
             <!-- Add user activity form -->
             <form action="/addList" method="post">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br>
-                <input type="submit" value="Add UserAct"/><br><br><hr>
+                <input type="submit" value="Add UserAct"/><br><br>
             </form>
+
             <!-- Get user activities button -->
             <form method="post" action="/getList">
-                <input type="submit" value="Get UserActs">
+                <input type="submit" value="Get UserActs"><hr>
             </form>
             <!-- Get activities by date button -->
             <form action="/getActByDate" method="post">
                 FirstDate: <input type="text" name="firstDate" value="" /><br><br>
                 LastDate: <input type="text" name="lastDate" value="" /><br><br>
-                <input type="submit" value="Buscar">
+                <input type="submit" value="Buscar"><hr>
             </form>
-
             <form action="/getUserActivities" method="POST">
                 <label for="userId">User ID:</label>
                 <input type="text" id="userId" name="userId">
-                <button type="submit">Get User Activities</button>
+                <button type="submit">Get User Activities</button><hr>
             </form>
             <form action="/toInsert">
-                <input type="submit" value="Insert Page">
+                <input type="submit" value="Insert Page"><hr>
             </form>
             <form action="/toEdit">
-                <input type="submit" value="Edit Page">
+                <input type="submit" value="Edit Page"><hr>
             </form>
             <form action="/toDelete">
-                <input type="submit" value="Delete Page">
+                <input type="submit" value="Delete Page"><hr>
 
             <form method="post" action="/getnewAct">
-                <input type="submit" value="nuevo">
+                <input type="submit" value="nuevo"><hr>
             </form>
-
             <form action="/newActivities" method="post">
                 NameAct: <input type="text" name="nameAct" value="" /><br><br>
                 Date: <input type="text" name="date" value="" /><br><br>
                 <input type="submit" value="Add Activities"/><br><br><hr>
             </form>
-            
             <form action="/newRegister" method="post">
                 Username: <input type="text" name="username" value="" /><br><br>
                 Password: <input type="text" name="password" value="" /><br><br>
                 ConfPassword: <input type="text" name="confPassword" value="" /><br><br>
                 <input type="submit" value="Register"/><br><br><hr>
-                </form>
+            </form>
 
             <p>TODOS LOS GET</p>
+            <form method="post" action="/newRegister">
+                IdAct: <input type="text" name="idAct" value="" /><br><br>
+                IdUser: <input type="text" name="idUser" value="" /><br><br>
+                <input type="submit" value="nuevo2"><hr>
+            </form>
+
             <form method="post" action="/getcompact">
-                <input type="submit" value="nuevo">
+                <input type="submit" value="nuevo"><hr>
             </form>
 
             <form method="post" action="/getcompetitor">
-                <input type="submit" value="participante">
+                <input type="submit" value="participante"><hr>
             </form>
 
             <form method="post" action="/getOrganizer">
-                <input type="submit" value="organizer">
+                <input type="submit" value="organizer"><hr>
             </form>
 
             <form method="post" action="/getTheme">
@@ -120,9 +127,11 @@
             </form>
 
             <form method="post" action="/getnewlist">
+            <h2>Insert UserActs</h2>
+            <form action="/addList" method="post">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br>
-                <input type="submit" value="nuevaLista">
+                <input type="submit" value="Add UserAct"/><br><br><hr>
             </form>
 
             <p>TODOS LOS DELETES</p>

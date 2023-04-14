@@ -12,5 +12,5 @@ const UserActs = db.define('userActs', {
 // Finally, it sets up the many-to-many relationship between "Users" and "Activities" by using the "belongsToMany" method on both models, passing in the "UserActs" model as the through table.
 Users.belongsToMany(Activities, { through: UserActs });
 Activities.belongsToMany( Users, { through: UserActs });
-
+// Export the "UserActs" model
 export default UserActs;
