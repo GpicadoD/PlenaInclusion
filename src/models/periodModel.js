@@ -1,27 +1,26 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-
+import newActivities from "./newActivityModel.js";
 
 const {DataTypes} = Sequelize;
-// Define the "Activities" model using Sequelize
-const Activities = db.define('activities', {
-    activityId:{
+
+const Period = db.define('period', {
+    idPeriod:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    name:{
+    period:{
         type: DataTypes.STRING
-    },
-    date:{
-        type: DataTypes.DATE
     }
 },{
     freezeTableName: true
 });
-// Synchronize the model with the database
+
 (async () => {
     await db.sync();
 })();
-// Export the "Activities" model
-export default Activities;
+
+Period.belongsTo(newActivities, { through: newActivities });
+
+export default Period;

@@ -1,7 +1,9 @@
+//Imports the "Users" model from the "userModel.js" module, as well as the "bcrypt" library
 import Users from "../models/userModel.js";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 
-// npm install bcrypt
+// This code defines a controller function called "GetUsers" that retrieves all user records from the database using the "findAll" method
+// It then sends the user data as a JSON response to the client
 
 export const GetUsers  = async(req, res) => {
     try {
@@ -12,6 +14,10 @@ export const GetUsers  = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "Register" that extracts the username, password, and confirmation password from the request body
+// It then checks that the username is not null and that the password matches the confirmation password
+// It generates a salt using the "genSalt" method and hashes the password using the "hash" method
+// It then creates a new user record in the database using the "create" method and sends a JSON response indicating success or failure
 export const Register = async(req, res) => {
     const {username, password, confPassword} = req.body;
     if(username == null) return res.status(400).json({msg: "Write the username"});
@@ -29,6 +35,12 @@ export const Register = async(req, res) => {
     }
 }
 
+// This code defines a controller function called "GetUsersPassHash" that extracts the username and password from the request body
+// It uses the "findOne" method to find the user record in the database with the specified username
+// If the user is not found, it sends a 404 error response
+// If the user is found, it checks the password hash using the "compare" method
+// If the password is invalid, it sends an error message
+// If the password is valid, it sends a success message
 export const GetUsersPassHash  = async(req, res) => {
     const {username, password} = req.body;
     try {
