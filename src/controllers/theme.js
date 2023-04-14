@@ -1,7 +1,7 @@
 // This code imports the "Theme" model from its respective module
 import Theme from "../models/themeModel.js";
 
-export const Gettheme  = async(req, res) => {
+export const GetTheme  = async(req, res) => {
     try {
         let Data = await Public.findAll();
         res.json(Data);

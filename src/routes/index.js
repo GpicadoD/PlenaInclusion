@@ -3,13 +3,16 @@ import { AddActivities, GetActivities, GetActByDate } from '../controllers/activ
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import { AddnewActivities, DeleteNewActivity, GetnewActivities } from '../controllers/newActivity.js';
+import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
-import { DeleteCompetitor, UpdateCompetitor, AddCompetitor } from '../controllers/competitor.js';
+import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from '../controllers/competitor.js';
 import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from '../controllers/organizer.js';
 import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
-import { DeleteOrganizerType, GetOrganizerType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
-import { DeletePeriodAct, GetPerAct, Addnewperiodact} from '../controllers/periodicActivity.js';
+
+import { DeleteOrganizerType, GetorgType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
+
+import { DeletePeriodAct, GetperiodicActs, Addnewperiodact} from '../controllers/periodicActivity.js';
+
 import { DeleteImgOrg } from '../controllers/imgOrg.js';
 import { DeletePublic, UpdatePublic, Addnewpublic } from '../controllers/public.js';
 import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.js';
@@ -127,9 +130,9 @@ router.post('/getnewlist', AddnewList);
 
 router.post('/getTheme',GetTheme);
 
-router.post('/getOrgType', GetOrganizerType);
+router.post('/getOrgType', GetorgType);
 
-router.post('/getPerAct', GetPerAct);
+router.post('/getPerAct', GetperiodicActs);
 
 
 //all deletes//

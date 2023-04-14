@@ -8,7 +8,6 @@ import Theme from "./themeModel.js";
 import PublicType from "./publicModel.js";
 import Period from "./periodModel.js";
 import Organizer from "./organizerModel.js";
-import ImgAct from "./imgActModel.js";
 
 const {DataTypes} = Sequelize;
 // Define the "Activities" model using Sequelize
