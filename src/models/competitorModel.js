@@ -12,7 +12,8 @@ const Competitor = db.define('competitor', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {

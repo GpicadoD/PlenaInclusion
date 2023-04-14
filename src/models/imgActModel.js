@@ -14,11 +14,11 @@ const ImgAct = db.define('imgAct', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {
     await db.sync();
 })();
-ImgAct.belongsTo(newActivities, { through: newActivities });
 export default ImgAct;

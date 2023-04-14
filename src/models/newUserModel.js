@@ -30,8 +30,11 @@ const newUsers = db.define('newusers', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
+
+
 (async () => {
     await db.sync();
 })();

@@ -17,13 +17,12 @@ const Organizer = db.define('organizer', {
         type: DataTypes.INTEGER
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {
     await db.sync();
 })();
-
-Organizer.belongsTo(newActivities, { through: newActivities });
 
 export default Organizer;

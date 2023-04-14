@@ -14,13 +14,12 @@ const OrgType = db.define('orgType', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {
     await db.sync();
 })();
-
-OrgType.belongsTo(Organizer, { through: Organizer });
 
 export default OrgType;
