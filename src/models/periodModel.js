@@ -21,6 +21,5 @@ const Period = db.define('period', {
     await db.sync();
 })();
 
-Period.belongsTo(newActivities, { through: newActivities });
 
 export default Period;

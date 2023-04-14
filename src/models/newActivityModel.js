@@ -1,8 +1,9 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-
+import ImgAct from "./imgActModel.js";
 import CompAct from "./comActModel.js";
 
+import Theme from "./themeModel.js";
 
 const {DataTypes} = Sequelize;
 // Define the "Activities" model using Sequelize
@@ -16,13 +17,14 @@ const newActivities = db.define('newactivities', {
         type: DataTypes.STRING
     },
     public:{
-        type: DataTypes.DATE
+        type: DataTypes.INTEGER
     },
     idTheme:{
         type: DataTypes.INTEGER
     },
     idImgAct:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        foreignKey : true
     },
     startDate:{
         type: DataTypes.DATE
@@ -39,11 +41,27 @@ const newActivities = db.define('newactivities', {
 },{
     freezeTableName: true
 });
+
+ImgAct.hasMany(newActivities, {
+    foreignKey: 'idImgAct'
+}); 
+newActivities.belongsTo(ImgAct, {
+    foreignKey: 'idImgAct',
+    targetKey: 'idImgAct',
+  });
+
+Theme.hasMany(newActivities, { 
+    foreignKey: 'idTheme'
+ });
+newActivities.belongsTo(Theme, {
+    foreignKey: 'idTheme',
+    targetKey:'idTheme'
+});
 // Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
 
-newActivities.belongsTo(newActivities, { through: newActivities });
+
 // Export the "Activities" model
 export default newActivities;

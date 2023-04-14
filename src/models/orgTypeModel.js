@@ -17,10 +17,10 @@ const OrgType = db.define('orgType', {
     freezeTableName: true
 });
 
+
+
 (async () => {
     await db.sync();
 })();
-
-OrgType.belongsTo(Organizer, { through: Organizer });
 
 export default OrgType;

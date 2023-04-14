@@ -20,5 +20,5 @@ const ImgAct = db.define('imgAct', {
 (async () => {
     await db.sync();
 })();
-ImgAct.belongsTo(newActivities, { through: newActivities });
+
 export default ImgAct;

@@ -3,7 +3,7 @@ import db from "../config/database.js";
 
 import Competitor from "../models/competitorModel.js";
 import newActivities from "../models/newActivityModel.js";
-const {DataTypes} = Sequelize;
+
 
 const CompAct = db.define('compact', {
 }, { timestamps: false });

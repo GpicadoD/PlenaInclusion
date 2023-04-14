@@ -22,6 +22,5 @@ const Theme = db.define('theme', {
     await db.sync();
 })();
 
-Theme.belongsTo(newActivities, { through: newActivities });
 // Export the "Activities" model
 export default Theme;

@@ -2,12 +2,18 @@ import express from 'express';
 import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
-import { AddList, GetList } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
-import { GetNewUser} from '../controllers/newUser.js';
-import { GetCompetitor } from '../controllers/competitor.js';
-import { GetOrganizer } from '../controllers/organizer.js';
+import { AddnewActivities, DeleteNewActivity, GetnewActivities } from '../controllers/newActivity.js';
+import { DeleteNewUser, GetNewUser} from '../controllers/newUser.js';
+import { DeleteCompetitor, GetCompetitor } from '../controllers/competitor.js';
+import { DeleteOrganizer, GetOrganizer } from '../controllers/organizer.js';
+import { DeleteTheme, GetTheme } from '../controllers/theme.js';
+import { DeleteOrganizerType, GetOrganizerType } from '../controllers/orgType.js';
+import { DeletePeriodAct, GetPerAct } from '../controllers/periodicActivity.js';
+import { DeleteImgOrg } from '../controllers/imgOrg.js';
+import { DeletePublic } from '../controllers/public.js';
+import { DeletePeriod } from '../controllers/period.js';
+import { DeleteImgAct } from '../controllers/imgAct.js';
 
 
 const router = express.Router();
@@ -96,6 +102,7 @@ router.post('/addnewAct', AddnewList);
 router.post('/newUser', GetNewUser);
 router.post('/newActivities', AddnewActivities);
 
+//all get//
 router.post('/getcompact', GetComAct);
 
 router.post('/getcompetitor', GetCompetitor);
@@ -103,6 +110,31 @@ router.post('/getcompetitor', GetCompetitor);
 router.post('/getOrganizer', GetOrganizer);
 
 router.post('/getnewlist', AddnewList);
+
+router.post('/getTheme',GetTheme);
+
+router.post('/getOrgType', GetOrganizerType);
+
+router.post('/getPerAct', GetPerAct);
+
+
+//all deletes//
+router.post('/deleteCompetitor', DeleteCompetitor);
+router.post('/deleteimgact',DeleteImgAct);
+router.post('/deleteImgOrg', DeleteImgOrg);
+router.post('/deletenewactivity',DeleteNewActivity);
+router.post('/deletenewuser', DeleteNewUser);
+router.post('/deleteOrganizer', DeleteOrganizer);
+router.post('/deleteorgtype',DeleteOrganizerType);
+router.post('/deletePeriod',DeletePeriod);
+
+
+router.post('/deletePublic',DeletePublic);
+router.post('/deleteTheme',DeleteTheme);
+
+
+router.post('/deleteperiodact',DeletePeriodAct);
+
 
 // Export the router object
 export default router;

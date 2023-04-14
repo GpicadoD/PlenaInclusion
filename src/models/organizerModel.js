@@ -2,7 +2,8 @@ import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
 import newActivities from "./newActivityModel.js";
-
+import ImgOrg from "./imgOrgModel.js";
+import newUsers from "./newUserModel.js";
 const {DataTypes} = Sequelize;
 
 const Organizer = db.define('organizer', {
@@ -11,7 +12,8 @@ const Organizer = db.define('organizer', {
         primaryKey: true
     },
     idImgOrg:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        foreignKey:true
     },
     idtypeProf:{
         type: DataTypes.INTEGER
@@ -19,11 +21,16 @@ const Organizer = db.define('organizer', {
 },{
     freezeTableName: true
 });
+ImgOrg.hasMany(Organizer, {
+    foreignKey: 'idImgOrg'
+}); 
+Organizer.belongsTo(ImgOrg, {
+    foreignKey: 'idImgOrg',
+    targetKey: 'idImgOrg',
+  });
 
 (async () => {
     await db.sync();
 })();
-
-Organizer.belongsTo(newActivities, { through: newActivities });
 
 export default Organizer;

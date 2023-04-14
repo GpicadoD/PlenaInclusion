@@ -1,11 +1,14 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
+import Organizer from "./organizerModel.js";
+import Competitor from "./competitorModel.js";
+
 const {DataTypes} = Sequelize;
 
 const newUsers = db.define('newusers', {
     userNIF:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true
     },
     name:{
@@ -32,7 +35,17 @@ const newUsers = db.define('newusers', {
 },{
     freezeTableName: true
 });
+ newUsers.hasOne(Organizer, { 
+    foreignKey: 'NifOrg'
+ });
+ Organizer.belongsTo(newUsers, {
+    foreignKey: 'NifOrg'
+ });
+ 
+ 
+ 
 (async () => {
     await db.sync();
 })();
+
 export default newUsers;
