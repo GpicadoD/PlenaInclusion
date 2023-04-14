@@ -10,6 +10,27 @@ export const GetorgType  = async(req, res) => {
     }
 }
 
+export const DeleteOrganizerType = async(req, res) => {
+    const { idTypeOrg } = req.body;
+    console.log(idTypeOrg);
+    try {
+        let orgtype = await OrgType.findByPk(idTypeOrg);
+        console.log(orgtype);
+        if(!orgtype){
+            return res.json({msg: "organizer not found"});  
+        } 
+        else{
+            if(orgtype.idTypeOrg == idTypeOrg){
+            await orgtype.destroy();
+          
+            return res.json({msg: "organizer successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdateOrgType = async(req, res) => {
     var {idTypeOrg, orgType} = req.body;
     
@@ -27,3 +48,19 @@ export const UpdateOrgType = async(req, res) => {
         console.log(error);
     }
 }
+
+export const AddorgType = async (req, res) => {
+    var { idTypeOrg, orgType } = req.body;
+    if(!idTypeOrg) return res.status(400).json({msg: "Cant update without PK"});
+
+    try {
+      await OrgType.create({
+        idTypeOrg,
+        orgType,
+      });
+      res.json({ msg: "Organization type created successfully" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+

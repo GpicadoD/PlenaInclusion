@@ -27,3 +27,38 @@ export const UpdatePeriod = async(req, res) => {
         console.log(error);
     }
 }
+
+export const addNewPeriod = async (req, res) => {
+    var { period } = req.body;
+    if(!period) return res.status(400).json({msg: "Cant update without PK"});
+
+    console.log(period)
+    try {
+      await Period.create({
+        period,
+      });
+      res.json({ msg: "Period created successfully" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+export const DeletePeriod = async(req, res) => {
+    const { idPeriod } = req.body;
+    try {
+        let periods = await Period.findByPk(idPeriod);
+        console.log(periods);
+        if(periods == null){
+            return res.json({msg: "public not found"});  
+        } 
+        else{
+            if(periods.idPeriod == idPeriod){
+            await periods.destroy();
+            return res.json({msg: "public successfully delete"});  
+            } 
+        }
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}

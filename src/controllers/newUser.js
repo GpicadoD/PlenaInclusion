@@ -14,6 +14,28 @@ export const GetNewUser = async(req, res) => {
     }
 }
 
+export const DeleteNewUser = async(req, res) => {
+    const { userNIF } = req.body;
+    console.log(userNIF);
+    try {
+        let newUser = await newUsers.findByPk(userNIF);
+        console.log(newUser);
+        if(!newUser){
+            return res.json({msg: "newUser not found"});  
+        } 
+        else{
+            if(newUser.userNIF == userNIF){
+            await newUser.destroy();
+          
+            return res.json({msg: "newUser successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const UpdateUser = async(req, res) => {
     var {userNIF, name, lastname, email, birthdate, phoneNumber,
         password, gender} = req.body;
@@ -43,3 +65,26 @@ export const UpdateUser = async(req, res) => {
         console.log(error);
     }
 }
+
+export const AddNewUser = async(req, res) => {
+    var { userNIF, name, lastname, email, birthdate, phoneNumber, password, gender } = req.body;
+    if(!userNIF) return res.status(400).json({msg: "Cant update without PK"});
+
+    try {
+      await newUsers.create({
+        userNIF: userNIF,
+        name: name,
+        lastname: lastname,
+        email: email,
+        birthdate: birthdate,
+        phoneNumber: phoneNumber,
+        password: password,
+        gender: gender
+      });
+  
+      res.json({ msg: "User added successfully" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+

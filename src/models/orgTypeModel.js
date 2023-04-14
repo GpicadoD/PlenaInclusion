@@ -23,7 +23,4 @@ const OrgType = db.define('orgType', {
 (async () => {
     await db.sync();
 })();
-
-OrgType.belongsTo(Organizer, { through: Organizer });
-// Export the "orgType" model
 export default OrgType;

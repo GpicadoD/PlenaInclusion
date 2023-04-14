@@ -5,9 +5,7 @@ import newActivities from "./newActivityModel.js";
 // It also imports the "newActivities" model previously defined.
 const {DataTypes} = Sequelize;
 // Define the "Public" model using Sequelize
-const Public = db.define('public', {
-    idPublic:{
-const {DataTypes} = Sequelize;
+
 const PublicType = db.define('publicType', {
     idPublicType:{
         type: DataTypes.INTEGER,
@@ -25,7 +23,5 @@ const PublicType = db.define('publicType', {
 (async () => {
     await db.sync();
 })();
-Public.belongsTo(newActivities, { through: newActivities });
 // Export the "Public" model
-export default Public;
 export default PublicType;

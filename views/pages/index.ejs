@@ -28,6 +28,7 @@
             <!-- Get users button -->
             <form method="post" action="/getUsers">
                 <input type="submit" value="Take users">
+
             </form>
                 <!-- Register form -->
                 <form action="/register" method="post">
@@ -42,16 +43,19 @@
                 Date: <input type="text" name="date" value="" /><br><br>
                 <input type="submit" value="Add Activities"/><br><br>
             </form>
+
             <!-- Get activities button -->
             <form method="post" action="/getActivities">
                 <input type="submit" value="Get Activities"><hr>
             </form>
+
             <!-- Add user activity form -->
             <form action="/addList" method="post">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br>
                 <input type="submit" value="Add UserAct"/><br><br>
             </form>
+
             <!-- Get user activities button -->
             <form method="post" action="/getList">
                 <input type="submit" value="Get UserActs"><hr>
@@ -62,7 +66,6 @@
                 LastDate: <input type="text" name="lastDate" value="" /><br><br>
                 <input type="submit" value="Buscar"><hr>
             </form>
-
             <form action="/getUserActivities" method="POST">
                 <label for="userId">User ID:</label>
                 <input type="text" id="userId" name="userId">
@@ -80,20 +83,19 @@
             <form method="post" action="/getnewAct">
                 <input type="submit" value="nuevo"><hr>
             </form>
-
             <form action="/newActivities" method="post">
                 NameAct: <input type="text" name="nameAct" value="" /><br><br>
                 Date: <input type="text" name="date" value="" /><br><br>
                 <input type="submit" value="Add Activities"/><br><br><hr>
             </form>
-            
             <form action="/newRegister" method="post">
                 Username: <input type="text" name="username" value="" /><br><br>
                 Password: <input type="text" name="password" value="" /><br><br>
                 ConfPassword: <input type="text" name="confPassword" value="" /><br><br>
                 <input type="submit" value="Register"/><br><br><hr>
-                </form>
+            </form>
 
+            <p>TODOS LOS GET</p>
             <form method="post" action="/newRegister">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br>
@@ -112,20 +114,83 @@
                 <input type="submit" value="organizer"><hr>
             </form>
 
-            <form method="post" action="/getnewlist">
-                IdAct: <input type="text" name="idAct" value="" /><br><br>
-                IdUser: <input type="text" name="idUser" value="" /><br><br><hr>
-                <input type="submit" value="nuevaLista">
-            </form>
-            <form method="post" action="/getPublic">
-                <input type="submit" value="Public"><hr>
-            </form>
-            <form method="post" action="/getPeriod">
-                <input type="submit" value="Period"><hr>
-            </form>
             <form method="post" action="/getTheme">
-                <input type="submit" value="Theme"><hr>
+                <input type="submit" value="theme">
             </form>
+
+            <form method="post" action="/getOrgType">
+                <input type="submit" value="OrgType">
+            </form>
+
+            <form method="post" action="/getPerAct">
+                <input type="submit" value="OrgType">
+            </form>
+
+            <form method="post" action="/getnewlist">
+            <h2>Insert UserActs</h2>
+            <form action="/addList" method="post">
+                IdAct: <input type="text" name="idAct" value="" /><br><br>
+                IdUser: <input type="text" name="idUser" value="" /><br><br>
+                <input type="submit" value="Add UserAct"/><br><br><hr>
+            </form>
+
+            <p>TODOS LOS DELETES</p>
+            <form method="post" action="/deleteCompetitor">
+                NifCom: <input type="text" name="NifCom" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteTheme">
+                idTheme: <input type="text" name="idTheme" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteOrganizer">
+                idOrganizer: <input type="text" name="idOrganizer" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteImgOrg">
+                idImgOrg: <input type="text" name="idImgOrg" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+            
+            <form method="post" action="/deletePublic">
+                idPublic: <input type="text" name="idPublic" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deletePeriod">
+                idPeriod: <input type="text" name="idPeriod" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deletenewuser">
+                userNIF: <input type="text" name="userNIF" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deletenewactivity">
+                activityId: <input type="text" name="activityId" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteimgact">
+                idImgAct: <input type="text" name="idImgAct" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteorgtype">
+                idTypeOrg: <input type="text" name="idTypeOrg" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+
+            <form method="post" action="/deleteperiodact">
+                actDate: <input type="text" name="actDate" value="" /><br><br>
+                activityId: <input type="text" name="activityId" value="" /><br><br>
+                <input type="submit" value="borrar">
+            </form>
+            
         </div>
     </main>
     <footer>

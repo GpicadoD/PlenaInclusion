@@ -19,7 +19,7 @@ export const GetActivities = async(req, res) => {
 // It then validates that the "date" field is not null, and if it is, it sends a 400 status response to the client with a JSON message indicating that the field is missing
 // If the field is not missing, it creates a new activity record in the database with the provided name and date, and sends a JSON response indicating success or failure
 export const AddActivities = async(req, res) => {
-    const {nameAct, date} = req.body;
+    const {nameAct = null, date = null} = req.body;
     if(date == null) return res.status(400).json({msg: "There is no date in the activity"});
     try {
         await Activities.create({
