@@ -1,9 +1,7 @@
 // It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-
-import newActivities from "./newActivityModel.js";
-// It also imports the "newActivities" model previously defined.
+import ImgOrg from "./imgOrgModel.js";
 
 const {DataTypes} = Sequelize;
 // Define the "Organizer" model using Sequelize
@@ -13,7 +11,8 @@ const Organizer = db.define('organizer', {
         primaryKey: true
     },
     idImgOrg:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        foreignKey:true
     },
     idtypeProf:{
         type: DataTypes.INTEGER
@@ -22,6 +21,14 @@ const Organizer = db.define('organizer', {
     freezeTableName: true,
     timestamps: false
 });
+ImgOrg.hasMany(Organizer, {
+    foreignKey: 'idImgOrg'
+}); 
+Organizer.belongsTo(ImgOrg, {
+    foreignKey: 'idImgOrg',
+    targetKey: 'idImgOrg',
+  });
+
 // Synchronize the model with the database
 (async () => {
     await db.sync();

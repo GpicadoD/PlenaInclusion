@@ -37,6 +37,28 @@ export const GetnewActivities = async(req, res) => {
     }
 }
 // This function updates an activity with new data from the request body
+export const DeleteNewActivity = async(req, res) => {
+    const { activityId } = req.body;
+    console.log(activityId);
+    try {
+        let newActivity = await newActivities.findByPk(activityId);
+        console.log(newActivity);
+        if(!newActivity){
+            return res.json({msg: "newActivity not found"});  
+        } 
+        else{
+            if(newActivity.activityId == activityId){
+            await newActivity.destroy();
+          
+            return res.json({msg: "newActivity successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const UpdateActivities = async(req, res) => {
     var {activityId, NameAct, idPublicType, idTheme, idImgAct, startDate,
         finishDate, idPeriod, idCreator} = req.body;
