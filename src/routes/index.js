@@ -2,12 +2,28 @@ import express from 'express';
 import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
-import { AddList, GetList } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, GetnewActivities } from '../controllers/newActivity.js';
 import { GetNewUser} from '../controllers/newUser.js';
-import { GetCompetitor } from '../controllers/competitor.js';
-import { GetOrganizer } from '../controllers/organizer.js';
+import { GetCompetitor, UpdateCompetitor } from '../controllers/competitor.js';
+import { GetOrganizer, UpdateOrganizer} from '../controllers/organizer.js';
+
+import { UpdateOrgType } from '../controllers/orgType.js';
+
+
+import { UpdateActivities } from '../controllers/newActivity.js';
+
+import { UpdateUser } from '../controllers/newUser.js';
+
+import { UpdatePublic } from '../controllers/public.js';
+
+import { UpdatePeriod } from '../controllers/period.js';
+
+import { UpdateTheme } from '../controllers/theme.js';
+
+
+
+
 
 const router = express.Router();
 
@@ -102,6 +118,23 @@ router.post('/getcompetitor', GetCompetitor);
 router.post('/getOrganizer', GetOrganizer);
 
 router.post('/getnewlist', AddnewList);
+
+router.post('/updateActivities', UpdateActivities);
+
+router.post('/updateUser', UpdateUser);
+
+router.post('/updateOrganizer', UpdateOrganizer);
+
+router.post('/updateCompetitor', UpdateCompetitor);
+
+router.post('/updateOrgType', UpdateOrgType);
+
+router.post('/updatePublic', UpdatePublic);
+
+router.post('/updatePeriod', UpdatePeriod);
+
+router.post('/updateTheme', UpdateTheme);
+
 
 // Export the router object
 export default router;

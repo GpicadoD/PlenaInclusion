@@ -13,7 +13,8 @@ const ImgOrg = db.define('imgOrg', {
         type: DataTypes.BLOB
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {

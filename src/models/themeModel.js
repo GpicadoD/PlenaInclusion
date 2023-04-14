@@ -15,13 +15,13 @@ const Theme = db.define('theme', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 // Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
 
-Theme.belongsTo(newActivities, { through: newActivities });
 // Export the "Activities" model
 export default Theme;

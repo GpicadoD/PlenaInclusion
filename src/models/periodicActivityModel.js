@@ -19,7 +19,8 @@ const PeriodicAct = db.define('periodicAct', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 
 (async () => {
