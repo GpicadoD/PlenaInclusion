@@ -9,7 +9,7 @@ const ImgOrg = db.define('imgOrg', {
         primaryKey: true,
         autoIncrement: true
     },
-    ImgAct:{
+    ImgOrg:{
         type: DataTypes.BLOB
     }
 },{

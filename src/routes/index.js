@@ -128,12 +128,13 @@ router.post('/deleteOrganizer', DeleteOrganizer);
 router.post('/deleteorgtype',DeleteOrganizerType);
 router.post('/deletePeriod',DeletePeriod);
 
+router.post('/deleteperiodact',DeletePeriodAct);
 
 router.post('/deletePublic',DeletePublic);
 router.post('/deleteTheme',DeleteTheme);
 
 
-router.post('/deleteperiodact',DeletePeriodAct);
+
 
 
 // Export the router object

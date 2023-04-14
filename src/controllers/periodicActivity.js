@@ -13,15 +13,18 @@ export const DeletePeriodAct = async(req, res) => {
     const { actDate, activityId } = req.body;
     try {
         let actdates = await PeriodicAct.findByPk(actDate);
-        let actid = await PeriodicAct.findByPk(activityId);
+        let actid = await PeriodicAct.findOne({
+            actid : [ activityId ] 
+    });
+
         console.log(actDate);
         console.log(activityId);
-        if(actdates == null || actid == null){
+        if( !actdates  || !actid ){
             return res.json({msg: "period-activity not found"});  
         } 
         else{
             if(actdates.actDate == actDate && actid.activityId == activityId){
-            await actdates.destroy();
+            await actid.destroy();
             return res.json({msg: "period-activity successfully delete"});  
             } 
         }
