@@ -8,10 +8,10 @@ export const Addnewperiodact = async (req, res) => {
 
   try {
     await PeriodicAct.create({
-      actDate,
-      activityId,
-      orgNif,
-      actPlace
+      actDate : actDate,
+      activityId: activityId,
+      orgNif: orgNif,
+      actPlace: actPlace
     });
     res.json({ msg: "periodicActivity created successfully" });
   } catch (error) {

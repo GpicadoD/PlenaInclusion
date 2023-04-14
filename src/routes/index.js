@@ -95,7 +95,7 @@ router.post('/getActByDate', GetActByDate);
 router.post('/getUserActivities', GetUserActivities)
 
 router.post('/getnewAct', GetnewActivities);
-router.post('/newActivities', AddnewActivities);
+router.post('/AddnewActivities', AddnewActivities);
 
 router.post('/AddorgType', AddorgType);
 

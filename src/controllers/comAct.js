@@ -1,6 +1,6 @@
 import CompAct from "../models/comActModel.js";
 import Competitor from "../models/competitorModel.js";
-import newActivities from "../models/newActivityModel.js";
+import PeriodicAct from "../models/periodicActivityModel.js";
 
 export const GetComAct  = async(req, res) => {
     try {
@@ -14,7 +14,9 @@ export const GetComAct  = async(req, res) => {
 export const AddnewList = async(req, res) => {
     const {idAct, idUser} = req.body;
     try {
-        let activity = await newActivities.findByPk(idAct);
+        let activity = await PeriodicAct.findOne({
+            activityId: [idAct]
+          });
         let user = await Competitor.findByPk(idUser);
         activity.addCompetitor(user);
         res.json({msg: "User - Activity Registration Successfully"});
