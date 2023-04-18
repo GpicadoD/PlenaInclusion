@@ -1,9 +1,11 @@
+// This code imports the "ImgAct" model from its respective module
+
 import ImgAct from "../models/imgActModel.js";
 
-export const GetImgAct = async(req, res) => {
+export const GetimgAct  = async(req, res) => {
     try {
-        let usersData = await ImgAct.findAll();
-        res.json(usersData);
+        let Data = await ImgAct.findAll();
+        res.json(Data);
     } catch (error) {
         console.log(error);
     }

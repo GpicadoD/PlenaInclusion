@@ -1,11 +1,10 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-
-import newActivities from "./newActivityModel.js";
 import ImgOrg from "./imgOrgModel.js";
-import newUsers from "./newUserModel.js";
-const {DataTypes} = Sequelize;
 
+const {DataTypes} = Sequelize;
+// Define the "Organizer" model using Sequelize
 const Organizer = db.define('organizer', {
     NifOrg:{
         type: DataTypes.STRING,
@@ -19,7 +18,8 @@ const Organizer = db.define('organizer', {
         type: DataTypes.INTEGER
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 ImgOrg.hasMany(Organizer, {
     foreignKey: 'idImgOrg'
@@ -29,8 +29,10 @@ Organizer.belongsTo(ImgOrg, {
     targetKey: 'idImgOrg',
   });
 
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
 
+// Export the "Organizer" model
 export default Organizer;

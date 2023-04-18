@@ -1,3 +1,4 @@
+// It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 import Organizer from "./organizerModel.js";
@@ -5,7 +6,7 @@ import Organizer from "./organizerModel.js";
 import newActivities from "./newActivityModel.js";
 
 const {DataTypes} = Sequelize;
-
+// Define the "PeriodicAct" model using Sequelize
 const PeriodicAct = db.define('periodicAct', {
     actDate:{
         type: DataTypes.DATE,
@@ -22,7 +23,8 @@ const PeriodicAct = db.define('periodicAct', {
         type: DataTypes.STRING
     }
 },{
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 });
 Organizer.hasMany(PeriodicAct, {
     foreignKey: 'NifOrg'
@@ -39,8 +41,9 @@ PeriodicAct.belongsTo(newActivities, {
     foreignKey: 'activityId',
     targetKey: 'activityId',
   });  
+// Synchronize the model with the database
 (async () => {
     await db.sync();
 })();
-
+// Export the "PeriodicAct" model
 export default PeriodicAct;
