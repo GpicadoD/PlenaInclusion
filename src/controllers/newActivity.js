@@ -36,7 +36,7 @@ export const GetnewActivities = async(req, res) => {
         console.log(error);
     }
 }
-
+// This function updates an activity with new data from the request body
 export const DeleteNewActivity = async(req, res) => {
     const { activityId } = req.body;
     console.log(activityId);
@@ -58,14 +58,15 @@ export const DeleteNewActivity = async(req, res) => {
         console.log(error);
     }
 }
+
 export const UpdateActivities = async(req, res) => {
     var {activityId, NameAct, idPublicType, idTheme, idImgAct, startDate,
         finishDate, idPeriod, idCreator} = req.body;
-    
+    // If activityId is missing, return an error response
     if(!activityId) return res.status(400).json({msg: "Cant update an activity without an ID"});
     try {
         const activity = await newActivities.findByPk(activityId);
-        
+        // Set any missing fields to their original values
         if(!NameAct) NameAct  = activity.nameAct;
         if(!idPublicType) idPublicType  = activity.idPublicType;
         if(!idTheme) idTheme  = activity.idTheme;
@@ -74,6 +75,7 @@ export const UpdateActivities = async(req, res) => {
         if(!finishDate) finishDate  = activity.finishDate;
         if(!idPeriod) idPeriod  = activity.idPeriod;
         if(!idCreator) idCreator  = activity.idCreator;
+        // Update the activity with new values
         activity.set({
             nameAct: NameAct,
             idPublicType: idPublicType,

@@ -1,6 +1,8 @@
 // This code imports the "Public" model from its respective module
 import PublicType from "../models/publicModel.js";
 
+// This code defines a controller function called "Getpublic" that uses the "findAll" method to retrieve all PublicTypes from the database
+// It then sends the publicType data as a JSON response to the client
 export const Getpublic  = async(req, res) => {
     try {
         let Data = await PublicType.findAll();
@@ -10,6 +12,10 @@ export const Getpublic  = async(req, res) => {
     }
 }
 
+
+// This code defines a controller function called "UpdatePublic" that extracts the id of the publicType and the new publicType from the request body
+// It then searches the publicType by the PK from the "PublicType" model and updates it with the new publicType data
+// It then sends a JSON response indicating success or failure
 export const DeletePublic = async(req, res) => {
     const { idPublic } = req.body;
     try {
@@ -46,6 +52,9 @@ export const UpdatePublic = async(req, res) => {
         console.log(error);
     }
 }
+
+// This code defines a controller function called "Addnewpublic" that extracts the id of the publicType and the name of the new publicType from the request body
+// If the idPublicType field is not missing, it creates a new PublicType record in the database with the provided data and sends a JSON response indicating success or failure
 export const Addnewpublic = async (req, res) => {
     var { idPublicType, publicType } = req.body;
     console.log(idPublicType);
