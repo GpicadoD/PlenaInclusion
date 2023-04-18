@@ -12,11 +12,11 @@ export const GetPerAct = async(req, res) => {
 export const DeletePeriodAct = async(req, res) => {
     const { actDate, activityId } = req.body;
     try {
-        let actdates = await PeriodicAct.findByPk(actDate);
-        let actid = await PeriodicAct.findOne({
-            actid : [ activityId ] 
-    });
-
+        let actdates = await PeriodicAct.findOne({
+            actdates : [actDate]
+        });
+        let actid = await PeriodicAct.findByPk(activityId);
+        
         console.log(actDate);
         console.log(activityId);
         if( !actdates  || !actid ){

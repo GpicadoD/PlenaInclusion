@@ -22,20 +22,12 @@ export const AddList = async(req, res) => {
     try {
         let activity = await Activities.findByPk(idAct);
         let user = await Users.findByPk(idUser);
-<<<<<<< HEAD
-        //console.log(activity);
-        //user.addActivities(activity);
-        activity.addUsers(user);
-=======
         user.addActivities(activity);
->>>>>>> 034c934d132d0ad7e6a1029d10090f27bbe3e27a
-        
         res.json({msg: "User - Activity Registration Successfully"});
     } catch (error) {
         console.log(error);
     }
 }
-
 
 // This code defines a controller function called "GetUserActivities" that extracts the activity and user IDs from the request body
 // It then uses the "findAll" method to find the corresponding activity and user records in the database
