@@ -1,6 +1,7 @@
 // This code imports the "Period" model from its respective module
 import Period from "../models/periodModel.js";
 
+// This function retrieves all Period records from the database
 export const GetPeriod  = async(req, res) => {
     try {
         let Data = await Period.findAll();
@@ -10,6 +11,7 @@ export const GetPeriod  = async(req, res) => {
     }
 }
 
+// This function updates a specific Period record in the database
 export const UpdatePeriod = async(req, res) => {
     var {idPeriod, period} = req.body;
     
@@ -28,6 +30,7 @@ export const UpdatePeriod = async(req, res) => {
     }
 }
 
+// This function adds a new Period record to the database
 export const addNewPeriod = async (req, res) => {
     var { period } = req.body;
     if(!period) return res.status(400).json({msg: "Cant update without PK"});
