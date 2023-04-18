@@ -2,7 +2,7 @@ import express from 'express';
 import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
-import { AddnewList, GetComAct } from '../controllers/comAct.js';
+import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login} from '../controllers/newUser.js';
 import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from '../controllers/competitor.js';
@@ -123,7 +123,7 @@ router.post('/getOrganizer', GetOrganizer);
 router.post('/Addcompetitor', AddCompetitor);
 
 router.post('/Addorganizer', Addneworganizer);
-router.post('/getnewlist', AddnewList);
+router.post('/insertCompact', AddnewList);
 
 router.post('/getTheme',GetTheme);
 
@@ -133,6 +133,7 @@ router.post('/getPerAct', GetperiodicActs);
 
 
 //all deletes//
+router.post('/deletecomact',DeleteCompAct);
 router.post('/deleteCompetitor', DeleteCompetitor);
 router.post('/deleteimgact',DeleteImgAct);
 router.post('/deleteImgOrg', DeleteImgOrg);
@@ -141,9 +142,7 @@ router.post('/deletenewuser', DeleteNewUser);
 router.post('/deleteOrganizer', DeleteOrganizer);
 router.post('/deleteorgtype',DeleteOrganizerType);
 router.post('/deletePeriod',DeletePeriod);
-
 router.post('/deleteperiodact',DeletePeriodAct);
-
 router.post('/deletePublic',DeletePublic);
 router.post('/deleteTheme',DeleteTheme);
 

@@ -1,4 +1,5 @@
 // This code imports the "CompAct", "Competitor" and "newActivity" models from their respective modules
+import { compare } from "bcrypt";
 import CompAct from "../models/comActModel.js";
 import Competitor from "../models/competitorModel.js";
 import PeriodicAct from "../models/periodicActivityModel.js";
@@ -18,36 +19,34 @@ export const GetComAct  = async(req, res) => {
 // It then searches the id by the PK from the "activity" and the "user", and if it is, then the activity adds a new user with the addCompetitor
 // If the field is not missing, it creates a new Competitor record in the database with the provided activity and user, and sends a JSON response indicating success or failure
 export const AddnewList = async(req, res) => {
-    const {idAct, idUser} = req.body;
+    const {idAct, idUser, actDate} = req.body;
     try {
-        let activity = await PeriodicAct.findOne({
-            activityId: [idAct]
-          });
-        let user = await Competitor.findByPk(idUser);
-        activity.addCompetitor(user);
-        res.json({msg: "User - Activity Registration Successfully"});
+        await CompAct.create({
+            ActDate: actDate,
+            NifCom: idUser,
+            activityId: idAct
+        });
+        res.json({msg: "Activity added successfully!"});
     } catch (error) {
         console.log(error);
     }
 }
 
 export const DeleteCompAct = async(req, res) => {
-    const { NifCom } = req.body;
+    var { idAct, idUser, actDate } = req.body;
+    const dateA = new Date(actDate);
     try {
-        let participant = await Competitor.findAll(NifCom);
-        let Comact = await CompAct.findAll(NifCom);
-        console.log(participant);
-        if(Comact.NifCom == null){
-            return res.json({msg: "Participant not found"});
-        }
-        else{
-            if(participant.NifCom == NifCom){
-            await participant.destroy();
-            await Comact.destroy();
-            return res.json({msg: "Participant successfully delete"});  
-            } 
-        }
-
+        let Comact = await CompAct.findOne({
+            where: {
+                ActDate: dateA,
+                NifCom: idUser,
+                activityId: idAct
+            }
+        });
+        console.log(Comact);
+        await Comact.destroy();
+        console.log(Comact);
+        res.json({msg: "Activity removed successfully!"});
     } 
     catch (error) {
         console.log(error);

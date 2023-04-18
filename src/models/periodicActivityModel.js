@@ -8,12 +8,12 @@ import newActivities from "./newActivityModel.js";
 const {DataTypes} = Sequelize;
 // Define the "PeriodicAct" model using Sequelize
 const PeriodicAct = db.define('periodicAct', {
-    actDate:{
-        type: DataTypes.DATE,
-        primaryKey: true
-    },
     activityId:{
         type: DataTypes.INTEGER,
+        primaryKey: true
+    },
+    actDate:{
+        type: DataTypes.DATE,
         primaryKey: true
     },
     NifOrg:{
