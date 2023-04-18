@@ -8,7 +8,8 @@ import PeriodicAct from "../models/periodicActivityModel.js";
 const {DataTypes} = Sequelize;
 // Define the "CompAct" model using Sequelize
 const CompAct = db.define('compact', {
-}, { timestamps: false });
+}, { timestamps: false
+ });
 // Export the CompAct" model
 Competitor.belongsToMany(PeriodicAct, { through: CompAct });
 PeriodicAct.belongsToMany( Competitor, { through: CompAct });

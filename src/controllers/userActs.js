@@ -43,9 +43,7 @@ export const GetUserActivities = async(req, res) => {
         },
         include: [
           {
-
             model: Activities
-
           }
         ]
       });
