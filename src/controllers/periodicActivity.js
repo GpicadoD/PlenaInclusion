@@ -14,24 +14,19 @@ export const GetperiodicActs  = async(req, res) => {
 
 // This controller function adds a new periodic activity to the database based on the data provided in the request body
 export const DeletePeriodAct = async(req, res) => {
-    const { actDate, activityId } = req.body;
+    const { actDate, idAct } = req.body;
+    const dateA = new Date(actDate);
     try {
-        let actdates = await PeriodicAct.findOne({
-            actdates : [actDate]
+        let pact = await PeriodicAct.findOne({
+            where: {
+                ActDate: dateA,
+                activityId: idAct
+            }
         });
-        let actid = await PeriodicAct.findByPk(activityId);
-        
-        console.log(actDate);
-        console.log(activityId);
-        if( !actdates  || !actid ){
-            return res.json({msg: "period-activity not found"});  
-        } 
-        else{
-            if(actdates.actDate == actDate && actid.activityId == activityId){
-            await actid.destroy();
-            return res.json({msg: "period-activity successfully delete"});  
-            } 
-        }
+        console.log(pact);
+        await pact.destroy();
+        console.log(pact);
+        res.json({msg: "PeriodicAct removed successfully!"});
     } 
     catch (error) {
         console.log(error);
