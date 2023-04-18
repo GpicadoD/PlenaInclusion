@@ -13,10 +13,7 @@ export const GetTheme  = async(req, res) => {
     }
 }
 
-// This code defines a controller function called "UpdateTheme" that extracts the ID and new name of a theme from the request body
-// If the ID is missing, it sends an error response to the client
-// Otherwise, it finds the theme in the database by its ID and updates its name to the provided new name
-// It then sends a success message to the client
+//
 
 export const DeleteTheme = async(req, res) => {
     const { idTheme } = req.body;
@@ -37,6 +34,11 @@ export const DeleteTheme = async(req, res) => {
         console.log(error);
     }
 }
+
+// This code defines a controller function called "UpdateTheme" that extracts the ID and new name of a theme from the request body
+// If the ID is missing, it sends an error response to the client
+// Otherwise, it finds the theme in the database by its ID and updates its name to the provided new name
+// It then sends a success message to the client
 export const UpdateTheme = async(req, res) => {
     var {idTheme, themeName} = req.body;
     

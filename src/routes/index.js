@@ -4,15 +4,12 @@ import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
-import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
+import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login} from '../controllers/newUser.js';
 import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from '../controllers/competitor.js';
 import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from '../controllers/organizer.js';
 import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
-
 import { DeleteOrganizerType, GetorgType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
-
 import { DeletePeriodAct, GetperiodicActs, Addnewperiodact} from '../controllers/periodicActivity.js';
-
 import { DeleteImgOrg } from '../controllers/imgOrg.js';
 import { DeletePublic, UpdatePublic, Addnewpublic } from '../controllers/public.js';
 import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.js';
@@ -166,6 +163,10 @@ router.post('/updatePublic', UpdatePublic);
 router.post('/updatePeriod', UpdatePeriod);
 
 router.post('/updateTheme', UpdateTheme);
+
+router.post('/resetPassword', ResetPassword);
+
+router.post('/loginNewUser', Login);
 
 
 // Export the router object

@@ -1,7 +1,7 @@
 // This code imports the "newUsers" model from its respective module, as well as the "bcrypt" library
 import newUsers from "../models/newUserModel.js";
 
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 
 // This code defines a controller function called "GetNewUser" that uses the "findAll" method to retrieve all new users from the database
 // It then sends the usersData data as a JSON response to the client
@@ -74,9 +74,11 @@ export const UpdateUser = async(req, res) => {
 
 // This code defines a controller function called "AddNewUser" that adds a new user to the database with the provided properties
 export const AddNewUser = async(req, res) => {
-    var { userNIF, name, lastname, email, birthdate, phoneNumber, password, gender } = req.body;
+    var { userNIF, name, lastname, email, birthdate, phoneNumber, password, gender,confPassword } = req.body;
     if(!userNIF) return res.status(400).json({msg: "Cant update without PK"});
-
+    if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(password, salt);
     try {
       await newUsers.create({
         userNIF: userNIF,
@@ -85,7 +87,7 @@ export const AddNewUser = async(req, res) => {
         email: email,
         birthdate: birthdate,
         phoneNumber: phoneNumber,
-        password: password,
+        password: hashPassword,
         gender: gender
       });
   
@@ -95,3 +97,47 @@ export const AddNewUser = async(req, res) => {
     }
   }
 
+
+export const ResetPassword = async(req, res) => {
+    var { newUserNif } = req.body;
+    const bank = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789:._";
+    var randomPass = "";
+    for (let i = 0; i < 7; i++) {
+        randomPass += bank.charAt(Math.floor(Math.random() * bank.length));
+    }
+    if(!newUserNif) return res.status(400).json({msg: "Cant update an activity without an ID"});
+    const salt = await bcrypt.genSalt();
+    try {
+        const user = await newUsers.findByPk(newUserNif);
+        var password = await bcrypt.hash(randomPass, salt);
+        user.set({
+            password: password
+        });
+        await user.save();
+        res.json({msg: "The new password is: " + randomPass});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const Login  = async(req, res) => {
+    const {newUserNif, password} = req.body;
+    try {
+        let users = await newUsers.findByPk(newUserNif);
+        if(users.userNIF != newUserNif){
+            res.status(404);
+            res.json({msg: "User Not found"});
+            return;
+        } else {
+            const checkPass = await bcrypt.compare(password, users.password);
+
+            if(!checkPass){
+                res.json({msg: "Invalid Password"});
+            } else {
+                res.json({msg: "Logged Succesfully"});
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
