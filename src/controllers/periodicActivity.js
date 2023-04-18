@@ -1,6 +1,8 @@
 // This code imports the "PeriodicAct" model from its respective module
 import PeriodicAct from "../models/periodicActivityModel.js";
 
+// This controller function uses the "findAll" method to retrieve all periodic activities from the database
+// It then sends the data as a JSON response to the client
 export const GetperiodicActs  = async(req, res) => {
     try {
         let Data = await PeriodicAct.findAll();
@@ -10,6 +12,7 @@ export const GetperiodicActs  = async(req, res) => {
     }
 }
 
+// This controller function adds a new periodic activity to the database based on the data provided in the request body
 export const DeletePeriodAct = async(req, res) => {
     const { actDate, activityId } = req.body;
     try {

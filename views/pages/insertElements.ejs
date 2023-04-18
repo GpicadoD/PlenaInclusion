@@ -31,12 +31,14 @@
             Date: <input type="text" name="date" value="" /><br><br>
             <input type="submit" value="Add Activities"/><br><br><hr>
         </form>
+        <!-- Start the form for inserting a CompAct -->
             <h2>Insert CompAct</h2>
             <form method="post" action="/getnewlist">
                 IdAct: <input type="text" name="idAct" value="" /><br><br>
                 IdUser: <input type="text" name="idUser" value="" /><br><br><hr>
                 <input type="submit" value="nuevaLista">
             </form>
+            <!-- Start the form for adding an OrgType -->
             <h2>Añadir OrgType</h2>
             <form method="post" action="/AddorgType">
                 <label for="idTypeOrg">ID Type Org:</label>
@@ -47,6 +49,7 @@
                 
                 <button type="submit">Submit</button>
             </form>
+            <!-- Start the form for adding a NewPeriodActivity -->
             <h2>Añadir NewPeriodActivity</h2>
             <form method="post" action="/AddnewPeriodActivity">
                 <label for="actDate">Date:</label>
@@ -63,12 +66,14 @@
               
                 <input type="submit" value="Add Periodic Activity">
             </form>
+            <!-- Start the form for adding a Period -->
             <h2>Insert Period</h2>
             <form method="post" action="/AddnewPeriod">
                 <label for="period">Period:</label>
                 <input type="text" id="period" name="period">
                 <input type="submit" value="Submit">
             </form>
+            <!-- Start the form for adding a Public -->
             <h2>Insert Public</h2>
             <form method="post" action="/AddnewPublic">
                 <label for="idPublicType">idPublicType:</label>
@@ -79,6 +84,7 @@
                 <br><br>
                 <input type="submit" value="Submit">
             </form>
+            <!-- Start the form for adding a Theme -->
             <h2>Insert Theme</h2>
             <form method="post" action="/Addnewtheme">
                 <label for="idTheme">idTheme:</label>
@@ -89,6 +95,7 @@
                 <br><br>
                 <input type="submit" value="Submit">
             </form>
+            <!-- Start the form for adding a Organizer -->
             <h2>Insert Organizer</h2>
             <form method="post" action="/Addorganizer">
                 <label for="NifOrg">NIF:</label>
@@ -99,6 +106,7 @@
                 <input type="text" id="idtypeProf" name="idtypeProf"><br><br>
                 <input type="submit" value="Add Organizer">
             </form>
+            <!-- Start the form for adding a NewUser -->
             <h2>Insert NewUser</h2>
             <form method="post" action="/AddnewUser">
                 <label for="userNIF">User NIF:</label>
@@ -127,6 +135,7 @@
               
                 <input type="submit" value="Submit">
               </form>
+            <!-- Start the form for adding a NewActivities -->
               <h2>Insert NewActivities</h2>
               <form method="post" action="/AddnewActivities">
                 <label for="activityId">activityId:</label>
@@ -158,6 +167,7 @@
               
                 <input type="submit" value="Submit">
             </form>
+            <!-- Start the form for adding a Competitor -->
             <h2>Insert competitor</h2>
             <form method="post" action="/Addcompetitor">
                 <label for="NifCom">NifCom:</label>
