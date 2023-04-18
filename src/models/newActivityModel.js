@@ -1,14 +1,13 @@
 // It first imports the Sequelize library and the database configuration.
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-
+import ImgAct from "./imgActModel.js";
 import CompAct from "./comActModel.js";
 // It also imports the "CompAct" model previously defined.
 import Theme from "./themeModel.js";
 import PublicType from "./publicModel.js";
 import Period from "./periodModel.js";
 import Organizer from "./organizerModel.js";
-import ImgAct from "./imgActModel.js";
 
 const {DataTypes} = Sequelize;
 // Define the "Activities" model using Sequelize
@@ -28,7 +27,8 @@ const newActivities = db.define('newactivities', {
         type: DataTypes.INTEGER
     },
     idImgAct:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        foreignKey : true
     },
     startDate:{
         type: DataTypes.DATE
@@ -90,6 +90,14 @@ newActivities.belongsTo(ImgAct, {
     foreignKey: 'idImgAct',
     targetKey: 'idImgAct',
   });
+
+Theme.hasMany(newActivities, { 
+    foreignKey: 'idTheme'
+ });
+newActivities.belongsTo(Theme, {
+    foreignKey: 'idTheme',
+    targetKey:'idTheme'
+});
 // Synchronize the model with the database
 (async () => {
     await db.sync();

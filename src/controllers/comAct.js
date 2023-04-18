@@ -30,3 +30,26 @@ export const AddnewList = async(req, res) => {
         console.log(error);
     }
 }
+
+export const DeleteCompAct = async(req, res) => {
+    const { NifCom } = req.body;
+    try {
+        let participant = await Competitor.findAll(NifCom);
+        let Comact = await CompAct.findAll(NifCom);
+        console.log(participant);
+        if(Comact.NifCom == null){
+            return res.json({msg: "Participant not found"});
+        }
+        else{
+            if(participant.NifCom == NifCom){
+            await participant.destroy();
+            await Comact.destroy();
+            return res.json({msg: "Participant successfully delete"});  
+            } 
+        }
+
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}

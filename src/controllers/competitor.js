@@ -13,9 +13,31 @@ export const GetCompetitor  = async(req, res) => {
 }
 
 
+// Controller function that updates a competitor's emergencyNumber based on the request body
+export const DeleteCompetitor = async(req, res) => {
+    const { NifCom } = req.body;
+    try {
+        let participant = await Competitor.findByPk(NifCom);
+        console.log(participant);
+        if(participant == null){
+            return res.json({msg: "Participant not found"});  
+        } 
+        else{
+            if(participant.NifCom == NifCom){
+            await participant.destroy();
+            return res.json({msg: "Participant successfully delete"});  
+            } 
+        }
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const UpdateCompetitor = async(req, res) => {
     var {NifCom, emergencyNumber} = req.body;
     
+    // If NifCom is not present in the request body, return an error response
     if(!NifCom) return res.status(400).json({msg: "Cant update an activity without an ID"});
     try {
         const competitor = await Competitor.findByPk(NifCom);
@@ -31,11 +53,14 @@ export const UpdateCompetitor = async(req, res) => {
     }
 }
 
+    // If emergencyNumber is not present in the request body, set it to the existing value in the database
 export const AddCompetitor = async (req, res) => {
     var { NifCom, emergencyNumber } = req.body;
+     // If NifCom is not present in the request body, return an error response
     if(!NifCom) return res.status(400).json({msg: "Cant update without PK"});
 
     try {
+        // Create a new competitor with the given NifCom and emergencyNumber values
       await Competitor.create({
         NifCom: NifCom,
         emergencyNumber: emergencyNumber,
