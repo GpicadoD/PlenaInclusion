@@ -17,7 +17,6 @@ export const GetNewUser = async(req, res) => {
 
 // This code defines a controller function called "UpdateUser" that updates an existing user in the database based on the provided userNIF (primary key)
 // If any properties are not provided in the request body, they will default to the current values stored in the database
-=======
 // This code defines a controller function called "UpdateUser" that updates the User's nif, lastname, email, birthdate, phonenumber, password and gender from the request body
 // It then uses the "findByPk" method to find the corresponding userNIF record in the database
 // The method request's searches if the characteristics of the user are the same or not in the list to change it

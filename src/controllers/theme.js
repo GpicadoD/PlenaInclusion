@@ -4,9 +4,7 @@ import Theme from "../models/themeModel.js";
 
 // This code defines a controller function called "Gettheme" that uses the "findAll" method to retrieve all public themes from the database
 // It then sends the theme data as a JSON response to the client
-export const Gettheme  = async(req, res) => {
-
-
+export const GetTheme  = async(req, res) => {
     try {
         let Data = await Public.findAll();
         res.json(Data);
