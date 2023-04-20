@@ -1,9 +1,6 @@
 // This code imports the "ImgOrg" model from its respective module
 import ImgOrg from "../models/imgOrgModel.js";
-
-<<<<<<< HEAD
 // This function retrieves all the data from the ImgOrg model and sends it as a JSON response
-=======
 export const DeleteImgOrg = async(req, res) => {
     const { idImgOrg } = req.body;
     try {
@@ -23,8 +20,6 @@ export const DeleteImgOrg = async(req, res) => {
         console.log(error);
     }
 }
-
->>>>>>> b9d0b1d50ef3facb0ee3637e93d78689bea43a11
 export const GetimgOrg  = async(req, res) => {
     try {
         let Data = await ImgOrg.findAll();
