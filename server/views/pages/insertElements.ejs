@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EJS Is Fun</title>
+
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+<body class="container">
+    <main>
+        <!-- Main header -->
+        <h1>POST TUTORIAL</h1>
+        <div class="form">
+          <h2>User Insert</h2>
+        </form>
+            <!-- Register form -->
+            <form action="/register" method="post">
+            Username: <input type="text" name="username" value="" /><br><br>
+            Password: <input type="text" name="password" value="" /><br><br>
+            ConfPassword: <input type="text" name="confPassword" value="" /><br><br>
+            <input type="submit" value="Register"/><br><br><hr>
+            </form>
+        <!-- Add activity form -->
+        <h2>Activity Insert</h2>
+        <form action="/addActivities" method="post">
+            NameAct: <input type="text" name="nameAct" value="" /><br><br>
+            Date: <input type="text" name="date" value="" /><br><br>
+            <input type="submit" value="Add Activities"/><br><br><hr>
+        </form>
+            <h2>Insert CompAct</h2>
+            <form method="post" action="/getnewlist">
+                IdAct: <input type="text" name="idAct" value="" /><br><br>
+                IdUser: <input type="text" name="idUser" value="" /><br><br><hr>
+                <input type="submit" value="nuevaLista">
+            </form>
+            <h2>Añadir OrgType</h2>
+            <form method="post" action="/AddorgType">
+                <label for="idTypeOrg">ID Type Org:</label>
+                <input type="text" id="idTypeOrg" name="idTypeOrg"><br><br>
+                
+                <label for="orgType">Org Type:</label>
+                <input type="text" id="orgType" name="orgType"><br><br>
+                
+                <button type="submit">Submit</button>
+            </form>
+            <h2>Añadir NewPeriodActivity</h2>
+            <form method="post" action="/AddnewPeriodActivity">
+                <label for="actDate">Date:</label>
+                <input type="text" id="actDate" name="actDate" required><br><br>
+              
+                <label for="activityId">Activity ID:</label>
+                <input type="text" id="activityId" name="activityId" required><br><br>
+              
+                <label for="orgNif">Organizer NIF:</label>
+                <input type="text" id="orgNif" name="orgNif" required><br><br>
+              
+                <label for="actPlace">Place:</label>
+                <input type="text" id="actPlace" name="actPlace" required><br><br>
+              
+                <input type="submit" value="Add Periodic Activity">
+            </form>
+            <h2>Insert Period</h2>
+            <form method="post" action="/AddnewPeriod">
+                <label for="period">Period:</label>
+                <input type="text" id="period" name="period">
+                <input type="submit" value="Submit">
+            </form>
+            <h2>Insert Public</h2>
+            <form method="post" action="/AddnewPublic">
+                <label for="idPublicType">idPublicType:</label>
+                <input type="text" id="idPublicType" name="idPublicType" required>
+                <br><br>
+                <label for="publicType">Public Type:</label>
+                <input type="text" id="publicType" name="publicType" required>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <h2>Insert Theme</h2>
+            <form method="post" action="/Addnewtheme">
+                <label for="idTheme">idTheme:</label>
+                <input type="text" id="idTheme" name="idTheme" required>
+                <br><br>
+                <label for="themeName">themeName Type:</label>
+                <input type="text" id="themeName" name="themeName" required>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <h2>Insert Organizer</h2>
+            <form method="post" action="/Addorganizer">
+                <label for="NifOrg">NIF:</label>
+                <input type="text" id="NifOrg" name="NifOrg"><br><br>
+                <label for="idImgOrg">Image ID:</label>
+                <input type="text" id="idImgOrg" name="idImgOrg"><br><br>
+                <label for="idtypeProf">Professional Type ID:</label>
+                <input type="text" id="idtypeProf" name="idtypeProf"><br><br>
+                <input type="submit" value="Add Organizer">
+            </form>
+            <h2>Insert NewUser</h2>
+            <form method="post" action="/AddnewUser">
+                <label for="userNIF">User NIF:</label>
+                <input type="text" id="userNIF" name="userNIF"><br>
+              
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br>
+              
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" name="lastname"><br>
+              
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br>
+              
+                <label for="birthdate">Birthdate:</label>
+                <input type="text" id="birthdate" name="birthdate"><br>
+              
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber"><br>
+              
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br>
+              
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender">><br>
+              
+                <input type="submit" value="Submit">
+              </form>
+              <h2>Insert NewActivities</h2>
+              <form method="post" action="/AddnewActivities">
+                <label for="activityId">activityId:</label>
+                <input type="text" id="activityId" name="activityId"><br>
+
+                <label for="nameAct">Name:</label>
+                <input type="text" id="nameAct" name="nameAct"><br>
+              
+                <label for="public">Public:</label>
+                <input type="text" id="public" name="idPublicType"><br>
+              
+                <label for="idTheme">Theme ID:</label>
+                <input type="text" id="idTheme" name="idTheme"><br>
+              
+                <label for="idImgAct">Image ID:</label>
+                <input type="text" id="idImgAct" name="idImgAct"><br>
+              
+                <label for="startDate">Start Date:</label>
+                <input type="text" id="startDate" name="startDate"><br>
+              
+                <label for="finishDate">Finish Date:</label>
+                <input type="text" id="finishDate" name="finishDate"><br>
+              
+                <label for="idPeriod">Period ID:</label>
+                <input type="text" id="idPeriod" name="idPeriod"><br>
+              
+                <label for="idCreator">Creator ID:</label>
+                <input type="text" id="idCreator" name="idCreator"><br>
+              
+                <input type="submit" value="Submit">
+            </form>
+            <h2>Insert competitor</h2>
+            <form method="post" action="/Addcompetitor">
+                <label for="NifCom">NifCom:</label>
+                <input type="text" name="NifCom" id="NifCom" required>
+                <br>
+                <label for="emergencyNumber">EmergencyNumber:</label>
+                <input type="text" name="emergencyNumber" id="emergencyNumber" required>
+                <br>
+                <input type="submit" value="Agregar Competidor">
+            </form>    
+        </div>
+    </main>
+    <footer>
+        <!-- Footer -->
+        <p class="text-center text-muted">© Copyright 2023</p>
+    </footer>
+</body>
+</html>
