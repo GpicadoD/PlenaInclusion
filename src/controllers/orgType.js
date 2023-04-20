@@ -1,4 +1,3 @@
-
 // This code imports the "OrgType" model from its respective module
 import OrgType from "../models/orgTypeModel.js";
 
@@ -12,7 +11,29 @@ export const GetorgType  = async(req, res) => {
     }
 }
 
+
 // Update an existing organization type
+export const DeleteOrganizerType = async(req, res) => {
+    const { idTypeOrg } = req.body;
+    console.log(idTypeOrg);
+    try {
+        let orgtype = await OrgType.findByPk(idTypeOrg);
+        console.log(orgtype);
+        if(!orgtype){
+            return res.json({msg: "organizer not found"});  
+        } 
+        else{
+            if(orgtype.idTypeOrg == idTypeOrg){
+            await orgtype.destroy();
+          
+            return res.json({msg: "organizer successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdateOrgType = async(req, res) => {
     var {idTypeOrg, orgType} = req.body;
     

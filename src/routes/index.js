@@ -3,20 +3,20 @@ import { AddActivities, GetActivities, GetActByDate } from '../controllers/activ
 import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
 import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, GetComAct } from '../controllers/comAct.js';
-import { AddnewActivities, GetnewActivities,  UpdateActivities} from '../controllers/newActivity.js';
-import { GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
-import { GetCompetitor, UpdateCompetitor, AddCompetitor} from '../controllers/competitor.js';
-import { GetOrganizer, UpdateOrganizer, Addneworganizer} from '../controllers/organizer.js';
-import { UpdateOrgType, AddorgType } from '../controllers/orgType.js';
-import { UpdatePublic, Addnewpublic} from '../controllers/public.js';
-import { UpdatePeriod, addNewPeriod} from '../controllers/period.js';
-import { UpdateTheme, Addnewtheme} from '../controllers/theme.js';
+import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
+import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser} from '../controllers/newUser.js';
+import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from '../controllers/competitor.js';
+import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from '../controllers/organizer.js';
+import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
 
-//Add UpdatePeriodictAct
-import { Addnewperiodact } from '../controllers/periodicActivity.js';
+import { DeleteOrganizerType, GetorgType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
 
+import { DeletePeriodAct, GetperiodicActs, Addnewperiodact} from '../controllers/periodicActivity.js';
 
-
+import { DeleteImgOrg } from '../controllers/imgOrg.js';
+import { DeletePublic, UpdatePublic, Addnewpublic } from '../controllers/public.js';
+import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.js';
+import { DeleteImgAct } from '../controllers/imgAct.js';
 
 const router = express.Router();
 
@@ -111,6 +111,9 @@ router.post('/Addnewtheme', Addnewtheme);
 
 // Define routes for user list-related actions and for adding new ones
 router.post('/newUser', GetNewUser);
+router.post('/newActivities', AddnewActivities);
+
+//all get//
 // Define routes for get the competitor and their activity which is related
 router.post('/AddnewUser', AddNewUser);
 router.post('/getcompact', GetComAct);
@@ -124,6 +127,30 @@ router.post('/Addcompetitor', AddCompetitor);
 
 router.post('/Addorganizer', Addneworganizer);
 router.post('/getnewlist', AddnewList);
+
+router.post('/getTheme',GetTheme);
+
+router.post('/getOrgType', GetorgType);
+
+router.post('/getPerAct', GetperiodicActs);
+
+
+//all deletes//
+router.post('/deleteCompetitor', DeleteCompetitor);
+router.post('/deleteimgact',DeleteImgAct);
+router.post('/deleteImgOrg', DeleteImgOrg);
+router.post('/deletenewactivity',DeleteNewActivity);
+router.post('/deletenewuser', DeleteNewUser);
+router.post('/deleteOrganizer', DeleteOrganizer);
+router.post('/deleteorgtype',DeleteOrganizerType);
+router.post('/deletePeriod',DeletePeriod);
+
+router.post('/deleteperiodact',DeletePeriodAct);
+
+router.post('/deletePublic',DeletePublic);
+router.post('/deleteTheme',DeleteTheme);
+
+
 
 router.post('/updateActivities', UpdateActivities);
 

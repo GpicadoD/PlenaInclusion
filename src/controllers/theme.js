@@ -1,9 +1,12 @@
 // This code imports the "Theme" model from its respective module
 import Theme from "../models/themeModel.js";
 
+
 // This code defines a controller function called "Gettheme" that uses the "findAll" method to retrieve all public themes from the database
 // It then sends the theme data as a JSON response to the client
 export const Gettheme  = async(req, res) => {
+
+
     try {
         let Data = await Public.findAll();
         res.json(Data);
@@ -16,6 +19,26 @@ export const Gettheme  = async(req, res) => {
 // If the ID is missing, it sends an error response to the client
 // Otherwise, it finds the theme in the database by its ID and updates its name to the provided new name
 // It then sends a success message to the client
+
+export const DeleteTheme = async(req, res) => {
+    const { idTheme } = req.body;
+    try {
+        let themes = await Theme.findByPk(idTheme);
+        console.log(themes);
+        if(themes == null){
+            return res.json({msg: "theme not found"});  
+        } 
+        else{
+            if(themes.idTheme == idTheme){
+            await themes.destroy();
+            return res.json({msg: "theme successfully delete"});  
+            } 
+        }
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdateTheme = async(req, res) => {
     var {idTheme, themeName} = req.body;
     

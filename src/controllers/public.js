@@ -12,9 +12,29 @@ export const Getpublic  = async(req, res) => {
     }
 }
 
+
 // This code defines a controller function called "UpdatePublic" that extracts the id of the publicType and the new publicType from the request body
 // It then searches the publicType by the PK from the "PublicType" model and updates it with the new publicType data
 // It then sends a JSON response indicating success or failure
+export const DeletePublic = async(req, res) => {
+    const { idPublic } = req.body;
+    try {
+        let publics = await PublicType.findByPk(idPublic);
+        console.log(publics);
+        if(publics == null){
+            return res.json({msg: "public not found"});  
+        } 
+        else{
+            if(publics.idPublicType == idPublic){
+            await publics.destroy();
+            return res.json({msg: "public successfully delete"});  
+            } 
+        }
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdatePublic = async(req, res) => {
     var {idPublicType, publicType} = req.body;
     

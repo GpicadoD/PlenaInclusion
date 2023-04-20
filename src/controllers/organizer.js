@@ -15,6 +15,27 @@ export const GetOrganizer  = async(req, res) => {
 // This code defines a controller function called "UpdateOrganizer" that updates the organizer with the specified "NifOrg" value in the database
 // It updates the "idImgOrg" and "idtypeProf" properties with the values in the request body, if they are provided
 // It then saves the changes to the database and sends a success message as a JSON response to the client
+export const DeleteOrganizer = async(req, res) => {
+    const { idOrganizer } = req.body;
+    console.log(idOrganizer);
+    try {
+        let organizers = await Organizer.findByPk(idOrganizer);
+        console.log(organizers);
+        if(!organizers){
+            return res.json({msg: "organizer not found"});  
+        } 
+        else{
+            if(organizers.NifOrg == idOrganizer){
+            await organizers.destroy();
+          
+            return res.json({msg: "organizer successfully delete"});  
+            } 
+        }
+    }   
+    catch (error) {
+        console.log(error);
+    }
+}
 export const UpdateOrganizer = async(req, res) => {
     var {NifOrg, idImgOrg, idtypeProf} = req.body;
     
