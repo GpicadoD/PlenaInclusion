@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/controllers/public.js
 // This code imports the "Public" model from its respective module
 import PublicType from "../models/publicModel.js";
 
@@ -71,68 +70,3 @@ export const Addnewpublic = async (req, res) => {
       console.log(error);
     }
   };
-=======
-// This code imports the "Public" model from its respective module
-import PublicType from "../models/publicModel.js";
-
-export const Getpublic  = async(req, res) => {
-    try {
-        let Data = await PublicType.findAll();
-        res.json(Data);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const DeletePublic = async(req, res) => {
-    const { idPublic } = req.body;
-    try {
-        let publics = await PublicType.findByPk(idPublic);
-        console.log(publics);
-        if(publics == null){
-            return res.json({msg: "public not found"});  
-        } 
-        else{
-            if(publics.idPublicType == idPublic){
-            await publics.destroy();
-            return res.json({msg: "public successfully delete"});  
-            } 
-        }
-    } 
-    catch (error) {
-        console.log(error);
-    }
-}
-export const UpdatePublic = async(req, res) => {
-    var {idPublicType, publicType} = req.body;
-    
-    if(!idPublicType) return res.status(400).json({msg: "Cant update an activity without an ID"});
-    try {
-        const Public = await PublicType.findByPk(idPublicType);
-        
-        if(!publicType) publicType  = Public.publicType;
-        Public.set({
-            publicType: publicType
-        });
-        await Public.save();
-        res.json({msg: "Organizer Registration Successful"});
-    } catch (error) {
-        console.log(error);
-    }
-}
-export const Addnewpublic = async (req, res) => {
-    var { idPublicType, publicType } = req.body;
-    console.log(idPublicType);
-    if(!idPublicType) return res.status(400).json({msg: "Cant update without PK"});
-
-    try {
-      await PublicType.create({
-        idPublic : idPublicType,
-        publicType: publicType
-      });
-      res.json({ msg: "Public created successfully" });
-    } catch (error) {
-      console.log(error);
-    }
-  };
->>>>>>> 812b6b3e7ef4916424ae070e54c3e28a9c206302:server/src/controllers/public.js
