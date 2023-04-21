@@ -17,7 +17,7 @@ export const AddnewActivities = async(req, res) => {
             idImgAct,
             startDate,
             finishDate,
-            idPeriod,
+            idPeriod: idPeriod,
             idCreator
         });
         res.json({msg: "Activity added successfully!"});
