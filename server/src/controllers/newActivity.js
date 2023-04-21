@@ -10,14 +10,14 @@ export const AddnewActivities = async(req, res) => {
 
     try {
         await newActivities.create({
-            activityId,
+            activityId: activityId,
             nameAct,
-            idPublicType,
+            idPublicType: idPublicType,
             idTheme,
             idImgAct,
             startDate,
             finishDate,
-            idPeriod,
+            idPeriod: idPeriod,
             idCreator
         });
         res.json({msg: "Activity added successfully!"});
