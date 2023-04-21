@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [userNIF, setuserNIF] = useState('');
+    const [newUserNif, setnewUserNif] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
     const history = useNavigate();
@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
         try {
             await axios.post('/loginNewUser', {
-                userNIF: userNIF,
+                newUserNif: newUserNif,
                 password: password
             });
             history("/dashboard");
@@ -36,7 +36,7 @@ const Login = () => {
                                 <div className="field mt-5">
                                     <label className="label">UserNIF</label>
                                     <div className="controls">
-                                        <input type="username" className="input" placeholder="Username" value={userNIF} onChange={(e) => setuserNIF(e.target.value)} />
+                                        <input type="username" className="input" placeholder="Username" value={newUserNif} onChange={(e) => setnewUserNif(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="field mt-5">
