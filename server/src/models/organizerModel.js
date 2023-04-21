@@ -2,6 +2,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 import ImgOrg from "./imgOrgModel.js";
+import OrgType from "../models/orgTypeModel.js";
 
 const {DataTypes} = Sequelize;
 // Define the "Organizer" model using Sequelize
@@ -28,6 +29,13 @@ Organizer.belongsTo(ImgOrg, {
     foreignKey: 'idImgOrg',
     targetKey: 'idImgOrg',
   });
+
+Organizer.hasOne(OrgType, { 
+    foreignKey: 'idtypeProf'
+});
+OrgType.belongsTo(Organizer, {
+    foreignKey: 'idtypeProf'
+});
 
 // Synchronize the model with the database
 (async () => {
