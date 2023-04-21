@@ -21,12 +21,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import './style.css';
+import '../App.css';
 
 // Alert before delete
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+//import { confirmAlert } from 'react-confirm-alert'; // Import
+//import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const Dashboard = () => {
     const [user, setUser] = useState({
@@ -190,7 +191,7 @@ const Dashboard = () => {
         }
     }
 
-    const BeforeDeleteAlert = (e, activityId) => {
+    /*const BeforeDeleteAlert = (e, activityId) => {
         confirmAlert({
             title: 'Abandonar actividad',
             message: '¿Estás seguro que deseas abandonar esta actividad?.',
@@ -204,7 +205,7 @@ const Dashboard = () => {
                 }
             ]
         });
-    }
+    }*/
 
     return (
         <div className="container mt-5 top">
@@ -270,9 +271,9 @@ const Dashboard = () => {
                                     <Button disabled={activitiesByUserDate.activity.countdown < 0} className='mr-2' variant="outline-success" onClick={() => navigation('/activityProfile/' + activitiesByUserDate.activity.id)}>
                                         Mensaje
                                     </Button>
-                                    <Button disabled={activitiesByUserDate.activity.countdown < 0} name="deleteButton" variant="danger" onClick={(e) => BeforeDeleteAlert(e, activitiesByUserDate.activity.id)}>
+                                    {/*<Button disabled={activitiesByUserDate.activity.countdown < 0} name="deleteButton" variant="danger" onClick={(e) => BeforeDeleteAlert(e, activitiesByUserDate.activity.id)}>
                                         Abandonar
-                                    </Button>
+                                    </Button>*/}
                                 </div>
                             </Card.Body>
                             {/* Paint countdown timer to begin the activity */}
