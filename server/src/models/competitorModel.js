@@ -20,10 +20,10 @@ const Competitor = db.define('competitor', {
 
 newUsers.hasOne(Competitor, { 
     foreignKey: 'NifCom'
- });
- Competitor.belongsTo(newUsers, {
+});
+Competitor.belongsTo(newUsers, {
     foreignKey: 'NifCom'
- });
+});
  
 // Synchronize the model with the database
 (async () => {

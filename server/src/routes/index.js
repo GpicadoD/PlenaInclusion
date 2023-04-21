@@ -1,7 +1,4 @@
 import express from 'express';
-import { AddActivities, GetActivities, GetActByDate } from '../controllers/activities.js';
-import { GetUsersPassHash,GetUsers, Register } from '../controllers/users.js';
-import { AddList, GetList, GetUserActivities } from '../controllers/userActs.js';
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login} from '../controllers/newUser.js';
@@ -78,21 +75,14 @@ router.post('/ShowList', (req, res) => {
 });
 
 // Define routes for user-related actions
-router.post('/register', Register);
-router.post('/getUsers', GetUsers);
-
-router.post('/getActivities', GetActivities);
-router.post('/addActivities', AddActivities);
 
 // Define routes for activity-related actions
-router.post('/login', GetUsersPassHash);
 // Define routes for user-activity list-related actions
-router.post('/addList', AddList);
-router.post('/getList', GetList);
+
 // Define routes for get the activity by searching from its date
-router.post('/getActByDate', GetActByDate);
+
 // Define routes for get the user-activity list-related actions
-router.post('/getUserActivities', GetUserActivities)
+
 // Define routes for get activity list-related actions and for adding new ones
 router.post('/getnewAct', GetnewActivities);
 router.post('/AddnewActivities', AddnewActivities);
