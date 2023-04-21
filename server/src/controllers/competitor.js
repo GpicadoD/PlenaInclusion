@@ -12,8 +12,6 @@ export const GetCompetitor  = async(req, res) => {
     }
 }
 
-
-
 export const DeleteCompetitor = async(req, res) => {
     const { NifCom } = req.body;
     try {
