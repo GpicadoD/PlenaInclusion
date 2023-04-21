@@ -62,7 +62,7 @@ export const Addnewpublic = async (req, res) => {
 
     try {
       await PublicType.create({
-        idPublic : idPublicType,
+        idPublicType : idPublicType,
         publicType: publicType
       });
       res.json({ msg: "Public created successfully" });
