@@ -122,6 +122,7 @@ export const ResetPassword = async(req, res) => {
 
 export const Login  = async(req, res) => {
     const {newUserNif, password} = req.body;
+    console.log(newUserNif);
     try {
         let users = await newUsers.findByPk(newUserNif);
         if(users.userNIF != newUserNif){
