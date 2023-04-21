@@ -5,19 +5,19 @@ import newActivities from "../models/newActivityModel.js";
 // confirms if the activity has a date or otherwise it will send a message of no date from the activity
 // if everything is correct, then creates a new activity from the name and the date and sends a json message of the success
 export const AddnewActivities = async(req, res) => {
-    var { activityId, nameAct, idPublic, idTheme, idImgAct, startDate, finishDate, idPeriod, idCreator } = req.body;
+    var { activityId, nameAct, idPublicType, idTheme, idImgAct, startDate, finishDate, idPeriod, idCreator } = req.body;
     if(!activityId) return res.status(400).json({msg: "Cant update without PK"});
 
     try {
         await newActivities.create({
-            activityId,
+            activityId: activityId,
             nameAct,
-            idPublic,
+            idPublicType: idPublicType,
             idTheme,
             idImgAct,
             startDate,
             finishDate,
-            idPeriod,
+            idPeriod: idPeriod,
             idCreator
         });
         res.json({msg: "Activity added successfully!"});
