@@ -142,3 +142,31 @@ export const Login  = async(req, res) => {
         console.log(error);
     }
 }
+
+export const UpdatePassword  = async(req, res) => {
+    var {newUserNif, actualUserPass, newUserPass, repeat_newUserPass} = req.body;
+    try {
+        const users = await newUsers.findByPk(newUserNif);
+        if(users.userNIF != newUserNif){
+            // UPDATE all userNif reference for the deadline.
+            res.status(404);
+            res.json({msg: "User Not found"});
+            return;
+        } else {
+            const checkPass = await bcrypt.compare(actualUserPass, users.password);
+            if(!checkPass){
+                res.json({msg: "Invalid Password"});
+            } else if (newUserPass == repeat_newUserPass) {
+                const salt = await bcrypt.genSalt();
+                newUserPass = await bcrypt.hash(newUserPass, salt);
+                users.set({
+                    password: newUserPass
+                });
+                await users.save();
+                res.json({msg: "Password Updated"});
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
