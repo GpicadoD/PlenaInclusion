@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+const Login = () => {
     const [newUserNif, setnewUserNif] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
@@ -56,3 +56,4 @@ export const Login = () => {
         </section>
     )
 }
+export default Login;   
