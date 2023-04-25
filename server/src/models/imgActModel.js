@@ -13,8 +13,11 @@ const ImgAct = db.define('imgAct', {
         primaryKey: true,
         autoIncrement: true
     },
-    ImgAct:{
+    name:{
         type: DataTypes.STRING
+    },
+    ImgAct:{
+        type: DataTypes.BLOB
     }
 },{
     freezeTableName: true,

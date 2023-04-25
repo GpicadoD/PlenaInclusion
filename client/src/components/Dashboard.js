@@ -224,6 +224,7 @@ const Dashboard = () => {
                         
                     </Nav>
                     <Form className="d-flex" onSubmit={getActivitiesByUserDate}>
+                        {/*Añadir ID de usuario temporal*/}
                         <Form.Control className="me-2" type="date" placeholder="Date" 
                             value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <Form.Control className="me-2" type="date" placeholder="Date" 

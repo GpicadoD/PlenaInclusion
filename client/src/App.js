@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Navigate, BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login.js";
 import Dashboard from "./components/Dashboard.js";
 import Barra from "./components/Navbar.js";
@@ -10,8 +10,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login/>} />
-          <Route path="/dashboard" element={<><Barra/> <Dashboard/></>} />
           <Route path="/activityprofile" element={<><Barra/> <ActivityProfile/></>} />
+          <Route path="/dashboard" element={<><Barra/><Dashboard/></>} />
+          {/*Medio apaño para hacer funcionar el login como primera página de React*/}
+          <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
       </BrowserRouter>
     </div>
