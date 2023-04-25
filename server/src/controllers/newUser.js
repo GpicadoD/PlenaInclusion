@@ -148,7 +148,6 @@ export const UpdatePassword  = async(req, res) => {
     try {
         const users = await newUsers.findByPk(newUserNif);
         if(users.userNIF != newUserNif){
-            // UPDATE all userNif reference for the deadline.
             res.status(404);
             res.json({msg: "User Not found"});
             return;
