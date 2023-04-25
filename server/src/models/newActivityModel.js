@@ -41,6 +41,12 @@ const newActivities = db.define('newactivities', {
     },
     idCreator:{
         type: DataTypes.STRING
+    },
+    Description:{
+        type: DataTypes.STRING
+    },
+    Limit:{
+        type: DataTypes.INTEGER
     }
 },{
     freezeTableName: true,
