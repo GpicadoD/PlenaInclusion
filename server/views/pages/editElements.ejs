@@ -90,7 +90,15 @@
                 User Nif: <input type="text" name="newUserNif" value="" /><br><br>
                 <input type="submit" value="Reset"/><br><br><hr>
             </form>
-
+            
+            <form action="/updatePassword" method="post">
+                <p>Cambiar contraseña</p>
+                UserNIF: <input type="text" name="newUserNif" value="" /><br><br>
+                Actual UserPass: <input type="password" name="actualUserPass" value="" /><br><br>
+                new UserPass: <input type="password" name="newUserPass" value="" /><br><br>
+                Repeat new UserPass: <input type="password" name="repeat_newUserPass" value="" /><br><br>
+                <input type="submit" value="Editar"/><br><br><hr>
+            </form>
 
         </div>
     </main>
