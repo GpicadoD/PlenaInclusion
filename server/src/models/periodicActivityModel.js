@@ -21,6 +21,9 @@ const PeriodicAct = db.define('periodicAct', {
     },
     actPlace:{
         type: DataTypes.STRING
+    },
+    StartTime:{
+        type: DataTypes.DATE
     }
 },{
     freezeTableName: true,
