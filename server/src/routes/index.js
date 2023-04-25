@@ -1,7 +1,7 @@
 import express from 'express';
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
-import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login} from '../controllers/newUser.js';
+import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login, UpdatePassword} from '../controllers/newUser.js';
 import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from '../controllers/competitor.js';
 import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from '../controllers/organizer.js';
 import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
@@ -157,6 +157,9 @@ router.post('/updateTheme', UpdateTheme);
 router.post('/resetPassword', ResetPassword);
 
 router.post('/loginNewUser', Login);
+
+router.post('/updatePassword', UpdatePassword);
+
 
 
 // Export the router object
