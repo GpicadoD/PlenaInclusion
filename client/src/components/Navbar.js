@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -18,8 +16,9 @@ const Barra = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-                <Nav.Link href="/addactivity">Add Activity</Nav.Link>
+                <Nav.Link href="/dashboard">Actividades</Nav.Link>
+                <Nav.Link href="/addactivity">Añadir Usuario</Nav.Link>
+                <Nav.Link href="/addactivity">Añadir Actividad</Nav.Link>
                 <NavDropdown title="Login" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/activityprofile">
                     Profile
