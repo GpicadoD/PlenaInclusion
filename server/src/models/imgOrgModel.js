@@ -10,6 +10,9 @@ const ImgOrg = db.define('imgOrg', {
         primaryKey: true,
         autoIncrement: true
     },
+    name:{
+        type: DataTypes.STRING
+    },
     ImgOrg:{
         type: DataTypes.BLOB
     }
