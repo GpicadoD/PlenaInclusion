@@ -6,13 +6,34 @@ import PeriodicAct from "../models/periodicActivityModel.js";
 
 // This code defines a controller function called "GetCompAct" that uses the "findAll" method to retrieve all CompActs from the database
 // It then sends the CompActData data as a JSON response to the client
+//export const GetComAct  = async(req, res) => {
+    //try {
+      //  let compActData = await CompAct.findAll();
+        //res.json(compActData);
+    //} catch (error) {
+        //console.log(error);
+    //}
+
+//}
+
 export const GetComAct  = async(req, res) => {
     try {
-        let compActData = await CompAct.findAll();
-        res.json(compActData);
-    } catch (error) {
+        const { startDate, endDate } = req.body;
+        console.log(startDate);
+        const dateA = new Date(startDate);
+        const dateB = new Date(endDate);
+        const activities = await Activities.findAll({
+          where: {
+            ActDate: {
+              [Sequelize.Op.between]: [dateA, dateB]
+            }
+          },
+          attributes: ["startDate", "StartTime", "actPlace", "Duration", "actName"],
+        });
+        res.json(activities);
+      } catch (error) {
         console.log(error);
-    }
+      }
 }
 
 // This code defines a controller function called "AddnewList" that extracts the id of the activity and the id of the user from the request body

@@ -24,7 +24,6 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
-
 // Alert before delete
 //import { confirmAlert } from 'react-confirm-alert'; // Import
 //import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -39,7 +38,14 @@ const Dashboard = () => {
     // const [users, setUsers] = useState([]);
     // const [activities, setActivities] = useState([]);
     // const [activitiesByUser, setActivitiesByUser] = useState([]);
-    const [activitiesByUserDate, setActivitiesByUserDate] = useState([]);
+    const [getComAct, setActivitiesByUserDate] = useState([]);
+    const [CompAct, setComAct] = useState({
+        startDate: '',
+        actName: '',
+        StartTime:'',
+        actPlace:'',
+        Duration:''
+    })
 
     // Default startDate (today) and endDate (today + 7)
     var curr = new Date();
@@ -141,7 +147,7 @@ const Dashboard = () => {
 
     const getActivitiesByUserDate = async (e) => {
         e.preventDefault();
-        const response = await axiosJWT.post('http://localhost:5050/activitiesByUserDate',
+        const response = await axiosJWT.post('http://localhost:5050/getComAct',
             {
                 params: { 
                     startDate: startDate, endDate: endDate 
@@ -153,6 +159,21 @@ const Dashboard = () => {
         const parsedActivities = await ParseActivities(response.data);
         setActivitiesByUserDate(parsedActivities);
     }
+
+    const GetComAct  = async (e) => {
+        e.preventDefault();
+        const response = await axiosJWT.post('http://localhost:3030/getcompact',
+            {
+                params:{
+                    startDate: startDate, endDate: endDate
+                }
+            }
+        );
+        console.log(response.data);
+        const parsedActivities = await ParseActivities(response.data);
+        setComAct(parsedActivities);
+        }
+    
 
     // Calculate how many days remain/have passed from today's date
     // and parse date and other parameters for a better compression
@@ -248,31 +269,30 @@ const Dashboard = () => {
             </Navbar>
             {/* <h1>Welcome Back: {user.name}</h1>
             <h1>Next activities:</h1>*/}
-            {activitiesByUserDate.length == 0 &&
+            {getComAct.length == 0 &&
                 <h2 className="noActivity">
                     No tienes ninguna actividad en las fechas seleccionadas.
                 </h2>
             }
             <Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                {activitiesByUserDate.map((activitiesByUserDate) => (
-                    <Col key={activitiesByUserDate.activity.id}>
-                        <Card className={`box-shadow ${activitiesByUserDate.activity.countdown < 0 ? 'passedCard' : 'futureCard'}`} key={activitiesByUserDate.activity.id} 
-                            onClick={(e) => OpenActivityProfile(e, activitiesByUserDate.activity.id, activitiesByUserDate.activity.countdown)} style={activitiesByUserDate.activity.countdown >= 0 ? {cursor: "pointer"} : {}}>
-                            <Card.Img variant="top" src={"http://localhost:3030/static/" + activitiesByUserDate.activity.image} />
+                {GetComAct.map((GetComAct) => (
+                    <Col key={GetComAct.activities}>
+                        <Card className={`box-shadow ${GetComAct.activities < 0 ? 'passedCard' : 'futureCard'}`} key={getComAct.activities} 
+                            onClick={(e) => OpenActivityProfile(e, GetComAct.activities, getComAct.activities)} style={getComAct.activities >= 0 ? {cursor: "pointer"} : {}}>
+                            <Card.Img variant="top" src={"http://localhost:3030/static/" + getComAct.activities} />
                             <Card.Body>
-                                <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activitiesByUserDate.activity.name}</Card.Title>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activitiesByUserDate.activity.time}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activitiesByUserDate.activity.date}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Dirección:</span> {activitiesByUserDate.activity.address}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activitiesByUserDate.activity.duration}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Teléfono:</span> {activitiesByUserDate.activity.contactNumber}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Email:</span> {activitiesByUserDate.activity.contactEmail}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Participantes:</span> {activitiesByUserDate.activity.nParticipants}/{activitiesByUserDate.activity.maxParticipants}</Card.Text>
+                                <Card.Title><span style={{ fontWeight: 'bold' }}>startDate:</span> {getComAct.activity.startDate}</Card.Title>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>StartTime:</span> {getComAct.activity.StartTime}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>actPlace:</span> {getComAct.activity.actPlace}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>Duration:</span> {getComAct.activity.duration}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>actName:</span> {getComAct.activity.actName}</Card.Text>
+
+                                
                                 <div className='mt-4 text-center'>
-                                    <Button disabled={activitiesByUserDate.activity.countdown < 0} className='mr-2' variant="outline-success" onClick={() => navigation('/activityProfile/' + activitiesByUserDate.activity.id)}>
+                                    <Button disabled={getComAct.activity.countdown < 0} className='mr-2' variant="outline-success" onClick={() => navigation('/activityProfile/' + getComAct.activity.id)}>
                                         Mensaje
                                     </Button>
-                                    {/*<Button disabled={activitiesByUserDate.activity.countdown < 0} name="deleteButton" variant="danger" onClick={(e) => BeforeDeleteAlert(e, activitiesByUserDate.activity.id)}>
+                                    {/*<Button disabled={getComAct.activity.countdown < 0} name="deleteButton" variant="danger" onClick={(e) => BeforeDeleteAlert(e, getComAct.activity.id)}>
                                         Abandonar
                                     </Button>*/}
                                 </div>
@@ -280,9 +300,9 @@ const Dashboard = () => {
                             {/* Paint countdown timer to begin the activity */}
                             {(() => {
                                 switch (true) {
-                                    case (activitiesByUserDate.activity.countdown > 0):   return <Card.Footer className="text-muted">¡Quedan {activitiesByUserDate.activity.countdown} días!</Card.Footer>;
-                                    case (activitiesByUserDate.activity.countdown == 0):  return <Card.Footer className="text-muted">¡Es hoy!</Card.Footer>;
-                                    default:     return <Card.Footer className="text-muted">¡Fue hace {activitiesByUserDate.activity.countdown * -1} días!</Card.Footer>
+                                    case (getComAct.activity.countdown > 0):   return <Card.Footer className="text-muted">¡Quedan {getComAct.activity.countdown} días!</Card.Footer>;
+                                    case (getComAct.activity.countdown == 0):  return <Card.Footer className="text-muted">¡Es hoy!</Card.Footer>;
+                                    default:     return <Card.Footer className="text-muted">¡Fue hace {getComAct.activity.countdown * -1} días!</Card.Footer>
                                 }
                             })()}
                         </Card>
