@@ -21,10 +21,47 @@ const ProtoDash = () => {
     var date = curr.toISOString().substring(0,10);
     curr.setDate(curr.getDate() + 7);
     const [startDate, setStartDate] = useState(date);
+
     date = curr.toISOString().substring(0,10);
     const [endDate, setEndDate] = useState(date);
 
+
     const navigation = useNavigate();
+
+    const defaultDate = async () => {
+        var curr = new Date();
+        var startDate = curr.toISOString().substring(0,10);
+        curr.setDate(curr.getDate() + 7);
+        var endDate = curr.toISOString().substring(0,10);
+        setStartDate(startDate); setEndDate(endDate);
+    }
+
+    const getComActs = async (e) => {
+        console.log("Comacts ok");
+        e.preventDefault();
+        const response = await axios.post('/getcompact', {
+                startDate: startDate,
+                endDate: endDate 
+            
+        });
+        console.log(response.data);
+    }
+
+    const ParseActivities = async (compActList) => {
+        var currDate = new Date();
+        compActList.forEach(compact => {
+            participant.activity.countdown = days(new Date(participant.activity.date), currDate);
+            participant.activity.date = participant.activity.date.substring(0,10);
+        });
+        return participants;
+    }
+    
+    useEffect(() => {
+        console.log("useEffects ok");
+        defaultDate();
+        getComActs(new Event('firstTime'));
+    }, []);
+
 
     
 }
