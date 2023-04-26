@@ -65,10 +65,12 @@ const Login = () => {
                             <Form.Control type="username" placeholder="12345678A" value={newUserNif} onChange={(e) => setnewUserNif(e.target.value)} />
                             <Form.Label className="d-flex justify-content-center mt-4" style={{fontSize: 20}}>Contraseña</Form.Label>
                             <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            {/*No funciona el check, está creado para cuandose agregue el webtoken*/}
+                            <Form.Check className="mt-3" label= "Recordar contraseña"/>
                             <div className= "d-flex justify-content-center align-items-center mt-3">
-                            <Button variant="success" type="submit" className= "border-dark w-100">
-                                Entrar
-                            </Button> 
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Entrar
+                                </Button> 
                             </div> 
                         </div>
                     </Form.Group> 
