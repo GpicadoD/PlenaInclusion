@@ -1,5 +1,6 @@
 // This code imports the "Activities" and "Users" models from their respective modules
 import Activities from "../models/activityModel.js";
+import CompAct from "../models/comActModel.js";
 import Users from "../models/userModel.js";
 import { Sequelize } from "sequelize";
 
@@ -44,7 +45,7 @@ export const GetActByDate = async (req, res) => {
       if (!firstDate || !lastDate) {
         return res.status(400).json({ msg: "Please provide a start date and an end date." });
       }
-      const activities = await Activities.findAll({
+      const activities = await CompAct.findAll({
         where: {
           date: {
             [Sequelize.Op.between]: [dateA, dateB]

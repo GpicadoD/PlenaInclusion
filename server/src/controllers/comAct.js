@@ -23,13 +23,13 @@ export const GetComAct  = async(req, res) => {
         console.log(startDate);
         const dateA = new Date(startDate);
         const dateB = new Date(endDate);
-        const activities = await Activities.findAll({
+        const activities = await CompAct.findAll({
           where: {
             ActDate: {
               [Sequelize.Op.between]: [dateA, dateB]
             }
           },
-          attributes: ["startDate", "StartTime", "actPlace", "Duration", "actName"],
+          attributes: ["",""],
         });
         res.json(activities);
       } catch (error) {
