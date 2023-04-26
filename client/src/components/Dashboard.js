@@ -254,7 +254,7 @@ const Dashboard = () => {
                 </h2>
             }
             <Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                {activitiesByUserDate.map((activitiesByUserDate) => (
+                {activitiesByUserDate.map((activitiesByUserDate) => (//Es un for each no se asusten
                     <Col key={activitiesByUserDate.activity.id}>
                         <Card className={`box-shadow ${activitiesByUserDate.activity.countdown < 0 ? 'passedCard' : 'futureCard'}`} key={activitiesByUserDate.activity.id} 
                             onClick={(e) => OpenActivityProfile(e, activitiesByUserDate.activity.id, activitiesByUserDate.activity.countdown)} style={activitiesByUserDate.activity.countdown >= 0 ? {cursor: "pointer"} : {}}>
