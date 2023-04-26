@@ -3,6 +3,7 @@ import Login from "./components/Login.js";
 import Dashboard from "./components/Dashboard.js";
 import Barra from "./components/Navbar.js";
 import ActivityProfile from "./components/ActivityProfile.js";
+import AddNewUser from "./components/AddUser.js";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/activityprofile" element={<><Barra/> <ActivityProfile/></>} />
           <Route path="/dashboard" element={<><Barra/><Dashboard/></>} />
+          <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
           {/*Medio apaño para hacer funcionar el login como primera página de React*/}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
