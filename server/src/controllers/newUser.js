@@ -6,8 +6,9 @@ import bcrypt from "bcrypt";
 // This code defines a controller function called "GetNewUser" that uses the "findAll" method to retrieve all new users from the database
 // It then sends the usersData data as a JSON response to the client
 export const GetNewUser = async(req, res) => {
+    const { userNIF } = req.body;
     try {
-        let usersData = await newUsers.findAll();
+        let usersData = await newUsers.findByPk(userNIF);
         res.json(usersData);
     } catch (error) {
         console.log(error);
