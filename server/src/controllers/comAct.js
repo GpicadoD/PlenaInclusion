@@ -3,6 +3,7 @@ import { compare } from "bcrypt";
 import CompAct from "../models/comActModel.js";
 import Competitor from "../models/competitorModel.js";
 import PeriodicAct from "../models/periodicActivityModel.js";
+import { Sequelize } from "sequelize";
 
 // This code defines a controller function called "GetCompAct" that uses the "findAll" method to retrieve all CompActs from the database
 // It then sends the CompActData data as a JSON response to the client
@@ -17,17 +18,17 @@ import PeriodicAct from "../models/periodicActivityModel.js";
 
 export const GetComAct  = async(req, res) => {
     try {
-        const { startDate, endDate } = req.body.params;
+        const { startDate, endDate } = req.body;
         console.log(startDate);
         const dateA = new Date(startDate);
         const dateB = new Date(endDate);
-        const activities = await Activities.findAll({
+        const activities = await CompAct.findAll({
           where: {
             ActDate: {
               [Sequelize.Op.between]: [dateA, dateB]
             }
           },
-          attributes: ["activityId", "name", "date"]
+          attributes: ["activityId", "NifCom", "ActDate"]
         });
         res.json(activities);
       } catch (error) {

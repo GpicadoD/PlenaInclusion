@@ -53,11 +53,11 @@ const Login = () => {
     </section>*/},
     <div style={{ 
         backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,
-        backgroundSize: "cover"
+        backgroundSize: "cover",
       }}>
         <div className='bg-success bg-opacity-25'>
             <div className= "form-container vh-100 d-flex justify-content-center align-items-center">
-                <Form onSubmit={Auth} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'>
+                <Form onSubmit={Auth} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                     <Form.Group className="field mt-4 mb-4">
                         <div className="container pl-2 ">
                             <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>

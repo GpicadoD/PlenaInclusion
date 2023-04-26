@@ -15,8 +15,9 @@ const Organizer = db.define('organizer', {
         type: DataTypes.INTEGER,
         foreignKey:true
     },
-    idtypeProf:{
-        type: DataTypes.INTEGER
+    idTypeOrg:{
+        type: DataTypes.INTEGER,
+        foreignKey:true
     }
 },{
     freezeTableName: true,
@@ -30,11 +31,12 @@ Organizer.belongsTo(ImgOrg, {
     targetKey: 'idImgOrg',
   });
 
-Organizer.hasOne(OrgType, { 
-    foreignKey: 'idtypeProf'
-});
-OrgType.belongsTo(Organizer, {
-    foreignKey: 'idtypeProf'
+OrgType.hasOne(Organizer, { 
+    foreignKey: 'idTypeOrg'
+}); 
+Organizer.belongsTo(OrgType, {
+    foreignKey: 'idTypeOrg',
+    targetKey: 'idTypeOrg',
 });
 
 // Synchronize the model with the database
