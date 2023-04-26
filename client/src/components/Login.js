@@ -53,21 +53,23 @@ const Login = () => {
     </section>*/},
     <div style={{ 
         backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,
-        backgroundSize: "cover"
+        backgroundSize: "cover",
       }}>
         <div className='bg-success bg-opacity-25'>
             <div className= "form-container vh-100 d-flex justify-content-center align-items-center">
-                <Form onSubmit={Auth} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'>
+                <Form onSubmit={Auth} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                     <Form.Group className="field mt-4 mb-4">
                         <div className="container pl-2 ">
                             <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
                             <Form.Control type="username" placeholder="12345678A" value={newUserNif} onChange={(e) => setnewUserNif(e.target.value)} />
                             <Form.Label className="d-flex justify-content-center mt-4" style={{fontSize: 20}}>Contraseña</Form.Label>
                             <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            {/*No funciona el check, está creado para cuandose agregue el webtoken*/}
+                            <Form.Check className="mt-3" label= "Recordar contraseña"/>
                             <div className= "d-flex justify-content-center align-items-center mt-3">
-                            <Button variant="success" type="submit" className= "border-dark w-100">
-                                Entrar
-                            </Button> 
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Entrar
+                                </Button> 
                             </div> 
                         </div>
                     </Form.Group> 
