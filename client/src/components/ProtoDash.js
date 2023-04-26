@@ -47,7 +47,7 @@ const ProtoDash = () => {
         console.log(response.data);
     }
 
-    const ParseActivities = async (compActList) => {
+    /*const ParseActivities = async (compActList) => {
         var currDate = new Date();
         compActList.forEach(compact => {
             participant.activity.countdown = days(new Date(participant.activity.date), currDate);
@@ -55,7 +55,7 @@ const ProtoDash = () => {
         });
         return participants;
     }
-    
+    */
     useEffect(() => {
         console.log("useEffects ok");
         defaultDate();
