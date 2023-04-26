@@ -275,11 +275,11 @@ const Dashboard = () => {
                 </h2>
             }
             <Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                {GetComAct.map((GetComAct) => (
-                    <Col key={GetComAct.activities}>
-                        <Card className={`box-shadow ${GetComAct.activities < 0 ? 'passedCard' : 'futureCard'}`} key={getComAct.activities} 
-                            onClick={(e) => OpenActivityProfile(e, GetComAct.activities, getComAct.activities)} style={getComAct.activities >= 0 ? {cursor: "pointer"} : {}}>
-                            <Card.Img variant="top" src={"http://localhost:3030/static/" + getComAct.activities} />
+                {activitiesByUserDate.map((activitiesByUserDate) => (//Es un for each no se asusten
+                    <Col key={activitiesByUserDate.activity.id}>
+                        <Card className={`box-shadow ${activitiesByUserDate.activity.countdown < 0 ? 'passedCard' : 'futureCard'}`} key={activitiesByUserDate.activity.id} 
+                            onClick={(e) => OpenActivityProfile(e, activitiesByUserDate.activity.id, activitiesByUserDate.activity.countdown)} style={activitiesByUserDate.activity.countdown >= 0 ? {cursor: "pointer"} : {}}>
+                            <Card.Img variant="top" src={"http://localhost:3030/static/" + activitiesByUserDate.activity.image} />
                             <Card.Body>
                                 <Card.Title><span style={{ fontWeight: 'bold' }}>startDate:</span> {getComAct.activity.startDate}</Card.Title>
                                 <Card.Text><span style={{ fontWeight: 'bold' }}>StartTime:</span> {getComAct.activity.StartTime}</Card.Text>
