@@ -41,11 +41,9 @@ export const GetActByDate = async (req, res) => {
       console.log(firstDate);
       const dateA = new Date(firstDate);
       const dateB = new Date(lastDate);
-
       if (!firstDate || !lastDate) {
         return res.status(400).json({ msg: "Please provide a start date and an end date." });
       }
-
       const activities = await Activities.findAll({
         where: {
           date: {
@@ -54,7 +52,6 @@ export const GetActByDate = async (req, res) => {
         },
         attributes: ["activityId", "name", "date"],
       });
-      console.log(activities);
       res.json(activities);
     } catch (error) {
       console.log(error);
