@@ -9,9 +9,41 @@ import Row from 'react-bootstrap/esm/Row';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const ActivityProfile = () => {
-    return (
-        <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
+  const[userNIF,setUserNif] = useState('');
+  const[userName,setUserName] = useState('');
+  const[userLastName, setUserLastName] = useState ('');
+  const[userEmail,setUserEmail] = useState('');
+  const[userBirthDate,setuserBirthDate] = useState('');
+  const[phoneNumber,setphoneNumber] = useState('');
+  const[userGender,setUserGender] = useState('');
+  const[msg, setMsg] = useState('');
+  
+  const Show = async (e) => {
+      e.preventDefault();
+      try{
+        const response = await axios.post('/newUser',{
+              userNIF: userNIF
+          }
+        )
+        console.log(response.data);
+        setUserNif(response.data.userNIF);
+        setUserName(response.data.name);
+        setUserLastName(response.data.lastname);
+        setuserBirthDate(response.data.birthdate.substring(0,10));
+        setphoneNumber(response.data.phoneNumber);
+        setUserEmail(response.data.email);
+        setUserGender(response.data.gender);
+      }
+        catch (error) {
+          if (error.response) {
+            setMsg(error.response.data.msg);
+          }      
+      }  
+}
+return(
+      <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
         <Container>
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="5" className="mt-5">
@@ -21,42 +53,45 @@ const ActivityProfile = () => {
                     <div className="flex-shrink-0">
                       <CardImg
                         style={{ width: '180px', borderRadius: '10px' }}
-                        src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'
+                        src='https://pbs.twimg.com/media/FuGkh2SX0AEYeHT.png'
                         alt='Generic placeholder image'
                         fluid />
                     </div>
                     <div className="flex-grow-1 ms-3">
-                      <Card.Title>Danny McLoan</Card.Title>
-                      <Card.Text>Senior Journalist</Card.Text>
-  
-                      <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
-                        style={{ backgroundColor: '#efefef' }}>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>Name:</span> {userName}</Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>lastname:</span> {userLastName}</Card.Text>
+                        <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
+                          style={{ backgroundColor: '#efefef' }}>
                         <div>
-                          <p className="small text-muted mb-1">Articles</p>
-                          <p className="mb-0">41</p>
+                          <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>userEmail:</span> {userEmail}</p>    
                         </div>
                         <div className="px-3">
-                          <p className="small text-muted mb-1">Followers</p>
-                          <p className="mb-0">976</p>
+                          <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>userGender:</span> {userGender}</p>    
                         </div>
-                        <div>
-                          <p className="small text-muted mb-1">Rating</p>
-                          <p className="mb-0">8.5</p>
-                        </div>
-                      </div>
-                      <div className="d-flex pt-1">
-                        <Button outline className="me-1 flex-grow-1">Chat</Button>
-                        <Button className="flex-grow-1">Follow</Button>
+                    </div>
+                    <div>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>birthdate:</span> {userBirthDate}</Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>phoneNumber:</span> {phoneNumber}</Card.Text>
+                    </div>
+                          <Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                            <Form.Group className="field mt-4 mb-4">
+                              <div className="container pl-2 ">
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Entrar
+                                </Button> 
+                              </div>
+                            </Form.Group> 
+                          </Form>
                       </div>
                     </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div> 
-    )
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        </div> 
+      )
 }
-
 export default ActivityProfile;

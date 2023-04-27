@@ -42,7 +42,6 @@ const ProtoDash = () => {
         const response = await axios.post('/getcompact', {
                 startDate: startDate,
                 endDate: endDate 
-            
         });
         console.log(response.data);
     }

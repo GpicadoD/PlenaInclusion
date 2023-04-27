@@ -29,7 +29,6 @@ export const GetComAct  = async(req, res) => {
               [Sequelize.Op.between]: [dateA, dateB]
             }
           },
-          attributes: ["",""],
         });
         res.json(activities);
       } catch (error) {
