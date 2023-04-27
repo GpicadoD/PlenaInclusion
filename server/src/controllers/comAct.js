@@ -28,7 +28,8 @@ export const GetComAct  = async(req, res) => {
               [Sequelize.Op.between]: [dateA, dateB]
             }
           },
-          attributes: ["activityId", "NifCom", "ActDate"]
+          attributes: ["activityId", "NifCom", "ActDate"],
+          include: [{all:true}]
         });
         res.json(activities);
       } catch (error) {
