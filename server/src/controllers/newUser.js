@@ -169,3 +169,37 @@ export const UpdatePassword  = async(req, res) => {
         console.log(error);
     }
 }
+
+export const RegisterNewUser = async(req, res) => {
+    var { userNIF, name, lastname, email, birthdate, phoneNumber, gender } = req.body;
+
+    if(!userNIF) return res.status(400).json({msg: "Cant update without PK"});
+
+    const salt = await bcrypt.genSalt();
+
+    const bank = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789:._";
+    var randomPass = "";
+    for (let i = 0; i < 7; i++) {
+        randomPass += bank.charAt(Math.floor(Math.random() * bank.length));
+    }
+
+    const hashPassword = await bcrypt.hash(randomPass, salt);
+
+    try {
+    
+      await newUsers.create({
+        userNIF: userNIF,
+        name: name,
+        lastname: lastname,
+        email: email,
+        birthdate: birthdate,
+        phoneNumber: phoneNumber,
+        password: hashPassword,
+        gender: gender
+      });
+  
+      res.json({ randomPass});
+    } catch (error) {
+      console.log(error);
+    }
+}
