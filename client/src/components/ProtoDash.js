@@ -152,8 +152,8 @@ const ProtoDash = () => {
                 <Tab eventKey="nearAct" title="Próximas actividades">
                     {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
                         {periodicAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.NifOrg}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.NifOrg}>
+                            <Col key={"Col" + activities.activityId + activities.ActDate}>
+                                <Card className={`box-shadow`} key={"Card" + activities.activityId + activities.ActDate}>
                                     <Card.Body>
                                         <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.newactivity.nameAct}</Card.Title>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.actDate.substring(0,10)}</Card.Text>

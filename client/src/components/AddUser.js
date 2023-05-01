@@ -70,7 +70,6 @@ const AddNewUser = () => {
                     </Form>
                 </div>  
             </div>
-             
         </div>
     )
 }
