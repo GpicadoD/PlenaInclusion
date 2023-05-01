@@ -11,8 +11,7 @@ const AddNewUser = () => {
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [birthdate, setBirthdate] = useState('');
-    const [phonenumber, setPhoneNumber] = useState('');
-    const [password, setPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
     const [msg, setMsg] = useState('');
     const history = useNavigate();
@@ -20,18 +19,17 @@ const AddNewUser = () => {
     const Add = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/addnewuser', {
+            var newPassword = await axios.post('/registernewuser', {
                 userNIF: userNIF,
                 name: name,
                 lastname: lastname,
                 email: email,
                 birthdate: birthdate,
-                phonenumber: phonenumber,
-                password: password,
-                gender: gender
+                phoneNumber: phoneNumber,
+                gender: gender,
             });
-            history("/dashboard");
-        } catch (error) {
+            console.log({newPassword});
+            } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
             }
@@ -59,9 +57,7 @@ const AddNewUser = () => {
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Fecha de nacimiento</Form.Label>
                                 <Form.Control type="username" placeholder="12345678A" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Número de teléfono</Form.Label>
-                                <Form.Control type="password" placeholder="Contraseña" value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Contraseña</Form.Label>
-                                <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <Form.Control type="text" placeholder="Contraseña" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Género</Form.Label>
                                 <Form.Control type="username" placeholder="12345678A" value={gender} onChange={(e) => setGender(e.target.value)} />
                                 <div className= "d-flex justify-content-center align-items-center mt-3">
@@ -79,4 +75,4 @@ const AddNewUser = () => {
     )
 }
 
-    export default AddNewUser;
+export default AddNewUser;

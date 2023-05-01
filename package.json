@@ -24,5 +24,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.21"
+  "dependencies": {
+    "react-alert": "^7.0.3"
   }
 }
