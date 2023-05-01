@@ -1,35 +1,60 @@
 import React from 'react';
 import { Container, Row, Col, Card, CardImg, Button } from 'react-bootstrap';
 import futbol from '../../src/img/futbol.jpeg'
-import entrenadora from '../../src/img/entrenadora.jpg'
-
 
 const ActivityInfo = () => {
   
-    const [userNIF, setUserNif] = useState('');
+    const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [startDate, setStartDate] = useState('');
     const [finishDate, setFinishDate] = useState('');
     const [Description, setDescription] = useState('');
     const [Limit, setLimit] = useState('');
-    const history = useNavigate();
+    const [msg, setMsg] = useState('');
 
-    const getActivityInfo = async (e) => {
+    const Show = async (e) => {
       console.log("NewActivityOK")
       e.preventDefault();
-    
-      const response = await axios.post('/ActivityInfo', {
-        nameAct: nameAct,
-        startDate: startDate,
-        finishDate: finishDate,
-        Description: Description,
-        Limit: Limit,
-       
-        });
-        console.log("GetActivityInfo");
+      try{
+        const response = await axios.post('/ActivityInfo', {
+          activityId: activityId;
+        }
+        )
         console.log(response.data);
+        setUserNif(response.data.activityId);
+        setUserName(response.data.nameAct);
+        setUserLastName(response.data.startDate);
+        setuserBirthDate(response.data.finishDate);
+        setphoneNumber(response.data.Description);
+        setUserEmail(response.data.Limit);
+      }
+        catch (error) {
+          if (error.response) {
+            setMsg(error.response.data.msg);
+          }      
+      }  
+
+      }
+    
+    const Update = async (e) => {
+      e.preventDefault();
+      try{
+        const response = await axios.post('/updateActivity',{
+              activityId: activityId,
+              nameAct: nameAct,
+              Description: Description
+          }
+        )
+        console.log(response.data);
+        setNameAct(response.data.nameAct);
+        setDescription(response.data.Description);
+      }
+        catch (error) {
+          if (error.response) {
+            setMsg(error.response.data.msg);
+          }      
+      } 
     }
- 
 
   return (
     <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
@@ -39,7 +64,6 @@ const ActivityInfo = () => {
             <Card style={{ borderRadius: '15px' }}>
               <Card.Body className="p-4">
                 <div className="d-flex text-black" style={{display: 'flex'}}>
-                  <div>
                   <div className="flex-shrink-0">
                     <CardImg
                       style={{ width: '180px', borderRadius: '10px' }}
@@ -47,40 +71,51 @@ const ActivityInfo = () => {
                       alt="Activity image"
                       fluid
                     />
-                    <div className="d-flex align-items-center mt-3">
-                      <CardImg
-                        style={{ width: '180px', borderRadius: '10px' }}
-                        src={entrenadora}
-                        alt="Organizer profile image"
-                        fluid
-                      />
                   </div>
-                  </div>
-                  <div className="flex-grow-1 ms-3 text-center">
-                    <Card.Title>Actividad de Futbol 7</Card.Title>
-                    <Card.Text>Lugar: Pabellon siglo XXI</Card.Text>
-                    <Card.Text>Inscritos: 24 personas</Card.Text>
-                    <Card.Text>Organizador: Begoña Pérez</Card.Text>
+                  <div className="flex-grow-1 ms-3">
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>NameAct:</span> {nameAct}</Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>Description:</span> {Description}</Card.Text>
+                        <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
+                          style={{ backgroundColor: '#efefef' }}>
+                          <div>
+                            <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>startDate:</span> {startDate}</p>    
+                          </div>
+                          <div className="px-3">
+                            <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>finishDate:</span> {finishDate}</p>    
+                          </div>
                     </div>
-                    <div className="d-flex justify-content-start rounded-3 p-2 mb-2" style={{ backgroundColor: '#efefef' }}>
-                      <div>
-                        <p className="small text-muted mb-1">Fecha</p>
-                        <p className="mb-0">2023-11-23</p>
-                      </div>
-                      <div className="px-3">
-                        <p className="small text-muted mb-1">Hora de inicio</p>
-                        <p className="mb-0">17:45</p>
-                      </div>
-                      <div>
-                        <p className="small text-muted mb-1">Duración</p>
-                        <p className="mb-0">2H</p>
-                      </div>
+                    <div>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>Limit:</span> {Limit}</Card.Text>
                     </div>
-                    <Card.Text className="mt-3">
-                      Descripción: Partido de futbol de 7 contra 7  con 10 jugadores de recambio 
-                      para cada equipo y personal especializado. El torneo durara 5 meses.
-                      Que gane el mejor!!
-                    </Card.Text>
+                    <Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                            <Form.Group className="field mt-4 mb-4">
+                              <div className="container pl-2 ">
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Entrar
+                                </Button> 
+                              </div>
+                            </Form.Group> 
+                    </Form>
+                    <Form onSubmit={Update} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                            <Form.Group className="field mt-4 mb-4">
+                              <div className="container pl-2 ">
+                                
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>activityId</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
+                                
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NameAct</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={nameAct} onChange={(e) => setNameAct(e.target.value)} />
+
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Description</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={Description} onChange={(e) => setDescription(e.target.value)} />
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Actualizar
+                                </Button> 
+                              </div>
+                            </Form.Group> 
+                      </Form>
                     <div className="d-flex pt-1">
                       <Button outline className="me-1 flex-grow-1">
                         Chat
