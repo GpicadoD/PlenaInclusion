@@ -23,28 +23,45 @@ const CompAct = db.define("CompActs", {
     
     ActDate:{
         type: DataTypes.DATE,
+        foreignKey: true,
         primaryKey: true
     }
 }, { timestamps: false,
-    ondelete : false
- });
+    onDelete : false
+});
 // Export the CompAct" model
-Competitor.belongsToMany(PeriodicAct, { through: CompAct, foreignKey: 'NifCom' });
-PeriodicAct.belongsToMany( Competitor, { through: CompAct, foreignKey: 'activityId' });
+PeriodicAct.belongsToMany(Competitor, {
+    through: {
+    model: CompAct,
+    unique: false,
+    },
+    foreignKey: 'activityId'
+});
+
+Competitor.belongsToMany(PeriodicAct, {
+    through: {
+    model: CompAct,
+    unique: false
+    },
+    foreignKey: 'NifCom'
+});
 CompAct.hasMany(Competitor, {
     foreignKey: 'NifCom'
 }); 
 Competitor.belongsTo(CompAct, {
     foreignKey: 'NifCom',
     targetKey: 'NifCom',
-  }
-);
+});
 CompAct.hasMany(PeriodicAct, {
     foreignKey: 'activityId'
 }); 
 PeriodicAct.belongsTo(CompAct, {
     foreignKey: 'activityId',
     targetKey: 'activityId',
-  }
-);
+});
+PeriodicAct.belongsTo(CompAct, {
+    foreignKey: 'actDate',
+    targetKey: 'ActDate',
+});
+
 export default CompAct;

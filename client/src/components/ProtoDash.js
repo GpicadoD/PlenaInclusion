@@ -13,9 +13,14 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
+import {useLocation} from 'react-router-dom';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 const ProtoDash = () => {
+    const location = useLocation();
     const [comAct, setComAct] = useState([]);
+    const [periodicAct, setperiodicAct] = useState([]);
 
     var curr = new Date();
     var date = curr.toISOString().substring(0,10);
@@ -24,7 +29,10 @@ const ProtoDash = () => {
 
     date = curr.toISOString().substring(0,10);
     const [endDate, setEndDate] = useState(date);
-
+    
+    const [NifCom, setNifCom] = useState(location.state.newUserNif);
+    const [idAct, setidAct] = useState("");
+    const [actDate, setactDate] = useState("");
 
     const navigation = useNavigate();
 
@@ -40,19 +48,45 @@ const ProtoDash = () => {
         console.log("Comacts ok");
         e.preventDefault();
         const response = await axios.post('/getcompact', {
-                startDate: startDate,
-                endDate: endDate 
+            startDate: startDate,
+            endDate: endDate,
+            NifCom: NifCom
         });
+        console.log('GetComActs:');
         console.log(response.data);
         setComAct(response.data);
-        console.log(comAct[0].activityId);
+    }
+    //SIN HACER
+    const getPeriodic = async (e) => {
+        console.log("Periodic ok");
+        e.preventDefault();
+        const response = await axios.post('/getperiodicActsByUserDate', {
+            startDate: startDate,
+            endDate: endDate,
+            NifCom: NifCom
+        });
+        console.log('GetPeriodic:');
+        console.log(response.data);
+        setperiodicAct(response.data);
+    }
+    //SIN HACER
+    const addComActs = async (e) => {
+        console.log("AddedComacts ok");
+        e.preventDefault();
+        const response = await axios.post('/insertCompact', {
+            idAct: idAct,
+            idUser: NifCom,
+            actDate: actDate
+        });
+        console.log(response.data);
+        setperiodicAct(response.data);
     }
 
-    useEffect(() => {
+    useEffect(() => {   
         console.log("useEffects ok");
         defaultDate();
         getComActs(new Event('firstTime'));
-        console.log(comAct);
+        getPeriodic(new Event('firstTime'));
     }, []);
 
     return (
@@ -69,7 +103,6 @@ const ProtoDash = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        
                     </Nav>
                     <Form className="d-flex" onSubmit={getComActs}>
                         {/*Añadir ID de usuario temporal*/}
@@ -77,63 +110,74 @@ const ProtoDash = () => {
                             value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <Form.Control className="me-2" type="date" placeholder="Date" 
                             value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                        {/* <Form.Control
-                            type="search"
-                            placeholder="Search by name"
-                            className="me-2"
-                            aria-label="Search"
-                        />
                         <Form.Control
                             type="search"
-                            placeholder="Search by duration"
+                            placeholder="Search by NIF"
                             className="me-2"
                             aria-label="Search"
-                        /> */}
+                            value={NifCom} onChange={(e) => setNifCom(e.target.value)}
+                        />
                         <Button variant="outline-success" type="submit">Buscar</Button>
                     </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {/* <h1>Welcome Back: {user.name}</h1>
-            <h1>Next activities:</h1>*/}
-            {comAct.length == 0 &&
+            <Tabs
+                defaultActiveKey="signedAct"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+                >
+                <Tab eventKey="signedAct" title="Apuntado">
+                    {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
+                        {comAct.map((activities) => (//Es un for each no se asusten
+                            <Col key={activities.activityId + activities.ActDate}>
+                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate}>
+                                    <Card.Body>
+                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {"Espero acordarme de cambiar esto"}</Card.Text>
+                                        <div className='mt-4 text-center'>
+                                            <Button className='succes'>
+                                                Ver Más
+                                            </Button>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                    ))}
+                    </Row>}
+                </Tab>
+                <Tab eventKey="nearAct" title="Próximas actividades">
+                    {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
+                        {periodicAct.map((activities) => (//Es un for each no se asusten
+                            <Col key={activities.activityId + activities.NifOrg}>
+                                <Card className={`box-shadow`} key={activities.activityId + activities.NifOrg}>
+                                    <Card.Body>
+                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.newactivity.nameAct}</Card.Title>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.actDate.substring(0,10)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.actDate.substring(11,16)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {"Cambiala Vago"}</Card.Text>
+                                        <div className='mt-4 text-center'>
+                                            <Button className='Espero acordarme de cambiar esto'>
+                                                ¡Apuntate!
+                                            </Button>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>}
+                </Tab>
+            </Tabs>
+            {comAct.length == 0 && 
                 <h2 className="noActivity">
                     No tienes ninguna actividad en las fechas seleccionadas.
                 </h2>
             }
-            
-            {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                {comAct.map((activities) => (//Es un for each no se asusten
-                    <Col key={activities.activityId}>
-                        <Card className={`box-shadow`} key={activities.activityId}>
-                            <Card.Body>
-                                <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].NifOrg}</Card.Title>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate}</Card.Text>
-                                <div className='mt-4 text-center'>
-                                    <Button className='succes'>
-                                        ¡Apuntate!
-                                    </Button>
-                                    {/*<Button disabled={activitiesByUserDate.activity.countdown < 0} name="deleteButton" variant="danger" onClick={(e) => BeforeDeleteAlert(e, activitiesByUserDate.activity.id)}>
-                                        Abandonar
-                                    </Button>*/}
-                                </div>
-                            </Card.Body>
-                            {/* Paint countdown timer to begin the activity
-                            {(() => {
-                                switch (true) {
-                                    case (activitiesByUserDate.activity.countdown > 0):   return <Card.Footer className="text-muted">¡Quedan {activitiesByUserDate.activity.countdown} días!</Card.Footer>;
-                                    case (activitiesByUserDate.activity.countdown == 0):  return <Card.Footer className="text-muted">¡Es hoy!</Card.Footer>;
-                                    default:     return <Card.Footer className="text-muted">¡Fue hace {activitiesByUserDate.activity.countdown * -1} días!</Card.Footer>
-                                }
-                            })()*/}
-                            
-                        </Card>
-                    </Col>
-                ))}
-                </Row>}
         </div>
-    )
-
-    
+    )    
 }
 export default ProtoDash;
