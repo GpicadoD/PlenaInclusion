@@ -185,11 +185,11 @@ export const RegisterNewUser = async(req, res) => {
     for (let i = 0; i < 7; i++) {
         randomPass += bank.charAt(Math.floor(Math.random() * bank.length));
     }
-    const hashPassword = await bcrypt.hash(randomPasss, salt);
+    const hashPassword = await bcrypt.hash(randomPass, salt);
 
     try {
     
-      await newUsers.create({
+    await newUsers.create({
         userNIF: userNIF,
         name: name,
         lastname: lastname,
@@ -198,9 +198,9 @@ export const RegisterNewUser = async(req, res) => {
         phoneNumber: phoneNumber,
         password: hashPassword,
         gender: gender
-      });
-      res.json({ randomPass});
+    });
+    res.json({ randomPass});
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
 }
