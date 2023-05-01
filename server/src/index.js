@@ -8,7 +8,7 @@ const app = express();
 
 //configurations
 // Configure the application settings
-app.set('port', process.env.PORT || 3030);
+app.set('port', process.env.PORT || 5050);
 app.set('json spaces', 2);
 
 //routes
