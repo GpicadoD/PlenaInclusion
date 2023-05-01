@@ -36,13 +36,6 @@ export const GetnewActivities = async(req, res) => {
         console.log(error);
     }
 }
-
-export const GetNewActivities = async(req, res) => {
-    const {activityId, nameAct, startDate, finishDate, idCreator, Description, Limit} = req.body;
-    try{
-
-    }
-}
 // This function updates an activity with new data from the request body
 export const DeleteNewActivity = async(req, res) => {
     const { activityId } = req.body;
