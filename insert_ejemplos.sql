@@ -83,7 +83,7 @@ INSERT INTO `newactivities`(`activityId`, `nameAct`, `idPublicType`, `idTheme`, 
 
 DELETE FROM `periodicact`;
 INSERT INTO `periodicact` (`activityId`,`actDate`,`NifOrg`,`actPlace`, `Duration`) VALUES -- Hay que aprender a asignar valores de tiempo, aunque se puede tomar por los últimos datos de la fecha
-('1', CURDATE() , '73286542N', 'Calle de las Armas, 71', curdate()),
+('1', CURDATE() , '73286542N', 'Calle de las Armas, 71', 'Mucho'),
 ('1', '2023-04-30 07:00:00' , '73286542N', 'Calle de las Armas, 71', 'Media hora'),
 ('2', '2023-04-29 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
 ('2', '2023-04-30 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),

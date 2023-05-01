@@ -66,20 +66,18 @@ const ProtoDash = () => {
             NifCom: NifCom
         });
         console.log('GetPeriodic:');
-        console.log(response.data);
+        console.log(response);
         setperiodicAct(response.data);
     }
     //SIN HACER
     const addComActs = async (e) => {
         console.log("AddedComacts ok");
         e.preventDefault();
-        const response = await axios.post('/insertCompact', {
+        await axios.post('/insertCompact', {
             idAct: idAct,
             idUser: NifCom,
             actDate: actDate
         });
-        console.log(response.data);
-        setperiodicAct(response.data);
     }
 
     useEffect(() => {   
@@ -137,7 +135,7 @@ const ProtoDash = () => {
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {"Espero acordarme de cambiar esto"}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
                                         <div className='mt-4 text-center'>
                                             <Button className='succes'>
                                                 Ver Más
@@ -152,14 +150,14 @@ const ProtoDash = () => {
                 <Tab eventKey="nearAct" title="Próximas actividades">
                     {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
                         {periodicAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.NifOrg}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.NifOrg}>
+                            <Col key={activities.activityId + activities.actDate +  activities.NifOrg}>
+                                <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct}>
                                     <Card.Body>
                                         <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.newactivity.nameAct}</Card.Title>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.actDate.substring(0,10)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.actDate.substring(11,16)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {"Cambiala Vago"}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
                                         <div className='mt-4 text-center'>
                                             <Button className='Espero acordarme de cambiar esto'>
                                                 ¡Apuntate!
