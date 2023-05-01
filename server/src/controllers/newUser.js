@@ -182,7 +182,6 @@ export const RegisterNewUser = async(req, res) => {
     for (let i = 0; i < 7; i++) {
         randomPass += bank.charAt(Math.floor(Math.random() * bank.length));
     }
-
     const hashPassword = await bcrypt.hash(randomPasss, salt);
 
     try {
