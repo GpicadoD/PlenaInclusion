@@ -11,16 +11,16 @@ import { useNavigate } from 'react-router-dom';
 
 
 const ActivityProfile = () => {
-  const[userNIF,setUserNif] = useState('');
-  const[userName,setUserName] = useState('');
-  const[userLastName, setUserLastName] = useState ('');
-  const[email,setUserEmail] = useState('');
-  const[userBirthDate,setuserBirthDate] = useState('');
-  const[phoneNumber,setphoneNumber] = useState('');
-  const[password,setuserPassword] = useState('');
-  const[userGender,setUserGender] = useState('');
-  const[msg, setMsg] = useState('');
-  
+const[userNIF,setUserNif] = useState('');
+const[userName,setUserName] = useState('');
+const[userLastName, setUserLastName] = useState ('');
+const[email,setUserEmail] = useState('');
+const[userBirthDate,setuserBirthDate] = useState('');
+const[phoneNumber,setphoneNumber] = useState('');
+const[password,setuserPassword] = useState('');
+const[userGender,setUserGender] = useState('');
+const[msg, setMsg] = useState('');
+
   const Show = async (e) => {
       e.preventDefault();
       try{
