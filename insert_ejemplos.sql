@@ -76,21 +76,30 @@ INSERT INTO `competitor` (`NifCom`, `emergencyNumber`) VALUES
 DELETE FROM `newactivities`;
 INSERT INTO `newactivities`(`activityId`, `nameAct`, `idPublicType`, `idTheme`, `idImgAct`,  `startDate`, `finishDate`, `idPeriod`, `idCreator`, `Description`, `Limit`) VALUES
 ('1', 'Actividad de Prueba 1', '1', '1', '1', CURDATE(), NULL, NULL, '78331338P', 'Es una charla de prueba', '12'),
-('2', 'Actividad Recurrente de Prueba 1', '2', '1', '1', CURDATE(), '2023-12-31', '2', '34267890F', 'Es una charla recurrente de prueba', '10');
+('4', 'Actividad de Prueba 2', '1', '1', '1', '2023-05-03 07:00:00', NULL, NULL, '78331338P', 'Es una charla de prueba', '12'),
+('2', 'Actividad Recurrente de Prueba 1', '2', '1', '1', '2023-1-31', '2023-12-31', '2', '34267890F', 'Es una charla recurrente de prueba', '10'),
+('3', 'Actividad Recurrente de Prueba 2', '2', '1', '1', 2023-1-31, '2023-12-31', '2', '34267890F', 'Es una charla recurrente de prueba', '10');
+
 
 DELETE FROM `periodicact`;
-INSERT INTO `periodicact` (`activityId`,`actDate`,`NifOrg`,`actPlace`, `StartTime`) VALUES -- Hay que aprender a asignar valores de tiempo, aunque se puede tomar por los últimos datos de la fecha
-('1', CURDATE() , '73286542N', 'Calle de las Armas, 71', curdate()),
-('2', '2023-04-26 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-01 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-01 07:00:00'),
-('2', '2023-05-08 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-08 07:00:00'),
-('2', '2023-05-16 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-16 07:00:00');
+INSERT INTO `periodicact` (`activityId`,`actDate`,`NifOrg`,`actPlace`, `Duration`) VALUES -- Hay que aprender a asignar valores de tiempo, aunque se puede tomar por los últimos datos de la fecha
+('1', CURDATE() , '73286542N', 'Calle de las Armas, 71', 'Mucho'),
+('1', '2023-04-30 07:00:00' , '73286542N', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-04-29 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-04-30 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-01 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-02 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-03 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-04 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-05 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-06 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('4', '2023-05-03 07:00:00' , '73286542N', 'Calle de las Armas, 71', 'Media hora');
 
 DELETE FROM `compacts`;
 INSERT INTO `compacts` (`activityId`,`NifCom`,`ActDate`) VALUES
 ('1', '55678901R', CURDATE()),
 ('1', '23456789T', CURDATE()),
-('2', '23456789T', '2023-04-26 07:00:00'),
-('2', '12345678U', '2023-05-01 07:00:00'),
 ('1', '12345678U', CURDATE()),
-('2', '80247484K', '2023-05-08 07:00:00');
+
+('2', '12345678U', '2023-04-30 07:00:00'),
+('2', '12345678U', '2023-05-05 07:00:00');
