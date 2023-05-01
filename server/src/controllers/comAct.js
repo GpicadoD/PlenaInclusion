@@ -24,16 +24,16 @@ export const GetComAct  = async(req, res) => {
         const dateA = new Date(startDate);
         const dateB = new Date(endDate);
         const activities = await CompAct.findAll({
-          where: {
-            ActDate: {
-              [Sequelize.Op.between]: [dateA, dateB]
-            }
-          },
+            where: {
+                ActDate: {
+                [Sequelize.Op.between]: [dateA, dateB]
+                }
+            },
         });
         res.json(activities);
-      } catch (error) {
-        console.log(error);
-      }
+        } catch (error) {
+            console.log(error);
+        }
 }
 
 // This code defines a controller function called "AddnewList" that extracts the id of the activity and the id of the user from the request body
