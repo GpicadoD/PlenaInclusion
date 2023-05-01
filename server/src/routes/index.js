@@ -6,7 +6,7 @@ import { DeleteCompetitor, UpdateCompetitor, AddCompetitor, GetCompetitor } from
 import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from '../controllers/organizer.js';
 import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
 import { DeleteOrganizerType, GetorgType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
-import { DeletePeriodAct, GetperiodicActs, Addnewperiodact} from '../controllers/periodicActivity.js';
+import { DeletePeriodAct, GetperiodicActs, Addnewperiodact, GetperiodicActsByUserDate} from '../controllers/periodicActivity.js';
 import { DeleteImgOrg } from '../controllers/imgOrg.js';
 import { DeletePublic, UpdatePublic, Addnewpublic } from '../controllers/public.js';
 import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.js';
@@ -160,7 +160,11 @@ router.post('/loginNewUser', Login);
 
 router.post('/updatePassword', UpdatePassword);
 
+
 router.post('/registernewuser', RegisterNewUser);
+
+router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
+
 
 // Export the router object
 export default router;
