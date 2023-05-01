@@ -17,7 +17,7 @@ const Barra = () => {
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
                 <Nav.Link href="/dashboard">Actividades</Nav.Link>
-                <Nav.Link href="/addactivity">Añadir Usuario</Nav.Link>
+                <Nav.Link href="/addnewuser">Añadir Usuario</Nav.Link>
                 <Nav.Link href="/addactivity">Añadir Actividad</Nav.Link>
                 <NavDropdown title="Login" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/activityprofile">

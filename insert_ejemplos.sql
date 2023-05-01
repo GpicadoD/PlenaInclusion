@@ -82,18 +82,18 @@ INSERT INTO `newactivities`(`activityId`, `nameAct`, `idPublicType`, `idTheme`, 
 
 
 DELETE FROM `periodicact`;
-INSERT INTO `periodicact` (`activityId`,`actDate`,`NifOrg`,`actPlace`, `StartTime`) VALUES -- Hay que aprender a asignar valores de tiempo, aunque se puede tomar por los últimos datos de la fecha
+INSERT INTO `periodicact` (`activityId`,`actDate`,`NifOrg`,`actPlace`, `Duration`) VALUES -- Hay que aprender a asignar valores de tiempo, aunque se puede tomar por los últimos datos de la fecha
 ('1', CURDATE() , '73286542N', 'Calle de las Armas, 71', curdate()),
-('1', '2023-04-30 07:00:00' , '73286542N', 'Calle de las Armas, 71', curdate()),
-('2', '2023-04-29 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-04-30 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-01 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-02 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-03 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-04 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-05 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('2', '2023-05-06 07:00:00' , '09876543Z', 'Calle de las Armas, 71', '2023-05-26 07:00:00'),
-('4', '2023-05-03 07:00:00' , '73286542N', 'Calle de las Armas, 71', curdate());
+('1', '2023-04-30 07:00:00' , '73286542N', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-04-29 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-04-30 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-01 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-02 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-03 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-04 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-05 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('2', '2023-05-06 07:00:00' , '09876543Z', 'Calle de las Armas, 71', 'Media hora'),
+('4', '2023-05-03 07:00:00' , '73286542N', 'Calle de las Armas, 71', 'Media hora');
 
 DELETE FROM `compacts`;
 INSERT INTO `compacts` (`activityId`,`NifCom`,`ActDate`) VALUES
