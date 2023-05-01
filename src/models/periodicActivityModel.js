@@ -8,21 +8,18 @@ import newActivities from "./newActivityModel.js";
 const {DataTypes} = Sequelize;
 // Define the "PeriodicAct" model using Sequelize
 const PeriodicAct = db.define('periodicAct', {
-    activityId:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-    },
     actDate:{
         type: DataTypes.DATE,
+        primaryKey: true
+    },
+    activityId:{
+        type: DataTypes.INTEGER,
         primaryKey: true
     },
     NifOrg:{
         type: DataTypes.STRING
     },
     actPlace:{
-        type: DataTypes.STRING
-    },
-    Duration:{
         type: DataTypes.STRING
     }
 },{
@@ -35,7 +32,7 @@ Organizer.hasMany(PeriodicAct, {
 PeriodicAct.belongsTo(Organizer, {
     foreignKey: 'NifOrg',
     targetKey: 'NifOrg',
-});
+  });
 
 newActivities.hasMany(PeriodicAct, {
     foreignKey: 'activityId'
@@ -43,7 +40,7 @@ newActivities.hasMany(PeriodicAct, {
 PeriodicAct.belongsTo(newActivities, {
     foreignKey: 'activityId',
     targetKey: 'activityId',
-});
+  });  
 // Synchronize the model with the database
 (async () => {
     await db.sync();

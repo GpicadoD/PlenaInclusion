@@ -24,7 +24,6 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
-
 // Alert before delete
 //import { confirmAlert } from 'react-confirm-alert'; // Import
 //import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -40,6 +39,13 @@ const Dashboard = () => {
     // const [activities, setActivities] = useState([]);
     // const [activitiesByUser, setActivitiesByUser] = useState([]);
     const [activitiesByUserDate, setActivitiesByUserDate] = useState([]);
+    const [CompAct, setComAct] = useState({
+        startDate: '',
+        actName: '',
+        StartTime:'',
+        actPlace:'',
+        Duration:''
+    })
 
     // Default startDate (today) and endDate (today + 7)
     var curr = new Date();
@@ -256,18 +262,17 @@ const Dashboard = () => {
             <Row xs={1} md={4} className="g-4 mt-1 mb-5">
                 {activitiesByUserDate.map((activitiesByUserDate) => (//Es un for each no se asusten
                     <Col key={activitiesByUserDate.activity.id}>
-                        <Card className={`box-shadow ${activitiesByUserDate.activity.countdown < 0 ? 'passedCard' : 'futureCard'}`} key={activitiesByUserDate.activity.id} 
+                     <Card className={`box-shadow ${activitiesByUserDate.activity.countdown < 0 ? 'passedCard' : 'futureCard'}`} key={activitiesByUserDate.activity.id} 
                             onClick={(e) => OpenActivityProfile(e, activitiesByUserDate.activity.id, activitiesByUserDate.activity.countdown)} style={activitiesByUserDate.activity.countdown >= 0 ? {cursor: "pointer"} : {}}>
                             <Card.Img variant="top" src={"http://localhost:3030/static/" + activitiesByUserDate.activity.image} />
                             <Card.Body>
-                                <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activitiesByUserDate.activity.name}</Card.Title>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activitiesByUserDate.activity.time}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activitiesByUserDate.activity.date}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Dirección:</span> {activitiesByUserDate.activity.address}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activitiesByUserDate.activity.duration}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Teléfono:</span> {activitiesByUserDate.activity.contactNumber}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Email:</span> {activitiesByUserDate.activity.contactEmail}</Card.Text>
-                                <Card.Text><span style={{ fontWeight: 'bold' }}>Participantes:</span> {activitiesByUserDate.activity.nParticipants}/{activitiesByUserDate.activity.maxParticipants}</Card.Text>
+                                <Card.Title><span style={{ fontWeight: 'bold' }}>startDate:</span> {activitiesByUserDate.activity.startDate}</Card.Title>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>StartTime:</span> {activitiesByUserDate.activity.StartTime}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>actPlace:</span> {activitiesByUserDate.activity.actPlace}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>Duration:</span> {activitiesByUserDate.activity.duration}</Card.Text>
+                                <Card.Text><span style={{ fontWeight: 'bold' }}>actName:</span> {activitiesByUserDate.activity.actName}</Card.Text>
+
+                                
                                 <div className='mt-4 text-center'>
                                     <Button disabled={activitiesByUserDate.activity.countdown < 0} className='mr-2' variant="outline-success" onClick={() => navigation('/activityProfile/' + activitiesByUserDate.activity.id)}>
                                         Mensaje

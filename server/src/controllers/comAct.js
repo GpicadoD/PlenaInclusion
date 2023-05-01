@@ -8,14 +8,15 @@ import { Sequelize } from "sequelize";
 
 // This code defines a controller function called "GetCompAct" that uses the "findAll" method to retrieve all CompActs from the database
 // It then sends the CompActData data as a JSON response to the client
-/*export const GetComAct  = async(req, res) => {
-    try {
-        let compActData = await CompAct.findAll();
-        res.json(compActData);
-    } catch (error) {
-        console.log(error);
-    }
-}*/
+//export const GetComAct  = async(req, res) => {
+    //try {
+      //  let compActData = await CompAct.findAll();
+        //res.json(compActData);
+    //} catch (error) {
+        //console.log(error);
+    //}
+
+//}
 
 export const GetComAct  = async(req, res) => {
     try {
@@ -24,6 +25,7 @@ export const GetComAct  = async(req, res) => {
         const dateA = new Date(startDate);
         const dateB = new Date(endDate);
         const activities = await CompAct.findAll({
+
         where: {
             ActDate: {
             [Sequelize.Op.between]: [dateA, dateB]
