@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
     const [newUserNif, setnewUserNif] = useState('');
@@ -18,7 +19,7 @@ const Login = () => {
                 newUserNif: newUserNif,
                 password: password
             });
-            history("/dashboard");
+            history("/protodash", {state:{newUserNif}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -54,7 +55,7 @@ const Login = () => {
     <div style={{ 
         backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,
         backgroundSize: "cover",
-      }}>
+    }}>
         <div className='bg-success bg-opacity-25'>
             <div className= "form-container vh-100 d-flex justify-content-center align-items-center">
                 <Form onSubmit={Auth} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
@@ -76,9 +77,7 @@ const Login = () => {
                 </Form>
             </div>  
         </div>
-         
     </div>
-     
     )
 }
 

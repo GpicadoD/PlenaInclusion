@@ -10,7 +10,7 @@ const {DataTypes} = Sequelize;
 const PeriodicAct = db.define('periodicAct', {
     activityId:{
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
     },
     actDate:{
         type: DataTypes.DATE,
@@ -21,9 +21,6 @@ const PeriodicAct = db.define('periodicAct', {
     },
     actPlace:{
         type: DataTypes.STRING
-    },
-    StartTime:{
-        type: DataTypes.DATE
     }
 },{
     freezeTableName: true,
@@ -35,7 +32,7 @@ Organizer.hasMany(PeriodicAct, {
 PeriodicAct.belongsTo(Organizer, {
     foreignKey: 'NifOrg',
     targetKey: 'NifOrg',
-  });
+});
 
 newActivities.hasMany(PeriodicAct, {
     foreignKey: 'activityId'
@@ -43,7 +40,7 @@ newActivities.hasMany(PeriodicAct, {
 PeriodicAct.belongsTo(newActivities, {
     foreignKey: 'activityId',
     targetKey: 'activityId',
-  });  
+});
 // Synchronize the model with the database
 (async () => {
     await db.sync();

@@ -3,6 +3,7 @@ import { compare } from "bcrypt";
 import CompAct from "../models/comActModel.js";
 import Competitor from "../models/competitorModel.js";
 import PeriodicAct from "../models/periodicActivityModel.js";
+import newActivities from "../models/newActivityModel.js";
 import { Sequelize } from "sequelize";
 
 // This code defines a controller function called "GetCompAct" that uses the "findAll" method to retrieve all CompActs from the database
@@ -18,22 +19,24 @@ import { Sequelize } from "sequelize";
 
 export const GetComAct  = async(req, res) => {
     try {
-        const { startDate, endDate } = req.body;
+        const { startDate, endDate, NifCom} = req.body;
         console.log(startDate);
         const dateA = new Date(startDate);
         const dateB = new Date(endDate);
         const activities = await CompAct.findAll({
-          where: {
+        where: {
             ActDate: {
-              [Sequelize.Op.between]: [dateA, dateB]
-            }
-          },
-          attributes: ["activityId", "NifCom", "ActDate"]
+            [Sequelize.Op.between]: [dateA, dateB]
+            },
+            NifCom: NifCom
+        },
+        include: [{model: PeriodicAct, include: [newActivities]}],
+        order: [[`ActDate`, `ASC`]]
         });
         res.json(activities);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
-      }
+    }
 }
 
 // This code defines a controller function called "AddnewList" that extracts the id of the activity and the id of the user from the request body
@@ -41,11 +44,15 @@ export const GetComAct  = async(req, res) => {
 // If the field is not missing, it creates a new Competitor record in the database with the provided activity and user, and sends a JSON response indicating success or failure
 export const AddnewList = async(req, res) => {
     const {idAct, idUser, actDate} = req.body;
+    const dateA = new Date(actDate)
+    console.log("IdAct: " + idAct);
+    console.log("idUser: " + idUser);
+    console.log("actDate: " + actDate);
     try {
         await CompAct.create({
-            ActDate: actDate,
+            activityId: idAct,
             NifCom: idUser,
-            activityId: idAct
+            ActDate: dateA
         });
         res.json({msg: "Activity added successfully!"});
     } catch (error) {
@@ -73,3 +80,4 @@ export const DeleteCompAct = async(req, res) => {
         console.log(error);
     }
 }
+
