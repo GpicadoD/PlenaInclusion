@@ -8,11 +8,11 @@ const app = express();
 
 //configurations
 // Configure the application settings
-app.set('port', process.env.PORT || 3030);
 app.set('json spaces', 2);
 
 //routes
 // Set the view engine to ejs
+app.set('port', process.env.PORT || 5050);
 app.set('view engine', 'ejs');
 // Use bodyParser to parse incoming requests
 app.use(bodyParser.json());
