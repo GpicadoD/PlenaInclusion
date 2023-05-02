@@ -21,6 +21,8 @@ const[password,setuserPassword] = useState('');
 const[userGender,setUserGender] = useState('');
 const[msg, setMsg] = useState('');
 
+//This function gets the userNif from the html, sends it to the routes('/newUser') and executes the function 
+//that is asocciated to '/newUser'. This function also sets all the info about the user
   const Show = async (e) => {
       e.preventDefault();
       try{
@@ -43,6 +45,9 @@ const[msg, setMsg] = useState('');
           }      
       }  
 }
+
+//This function gets the userNif, the email and the password from the html, sends it to the routes('/updateUser')
+//and executes the function that is asocciated to '/newUser' that updates the email and password
 const Update = async (e) => {
   e.preventDefault();
   try{
