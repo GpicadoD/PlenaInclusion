@@ -8,7 +8,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -35,6 +34,8 @@ const ProtoDash = () => {
     const [actDate, setactDate] = useState("");
 
     const navigation = useNavigate();
+
+    const [join, setJoin] = useState(false)
 
     const defaultDate = async () => {
         var curr = new Date();
@@ -73,20 +74,26 @@ const ProtoDash = () => {
     const addComActs = async (e, activities) => {
         console.log("AddedComacts ok");
         e.preventDefault();
-        console.log(activities);
+        console.log(activities.actDate);
         await axios.post('/insertCompact', {
             idAct: activities.activityId,
             idUser: NifCom,
-            actDate: activities.ActDate
+            actDate: activities.actDate
         });
+        setJoin(true);
     }
 
+    const added = async (e) => {
+        setJoin(false);
+    }
+    
     useEffect(() => {   
         console.log("useEffects ok");
         defaultDate();
         getComActs(new Event('firstTime'));
         getPeriodic(new Event('firstTime'));
-    }, []);
+        added();
+    }, [join]);
 
     return (
         <div className="container mt-5 top">
@@ -160,7 +167,7 @@ const ProtoDash = () => {
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
                                         <div className='mt-4 text-center'>
-                                            <button className='Espero acordarme de cambiar esto' onClick={e=>addComActs(e, activities)}>¡Apuntate!</button>
+                                            <button className='Espero acordarme de cambiar esto' onClick={e=>addComActs(e, activities) }>¡Apuntate!</button>
                                         </div>
                                     </Card.Body>
                                 </Card>
