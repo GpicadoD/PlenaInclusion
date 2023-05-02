@@ -36,3 +36,67 @@
     transform: rotate(360deg);
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.Barra {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.Barra_menu.container {
+  margin-left: 10px;
+}
+
+a.nav-link{
+  margin-left: 20px;
+  color: rgb(62, 87, 66);
+}
+
+a.nav-link:hover{
+  color: #89c865;
+}
+
+a.nav-link:active{
+  color: #89c865;
+}
+
+.card-body {
+  border-radius: 20px;
+  color: white;
+  background-color: #4fa364;
+  box-shadow: 5px 6px 8px 1px rgb(21 82 23 / 40%)
+}
+
+.box-shadow.card {
+  border-radius: 20px;
+  border-width: 2px;
+  border: var(--bs-card-border-width) solid rgb(8 100 43);
+}
+
+.danger {
+  font-style: italic;
+  font-weight: 900;
+  background-color: rgb(156, 31, 31);
+  border-width: 2px;
+  border-color: #580707;
+}
+
+.danger:hover {
+  background-color: rgb(175, 81, 18);
+  border-color: #580707;
+}
+
+.carta_imagen {
+  height: 100%;
+  border-radius: 5px;
+  border-color: #ffffff00;
+}
+
+.Formulario_usuario label.d-flex.justify-content-center.form-label {
+  margin-top: 15px;
+}

@@ -19,7 +19,7 @@ export const DeleteImgOrg = async(req, res) => {
     catch (error) {
         console.log(error);
     }
-}
+}   
 export const GetimgOrg  = async(req, res) => {
     try {
         let Data = await ImgOrg.findAll();
