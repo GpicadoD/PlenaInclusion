@@ -81,12 +81,12 @@ const ProtoDash = () => {
         console.log(response.data);
         setperiodicAct(response.data);
     }
-
+    
     useEffect(() => {   
         console.log("useEffects ok");
         defaultDate();
         getComActs(new Event('firstTime'));
-        getPeriodic(new Event('firstTime'));
+        // getPeriodic(new Event('firstTime'));
     }, []);
 
     return (
@@ -128,19 +128,33 @@ const ProtoDash = () => {
                 className="mb-3"
                 >
                 <Tab eventKey="signedAct" title="Apuntado">
-                    {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
+                    {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
                         {comAct.map((activities) => (//Es un for each no se asusten
                             <Col key={activities.activityId + activities.ActDate}>
                                 <Card className={`box-shadow`} key={activities.activityId + activities.ActDate}>
                                     <Card.Body>
-                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                        <Card.Title><span style={{ fontWeight: 'bold' }}></span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                        <Row md={3}>
+                                            <Col>
+                                                <Card className='carta_imagen' style={{ width: '100%' }}>
+                                                    <Card.Img variant="top" src="holder.js/100px180" />
+                                                </Card>
+                                            </Col>
+                                            <Col>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
+                                            </Col>
+                                            <Col>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Apuntados:</span> <p><span style={{ fontSize: '40px' }}>8/10</span></p></Card.Text>
+                                            </Col>
+                                        </Row>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {"Espero acordarme de cambiar esto"}</Card.Text>
                                         <div className='mt-4 text-center'>
-                                            <Button className='succes'>
-                                                Ver Más
+                                            <Button className='danger'>
+                                                APUNTARSE
                                             </Button>
                                         </div>
                                     </Card.Body>
@@ -149,7 +163,7 @@ const ProtoDash = () => {
                     ))}
                     </Row>}
                 </Tab>
-                <Tab eventKey="nearAct" title="Próximas actividades">
+                {/* <Tab eventKey="nearAct" title="Próximas actividades">
                     {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
                         {periodicAct.map((activities) => (//Es un for each no se asusten
                             <Col key={activities.activityId + activities.NifOrg}>
@@ -170,9 +184,9 @@ const ProtoDash = () => {
                             </Col>
                         ))}
                     </Row>}
-                </Tab>
-            </Tabs>
-            {comAct.length == 0 && 
+                </Tab>*/}
+            </Tabs> 
+            {comAct.length === 0 && 
                 <h2 className="noActivity">
                     No tienes ninguna actividad en las fechas seleccionadas.
                 </h2>
