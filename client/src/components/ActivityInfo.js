@@ -1,3 +1,9 @@
+
+// These lines of code import necessary libraries and modules for the component to work.
+// Specifically, it imports React and useState from the 'react' library, as well as several 
+//components from the 'react-bootstrap' library, an image, and the 'axios' library for 
+//making API requests. It also defines a functional component called 'ActivityInfo', 
+//which renders some HTML elements and defines two functions: 'Show' and 'Update'.
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, CardImg, Button, Form } from 'react-bootstrap';
 import futbol from '../../src/img/futbol.jpeg'
@@ -5,7 +11,8 @@ import axios from 'axios';
 
 
 const ActivityInfo = () => {
-  
+  // The 'useState' hooks initialize state variables for 'activityId', 
+  // 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' respectively
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -14,6 +21,9 @@ const ActivityInfo = () => {
     const [Limit, setLimit] = useState('');
     const [msg, setMsg] = useState('');
 
+    // The 'Show' function makes an API request to the server with the 'activityId' state as a parameter, 
+    //and sets the state variables for 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' with the returned data if the request is successful. 
+    //If there is an error, it sets the 'msg' state variable with the error message.
     const Show = async (e) => {
       console.log("NewActivityOK")
       e.preventDefault();
@@ -38,6 +48,9 @@ const ActivityInfo = () => {
 
       }
     
+      // The 'Update' function makes an API request to the server with the 'activityId', 'nameAct', and 'Description' states as parameters,
+      //and sets the state variables for 'nameAct' and 'Description' with the returned data if the request is successful. 
+      //If there is an error, it sets the 'msg' state variable with the error message.
     const Update = async (e) => {
       e.preventDefault();
       try{
@@ -58,6 +71,8 @@ const ActivityInfo = () => {
       } 
     }
 
+    // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
+    // 'nameAct', and 'Description' state variables. It also displays the 'msg' state variable if there is an error.
   return (
     <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
       <Container>
