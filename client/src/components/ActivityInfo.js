@@ -41,7 +41,7 @@ const ActivityInfo = () => {
     const Update = async (e) => {
       e.preventDefault();
       try{
-        const response = await axios.post('/updateActivity',{
+        const response = await axios.post('/UpdateActivities',{
               activityId: activityId,
               nameAct: nameAct,
               Description: Description
