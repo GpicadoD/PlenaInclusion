@@ -5,6 +5,7 @@ import ProtoDash from "./components/ProtoDash.js";
 import Barra from "./components/Navbar.js";
 import ActivityProfile from "./components/ActivityProfile.js";
 import AddNewUser from "./components/AddUser.js";
+import ActivityInfo from "./components/ActivityInfo.js";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
           <Route path="/dashboard" element={<><Barra/><Dashboard/></>} />
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
+          <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
+
           {/*Medio apaño para hacer funcionar el login como primera página de React*/}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
