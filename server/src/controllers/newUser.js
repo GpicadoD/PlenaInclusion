@@ -83,7 +83,7 @@ export const AddNewUser = async(req, res) => {
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
-      await newUsers.create({
+    await newUsers.create({
         userNIF: userNIF,
         name: name,
         lastname: lastname,
@@ -92,13 +92,12 @@ export const AddNewUser = async(req, res) => {
         phoneNumber: phoneNumber,
         password: hashPassword,
         gender: gender
-      });
-  
-      res.json({ msg: "User added successfully" });
+    });
+
+    res.json({ msg: "User added successfully" });
     } catch (error) {
-      console.log(error);
-    }
-  }
+    console.log(error);
+    }}
 
 
 export const ResetPassword = async(req, res) => {
