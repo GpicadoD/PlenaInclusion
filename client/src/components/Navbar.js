@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import Image from 'react-bootstrap/Image';
 
+// The function Barra with the elements that make it works, with an exported CSS to have style
 const Barra = () => {
     return (
         <Navbar className='Barra' sticky="top" bg="success" expand="lg">
@@ -35,4 +36,5 @@ const Barra = () => {
     )
 }
 
+// With this, the component can be exported to the App.js
 export default Barra;

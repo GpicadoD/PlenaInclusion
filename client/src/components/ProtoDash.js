@@ -17,19 +17,23 @@ import {useLocation} from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
+// ProtoDash is a dashboard made from 0 to better understand its function, first it uses the ComAct and set it for later in the return
 const ProtoDash = () => {
     const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
 
+    // This sets the current date of the activity and then it adds a week
     var curr = new Date();
     var date = curr.toISOString().substring(0,10);
     curr.setDate(curr.getDate() + 7);
     const [startDate, setStartDate] = useState(date);
 
+    // This sets the end date
     date = curr.toISOString().substring(0,10);
     const [endDate, setEndDate] = useState(date);
     
+    // This sets the NIF of the user and then finds it in the database
     const [NifCom, setNifCom] = useState(location.state.newUserNif);
     const [idAct, setidAct] = useState("");
     const [actDate, setactDate] = useState("");
@@ -44,6 +48,7 @@ const ProtoDash = () => {
         setStartDate(startDate); setEndDate(endDate);
     }
 
+    // This gets the ComActs from the database in the getcompact and then respond with a more specific information
     const getComActs = async (e) => {
         console.log("Comacts ok");
         e.preventDefault();
@@ -56,7 +61,7 @@ const ProtoDash = () => {
         console.log(response.data);
         setComAct(response.data);
     }
-    //SIN HACER
+    // This choose the period of dates for the user
     const getPeriodic = async (e) => {
         console.log("Periodic ok");
         e.preventDefault();
@@ -69,7 +74,7 @@ const ProtoDash = () => {
         console.log(response.data);
         setperiodicAct(response.data);
     }
-    //SIN HACER
+    // This adds the ComActs and the users
     const addComActs = async (e) => {
         console.log("AddedComacts ok");
         e.preventDefault();
@@ -81,7 +86,7 @@ const ProtoDash = () => {
         console.log(response.data);
         setperiodicAct(response.data);
     }
-    
+    s
     useEffect(() => {   
         console.log("useEffects ok");
         defaultDate();
