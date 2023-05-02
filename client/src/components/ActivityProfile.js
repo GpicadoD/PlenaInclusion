@@ -114,7 +114,6 @@ return(
                                 
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>userEmail</Form.Label>
                                 <Form.Control type="username" placeholder="12345678A" value={email} onChange={(e) => setUserEmail(e.target.value)} />
-
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>userPassword</Form.Label>
                                 <Form.Control type="username" placeholder="12345678A" value={password} onChange={(e) => setuserPassword(e.target.value)} />
                                 <Button variant="success" type="submit" className= "border-dark w-100">
