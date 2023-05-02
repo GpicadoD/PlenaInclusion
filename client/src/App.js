@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard.js";
 import ProtoDash from "./components/ProtoDash.js";
 import Barra from "./components/Navbar.js";
 import ActivityProfile from "./components/ActivityProfile.js";
+import UserProfile from "./components/UserProfile.js";
 import AddNewUser from "./components/AddUser.js";
 import ActivityInfo from "./components/ActivityInfo.js";
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/activityprofile" element={<><Barra/> <ActivityProfile/></>} />
+          <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
           <Route path="/dashboard" element={<><Barra/><Dashboard/></>} />
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
