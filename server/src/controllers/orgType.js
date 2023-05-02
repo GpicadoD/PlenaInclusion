@@ -25,7 +25,6 @@ export const DeleteOrganizerType = async(req, res) => {
         else{
             if(orgtype.idTypeOrg == idTypeOrg){
             await orgtype.destroy();
-          
             return res.json({msg: "organizer successfully delete"});  
             } 
         }
@@ -57,13 +56,12 @@ export const AddorgType = async (req, res) => {
     if(!idTypeOrg) return res.status(400).json({msg: "Cant update without PK"});
 
     try {
-      await OrgType.create({
+    await OrgType.create({
         idTypeOrg,
         orgType,
-      });
-      res.json({ msg: "Organization type created successfully" });
+    });
+    res.json({ msg: "Organization type created successfully" });
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
-  };
-
+};

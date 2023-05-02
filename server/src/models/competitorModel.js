@@ -24,7 +24,6 @@ newUsers.hasOne(Competitor, {
 Competitor.belongsTo(newUsers, {
     foreignKey: 'NifCom'
 });
- 
 // Synchronize the model with the database
 (async () => {
     await db.sync();

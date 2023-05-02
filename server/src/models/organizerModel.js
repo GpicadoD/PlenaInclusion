@@ -29,7 +29,7 @@ ImgOrg.hasMany(Organizer, {
 Organizer.belongsTo(ImgOrg, {
     foreignKey: 'idImgOrg',
     targetKey: 'idImgOrg',
-  });
+});
 
 OrgType.hasOne(Organizer, { 
     foreignKey: 'idTypeOrg'

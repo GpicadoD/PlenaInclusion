@@ -53,14 +53,12 @@ export const GetUsersPassHash  = async(req, res) => {
             return;
         } else {
             const checkPass = await bcrypt.compare(password, users.password);
-
             if(!checkPass){
                 res.json({msg: "Invalid Password"});
             } else {
                 res.json({msg: "Logged Succesfully"});
             }
             users = null;
-
         }
     } catch (error) {
         console.log(error);

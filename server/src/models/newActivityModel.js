@@ -59,8 +59,7 @@ Theme.hasMany(newActivities, {
 newActivities.belongsTo(Theme, {
     foreignKey: 'idTheme',
     targetKey: 'idTheme'
-  }
-);
+});
 
 Period.hasMany(newActivities, {
     foreignKey: 'idPeriod'
@@ -68,8 +67,7 @@ Period.hasMany(newActivities, {
 newActivities.belongsTo(Period, {
     foreignKey: 'idPeriod',
     targetKey: 'idPeriod',
-  }
-);
+});
 
 PublicType.hasMany(newActivities, {
     foreignKey: 'idPublicType'
@@ -77,8 +75,7 @@ PublicType.hasMany(newActivities, {
 newActivities.belongsTo(PublicType, {
     foreignKey: 'idPublicType',
     targetKey: 'idPublicType',
-  }
-);
+});
 
 Organizer.hasMany(newActivities, {
     foreignKey: 'idCreator'
@@ -86,8 +83,7 @@ Organizer.hasMany(newActivities, {
 newActivities.belongsTo(Organizer, {
     foreignKey: 'idCreator',
     targetKey: 'NifOrg',
-  }
-);
+});
 
 ImgAct.hasMany(newActivities, {
     foreignKey: 'idImgAct'
@@ -95,11 +91,11 @@ ImgAct.hasMany(newActivities, {
 newActivities.belongsTo(ImgAct, {
     foreignKey: 'idImgAct',
     targetKey: 'idImgAct',
-  });
+});
 
 Theme.hasMany(newActivities, { 
     foreignKey: 'idTheme'
- });
+});
 newActivities.belongsTo(Theme, {
     foreignKey: 'idTheme',
     targetKey:'idTheme'

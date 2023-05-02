@@ -37,12 +37,12 @@ const newUsers = db.define('newusers', {
     freezeTableName: true,
     timestamps: false
 });
- newUsers.hasOne(Organizer, { 
+newUsers.hasOne(Organizer, { 
     foreignKey: 'NifOrg'
- });
- Organizer.belongsTo(newUsers, {
+});
+Organizer.belongsTo(newUsers, {
     foreignKey: 'NifOrg'
- });
+});
 
 // Synchronize the model with the database
 (async () => {

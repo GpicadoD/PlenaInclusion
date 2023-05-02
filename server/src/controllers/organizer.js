@@ -27,7 +27,6 @@ export const DeleteOrganizer = async(req, res) => {
         else{
             if(organizers.NifOrg == idOrganizer){
             await organizers.destroy();
-          
             return res.json({msg: "organizer successfully delete"});  
             } 
         }
@@ -64,13 +63,13 @@ export const Addneworganizer = async (req, res) => {
     if(!NifOrg) return res.status(400).json({msg: "Cant update without PK"});
 
     try {
-      await Organizer.create({
+    await Organizer.create({
         NifOrg,
         idImgOrg,
         idtypeProf,
-      });
-      res.json({ msg: "Organizer created successfully" });
+    });
+    res.json({ msg: "Organizer created successfully" });
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
-  };
+};

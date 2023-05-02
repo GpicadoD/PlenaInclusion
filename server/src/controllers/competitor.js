@@ -59,12 +59,12 @@ export const AddCompetitor = async (req, res) => {
 
     try {
         // Create a new competitor with the given NifCom and emergencyNumber values
-      await Competitor.create({
+    await Competitor.create({
         NifCom: NifCom,
         emergencyNumber: emergencyNumber,
-      });
-      res.json({ msg: "Competitor added successfully" });
+    });
+    res.json({ msg: "Competitor added successfully" });
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
-  };
+};

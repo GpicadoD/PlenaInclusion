@@ -37,15 +37,14 @@ export const addNewPeriod = async (req, res) => {
 
     console.log(period)
     try {
-      await Period.create({
+    await Period.create({
         period,
-      });
-      res.json({ msg: "Period created successfully" });
+    });
+    res.json({ msg: "Period created successfully" });
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
-  };
-  
+};  
 export const DeletePeriod = async(req, res) => {
     const { idPeriod } = req.body;
     try {

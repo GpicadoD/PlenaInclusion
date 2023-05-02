@@ -22,7 +22,7 @@ const Activities = db.define('activities', {
 });
 // Synchronize the model with the database
 (async () => {
-  await db.sync();
+await db.sync();
 })();
 // Export the "Activities" model
 export default Activities;

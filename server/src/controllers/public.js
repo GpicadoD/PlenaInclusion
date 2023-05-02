@@ -61,12 +61,12 @@ export const Addnewpublic = async (req, res) => {
     if(!idPublicType) return res.status(400).json({msg: "Cant update without PK"});
 
     try {
-      await PublicType.create({
+    await PublicType.create({
         idPublicType : idPublicType,
         publicType: publicType
-      });
-      res.json({ msg: "Public created successfully" });
+    });
+    res.json({ msg: "Public created successfully" });
     } catch (error) {
-      console.log(error);
+    console.log(error);
     }
-  };
+};

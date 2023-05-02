@@ -61,15 +61,14 @@ export const UpdateTheme = async(req, res) => {
 
 export const Addnewtheme = async (req, res) => {
   var { idTheme, themeName } = req.body; // Extract the theme ID and name from the request body
-  if(!idTheme) return res.status(400).json({msg: "Cant update without PK"});
+if(!idTheme) return res.status(400).json({msg: "Cant update without PK"});
 
-  try {
+try {
     await Theme.create({// Create a new theme in the database
-      idTheme,
-      themeName,
+    idTheme,
+    themeName,
     });
     res.json({ msg: "Theme created successfully" }); // Return a success message
-  } catch (error) {
+} catch (error) {
     console.log(error); // Log any errors that occur
-  }
-};
+}};

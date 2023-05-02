@@ -13,15 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/api/users', async (req, res) => {
   try {
     const { username, password } = req.body;
-
     // Verificar que se hayan proporcionado el nombre de usuario y la contraseña
     if (!username || !password) {
       return res.status(400).json({ message: 'Se requiere un nombre de usuario y una contraseña' });
     }
-
     // Crear el usuario en la base de datos utilizando el modelo Users
     const user = await Users.create({ username, password });
-
     // Devolver una respuesta con el nuevo usuario creado
     return res.status(201).json(user);
   } catch (error) {
