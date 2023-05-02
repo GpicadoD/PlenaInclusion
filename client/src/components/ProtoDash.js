@@ -79,8 +79,6 @@ const ProtoDash = () => {
             idUser: NifCom,
             actDate: activities.ActDate
         });
-        getComActs(new Event('addComActs'));
-        getPeriodic(new Event('addComActs'));
     }
 
     useEffect(() => {   

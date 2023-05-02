@@ -49,7 +49,7 @@ export const AddnewList = async(req, res) => {
     const dateA = new Date(actDate)
     console.log("IdAct: " + idAct);
     console.log("idUser: " + idUser);
-    console.log("actDate: " + actDate);
+    console.log("actDate: " + dateA);
     try {
         await CompAct.create({
             activityId: idAct,
@@ -64,7 +64,7 @@ export const AddnewList = async(req, res) => {
 
 export const DeleteCompAct = async(req, res) => {
     var { idAct, idUser, actDate } = req.body;
-    const dateA = new Date(actDate);
+    const dateA = new Date(actDate.substring(0,10));
     try {
         let Comact = await CompAct.findOne({
             where: {
