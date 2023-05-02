@@ -46,10 +46,11 @@ export const GetComAct  = async(req, res) => {
 // If the field is not missing, it creates a new Competitor record in the database with the provided activity and user, and sends a JSON response indicating success or failure
 export const AddnewList = async(req, res) => {
     const {idAct, idUser, actDate} = req.body;
+    console.log("actDate: " + actDate);
     const dateA = new Date(actDate)
     console.log("IdAct: " + idAct);
     console.log("idUser: " + idUser);
-    console.log("actDate: " + actDate);
+    console.log("actDate: " + dateA);
     try {
         await CompAct.create({
             activityId: idAct,
@@ -64,7 +65,7 @@ export const AddnewList = async(req, res) => {
 
 export const DeleteCompAct = async(req, res) => {
     var { idAct, idUser, actDate } = req.body;
-    const dateA = new Date(actDate);
+    const dateA = new Date(actDate.substring(0,10));
     try {
         let Comact = await CompAct.findOne({
             where: {
