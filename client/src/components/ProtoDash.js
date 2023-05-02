@@ -19,7 +19,7 @@ import Tabs from 'react-bootstrap/Tabs';
 
 // ProtoDash is a dashboard made from 0 to better understand its function, first it uses the ComAct and set it for later in the return
 const ProtoDash = () => {
-    c	onst location = useLocation();
+    const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
 
@@ -168,7 +168,7 @@ const ProtoDash = () => {
                     ))}
                     </Row>}
                 </Tab>
-                 <Tab eventKey="nearAct" title="Próximas actividades">
+                <Tab eventKey="nearAct" title="Próximas actividades">
                     {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
                         {periodicAct.map((activities) => (//Es un for each no se asusten
                             <Col key={activities.activityId + activities.actDate +  activities.NifOrg}>
@@ -191,7 +191,6 @@ const ProtoDash = () => {
                     </Row>}
                 </Tab>
             </Tabs>
-            </Tabs> 
             {comAct.length === 0 && 
                 <h2 className="noActivity">
                     No tienes ninguna actividad en las fechas seleccionadas.
