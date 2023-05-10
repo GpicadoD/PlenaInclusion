@@ -26,3 +26,4 @@ const Users = db.define('users', {
 })();
 // Finally, the `Users` model is exported using the `export default` statement.
 export default Users;
+//Esto es un comentario
