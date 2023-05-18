@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
 
+
 // Create an instance of the express application
 const app = express();
 
@@ -26,3 +27,4 @@ app.use(router);
 app.listen(app.get('port'), () => {
     console.log(`Server listening in port ${app.get('port')}`)
 });
+

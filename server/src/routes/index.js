@@ -1,4 +1,5 @@
 import express from 'express';
+import nodemailer from 'nodemailer';
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login, UpdatePassword, RegisterNewUser} from '../controllers/newUser.js';
@@ -13,6 +14,7 @@ import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.
 import { DeleteImgAct } from '../controllers/imgAct.js';
 
 const router = express.Router();
+
 
 // Define a route for the home page
 router.get('/', (req, res) => {
@@ -159,11 +161,36 @@ router.post('/resetPassword', ResetPassword);
 router.post('/loginNewUser', Login);
 
 router.post('/updatePassword', UpdatePassword);
-
-
 router.post('/registernewuser', RegisterNewUser);
-
 router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
+
+
+router.post('/SendMail', (req,res) => {
+    let mailTransporter = nodemailer.createTransport({
+      service: "gmail",// true for 465, false for other ports
+      auth: {
+        user: 'rodrigoomg6@gmail.com', // generated ethereal user
+        pass: 'Lampara98@', // generated ethereal password
+      },
+    });
+  
+    let details = {
+      from: "rodrigoomg6@gmail.com" , 
+      to: "rodrigoomg6@gmail.com", 
+      subject: "Email desde node.js ✔", 
+      text: "Enviando email desde node.js", 
+      html: "<b>Hello world?</b>", 
+    }
+
+    mailTransporter.sendMail(details,(err) => {
+      if(err){
+        console.log("it has an error", err)
+      }
+      else{
+        console.log("email has sent")
+      }
+    })
+});
 
 
 // Export the router object
