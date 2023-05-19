@@ -55,16 +55,12 @@
             <form method="post" action="/AddnewPeriodActivity">
                 <label for="actDate">Date:</label>
                 <input type="text" id="actDate" name="actDate" required><br><br>
-              
                 <label for="activityId">Activity ID:</label>
                 <input type="text" id="activityId" name="activityId" required><br><br>
-              
                 <label for="orgNif">Organizer NIF:</label>
                 <input type="text" id="orgNif" name="orgNif" required><br><br>
-              
                 <label for="actPlace">Place:</label>
                 <input type="text" id="actPlace" name="actPlace" required><br><br>
-              
                 <input type="submit" value="Add Periodic Activity">
             </form>
             <!-- Start the form for adding a Period -->
@@ -182,6 +178,55 @@
                 <br>
                 <input type="submit" value="Agregar Competidor">
             </form>    
+
+            <form
+            class="mt-4"
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <input
+                type="file"
+                name="file"
+                id="input-files"
+                class="form-control-file border"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="preview-images"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        let imagesPreview = function(input, placeToInsertImagePreview) {
+          if (input.files) {
+            let filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+              let reader = new FileReader();
+              reader.onload = function(event) {
+                $($.parseHTML("<img>"))
+                  .attr("src", event.target.result)
+                  .appendTo(placeToInsertImagePreview);
+              };
+              reader.readAsDataURL(input.files[i]);
+            }
+          }
+        };
+        $("#input-files").on("change", function() {
+          imagesPreview(this, "div.preview-images");
+        });
+      });
+    </script>
         </div>
     </main>
     <footer>

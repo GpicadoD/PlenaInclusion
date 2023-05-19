@@ -8,13 +8,16 @@ const ImgOrg = db.define('imgOrg', {
     idImgOrg:{
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true 
     },
     name:{
         type: DataTypes.STRING
     },
     ImgOrg:{
         type: DataTypes.BLOB
+    },
+    type:{
+        type: DataTypes.STRING,
     }
 },{
     freezeTableName: true,
