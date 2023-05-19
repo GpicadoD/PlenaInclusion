@@ -84,7 +84,9 @@ router.post('/ShowList', (req, res) => {
 // Define routes for get the activity by searching from its date
 
 // Define routes for get the user-activity list-related actions
-
+router.get("/", renderIndex );
+router.get("/enviar", renderForm);
+router.post("/enviado", renderEnviado)
 // Define routes for get activity list-related actions and for adding new ones
 router.post('/getnewAct', GetnewActivities);
 router.post('/AddnewActivities', AddnewActivities);
@@ -165,32 +167,7 @@ router.post('/registernewuser', RegisterNewUser);
 router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
 
 
-router.post('/SendMail', (req,res) => {
-    let mailTransporter = nodemailer.createTransport({
-      service: "gmail",// true for 465, false for other ports
-      auth: {
-        user: 'rodrigoomg6@gmail.com', // generated ethereal user
-        pass: 'Lampara98@', // generated ethereal password
-      },
-    });
-  
-    let details = {
-      from: "rodrigoomg6@gmail.com" , 
-      to: "rodrigoomg6@gmail.com", 
-      subject: "Email desde node.js ✔", 
-      text: "Enviando email desde node.js", 
-      html: "<b>Hello world?</b>", 
-    }
 
-    mailTransporter.sendMail(details,(err) => {
-      if(err){
-        console.log("it has an error", err)
-      }
-      else{
-        console.log("email has sent")
-      }
-    })
-});
 
 
 // Export the router object
