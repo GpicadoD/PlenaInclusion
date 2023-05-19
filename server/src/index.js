@@ -2,7 +2,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
+import dotenv from "dotenv";
 
+dotenv.config();
 // Create an instance of the express application
 const app = express();
 

@@ -3,6 +3,8 @@ import newUsers from "../models/newUserModel.js";
 
 import bcrypt from "bcrypt";
 
+import jwt from "jsonwebtoken";
+
 // This code defines a controller function called "GetNewUser" that uses the "findAll" method to retrieve all new users from the database
 // It then sends the usersData data as a JSON response to the client
 export const GetNewUser = async(req, res) => {
@@ -32,8 +34,7 @@ export const DeleteNewUser = async(req, res) => {
         } 
         else{
             if(newUser.userNIF == userNIF){
-            await newUser.destroy();
-          
+            await newUser.destroy();  
             return res.json({msg: "newUser successfully delete"});  
             } 
         }
@@ -133,16 +134,61 @@ export const Login  = async(req, res) => {
             return;
         } else {
             const checkPass = await bcrypt.compare(password, users.password);
-
+            const newUserNif = users.userNIF;
+            const name = users.name;
+            const email = users.email;
+            console.log(newUserNif);
+            console.log(name);
+            console.log(email);
             if(!checkPass){
                 res.json({msg: "Invalid Password"});
             } else {
                 res.json({msg: "Logged Succesfully"});
             }
+            console.log("PreACCES");
+            const accessToken = jwt.sign({newUserNif, name, email}, process.env.ACCESS_TOKEN_SECRET,{
+                expiresIn: '15s'
+            });
+            console.log("PreACCES");
+            const refreshToken = jwt.sign({newUserNif, name, email}, process.env.REFRESH_TOKEN_SECRET,{
+                expiresIn: '1d'
+            });
+            console.log("PreUpdate");
+            await users.update({refreshToken: refreshToken},{
+                where:{
+                    userNIF  : newUserNif
+                }
+            });
+            console.log("PostUpdate");
+            res.cookie('refreshToken', refreshToken,{
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000
+            });
+        res.json({ accessToken });
         }
     } catch (error) {
         console.log(error);
     }
+}
+
+export const Logout = async(req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    console.log(refreshToken);
+    if(!refreshToken) return res.sendStatus(204);
+    const user = await newUsers.findAll({
+        where:{
+            refresh_token: refreshToken
+        }
+    });
+    if(!user[0]) return res.sendStatus(204);
+    const userId = user[0].id;
+    await newUsers.update({refresh_token: null},{
+        where:{
+            id: userId
+        }
+    });
+    res.clearCookie('refreshToken');
+    return res.sendStatus(200);
 }
 
 export const UpdatePassword  = async(req, res) => {

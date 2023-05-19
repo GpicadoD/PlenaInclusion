@@ -15,9 +15,13 @@ import '../App.css';
 import {useLocation} from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import jwt_decode from "jwt-decode";
 
 // ProtoDash is a dashboard made from 0 to better understand its function, first it uses the ComAct and set it for later in the return
 const ProtoDash = () => {
+    const [user, setUser] = useState([]);
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
     const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
@@ -87,6 +91,54 @@ const ProtoDash = () => {
         });
         setJoin(true);
     }
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('http://localhost:3030/token');
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userId: decoded.userId,
+                name: decoded.name
+            });
+            setExpire(decoded.exp);
+        } catch (error) {
+            if (error.response) {
+                navigation("/");
+            }
+        }
+    }
+    const axiosJWT = axios.create();
+
+    // Siempre que se realice una peticion segura se ejcuta esta
+    // funcion que actualiza el accessToken si es necesario
+    // y en config añade los headers y los datos para las queries
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+            const response = await axios.get('http://localhost:3030/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userId: decoded.userId,
+                name: decoded.name
+            });
+            config.params = {
+                userId: decoded.userId
+            }
+            setExpire(decoded.exp);
+        } else {
+            config.headers.Authorization = `Bearer ${token}`;
+            config.params = {
+                userId: user.userId
+            }
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
     
     const added = async (e) => {
         setJoin(false);
@@ -94,13 +146,14 @@ const ProtoDash = () => {
     
     useEffect(() => {   
         console.log("useEffects ok");
+        refreshToken();
         defaultDate();
         getComActs(new Event('firstTime'));
         getPeriodic(new Event('firstTime'));
         added();
     }, [join]);
 
-   return (
+    return (
         <div className="container mt-5 top">
             <div className='p-5 text-center'>
                 <h1 className='mb-3' style={{ fontSize: 30, fontWeight: 'bold' }}>Mis actividades</h1>
