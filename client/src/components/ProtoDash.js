@@ -53,6 +53,14 @@ const ProtoDash = () => {
         setStartDate(startDate); setEndDate(endDate);
     }
 
+    const getUser = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('/getcompact', {
+        userNIF: NifCom
+    });
+    setUser(response.data);
+    }
+
     // This gets the ComActs from the database in the getcompact and then respond with a more specific information
     const getComActs = async (e) => {
         console.log("Comacts ok");
