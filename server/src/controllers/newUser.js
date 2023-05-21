@@ -2,6 +2,8 @@
 import newUsers from "../models/newUserModel.js";
 
 import bcrypt from "bcrypt";
+import nodemailer from 'nodemailer';
+
 
 // This code defines a controller function called "GetNewUser" that uses the "findAll" method to retrieve all new users from the database
 // It then sends the usersData data as a JSON response to the client
@@ -198,8 +200,30 @@ export const RegisterNewUser = async(req, res) => {
         password: hashPassword,
         gender: gender
     });
-    res.json({ randomPass});
+           // Enviar el correo electrónico al usuario con la contraseña auto-generada
+           const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'lacalrodrigo8@gmail.com',
+                pass: 'vodkockdmpdcuuem'
+            }
+        });
+
+        const info = await transporter.sendMail({
+            from: 'lacalrodrigo8@gmail.com',
+            to: 'lacalrodrigo8@gmail.com',
+            subject: 'Registro Exitoso',
+            text: `¡Hola ${name}! Tu contraseña auto-generada es: ${randomPass}. Recuerda cambiarla después de iniciar sesión.`,
+            html: `<h1>Registro Exitoso</h1>
+                   <p>¡Hola ${name}!</p>
+                   <p>Tu contraseña auto-generada es: ${randomPass}.</p>
+                   <p>Recuerda cambiarla después de iniciar sesión.</p>`
+        });
+
+        console.log('Registration email sent to:', email, info.messageId);
+
+        res.json({ randomPass });
     } catch (error) {
-    console.log(error);
+        console.log(error);
     }
-}
+};

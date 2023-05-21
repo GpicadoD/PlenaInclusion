@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 // Use bodyParser to parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true //the two body parsers are so that you can accept form requests from an html
+    extended: false //the two body parsers are so that you can accept form requests from an html
 }));
 // Use the router module for routing requests
 app.use(router);
