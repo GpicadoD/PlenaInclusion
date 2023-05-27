@@ -8,9 +8,6 @@ import {Link} from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
 const Login = () => {
-    const [user, setUser] = useState([]);
-    const [token, setToken] = useState('');
-    const [expire, setExpire] = useState('');
     const [newUserNif, setnewUserNif] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
@@ -23,7 +20,7 @@ const Login = () => {
                 newUserNif: newUserNif,
                 password: password
             });
-            refreshToken();
+            
             history("/protodash", {state:{newUserNif}});
         } catch (error) {
             if (error.response) {
@@ -31,25 +28,7 @@ const Login = () => {
             }
         }
     }
-    const refreshToken = async () => {
-        try {
-            const response = await axios.get('/token');
-            setToken(response.data.accessToken);
-            //console.log(response.data.accessToken);
-            const decoded = jwt_decode(response.data.accessToken);
-            setUser({
-                ...user, // Copy other fields
-                userId: decoded.userId,
-                name: decoded.name
-            });
-            setExpire(decoded.exp);
-        } catch (error) {
-            if (error.response) {
-                history("/");
-            }
-        }
-    }
-
+    
     return (
     <div style={{ 
         backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,

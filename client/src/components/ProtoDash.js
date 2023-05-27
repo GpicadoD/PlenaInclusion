@@ -19,7 +19,16 @@ import jwt_decode from "jwt-decode";
 
 // ProtoDash is a dashboard made from 0 to better understand its function, first it uses the ComAct and set it for later in the return
 const ProtoDash = () => {
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({
+        userNIF: '1',
+        name: '',
+        lastname:'',
+        email:'',
+        birthdate:'',
+        phoneNumber:'',
+        gender:'',
+        accessToken:''
+    });
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const location = useLocation();
@@ -37,7 +46,7 @@ const ProtoDash = () => {
     const [endDate, setEndDate] = useState(date);
     
     // This sets the NIF of the user and then finds it in the database
-    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
+    const [NifCom, setNifCom] = useState( /*location.state.newUserNif*/);
     const [idAct, setidAct] = useState("");
     const [actDate, setactDate] = useState("");
 
@@ -113,9 +122,17 @@ const ProtoDash = () => {
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
-                userId: decoded.userId,
-                name: decoded.name
+                userNIF: decoded.userId,
+                name: decoded.name,
+                lastname:decoded.lastname,
+                email:decoded.email,
+                birthdate:decoded.birthdate,
+                phoneNumber:decoded.phoneNumber,
+                gender:decoded.gender,
+                accessToken:decoded.accessToken
             });
+            console.log(decoded.userId);
+            setNifCom(decoded.userId);
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {

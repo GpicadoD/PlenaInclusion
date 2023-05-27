@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +5,20 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
+import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from 'react'
 
 const AddNewUser = () => {
+    const [user, setUser] = useState({
+        userNIF: '1',
+        name: '',
+        lastname:'',
+        email:'',
+        birthdate:'',
+        phoneNumber:'',
+        gender:'',
+        accessToken:''
+    });
     const [userNIF, setUserNif] = useState('');
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -16,6 +27,8 @@ const AddNewUser = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
     const [msg, setMsg] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
     const history = useNavigate();
 
     const Add = async (e) => {
@@ -30,6 +43,7 @@ const AddNewUser = () => {
                 phoneNumber: phoneNumber,
                 gender: gender,
             });
+            refreshToken();
             console.log({newPassword});
             } catch (error) {
             if (error.response) {
@@ -37,6 +51,20 @@ const AddNewUser = () => {
             }
         }
     }
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('/verifyToken');
+            console.log(response);
+        } catch (error) {
+            if (error.response) {
+                history(-1);
+            }
+        }
+    }
+    useEffect(() => {   
+        console.log("useEffects ok");
+        refreshToken();
+    }, []);
         
     return (
         <div style={{ 

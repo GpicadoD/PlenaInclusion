@@ -169,6 +169,7 @@ router.post('/logout',Logout);
 router.post('/registernewuser', RegisterNewUser);
 
 router.post('/getperiodicActsByUserDate',GetperiodicActsByUserDate);
+router.get('/verifyToken', verifyToken);
 
 
 // Export the router object
