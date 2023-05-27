@@ -123,53 +123,57 @@ export const ResetPassword = async(req, res) => {
     }
 }
 
-export const Login  = async(req, res) => {
-    const {newUserNif, password} = req.body;
+export const Login = async (req, res) => {
+    const { newUserNif, password } = req.body;
     console.log(newUserNif);
     try {
         let users = await newUsers.findByPk(newUserNif);
-        if(users.userNIF != newUserNif){
-            res.status(404);
-            res.json({msg: "User Not found"});
-            return;
+        if (users.userNIF != newUserNif) {
+        res.status(404);
+        return res.json({ msg: "User Not found" });
         } else {
-            const checkPass = await bcrypt.compare(password, users.password);
-            const newUserNif = users.userNIF;
-            const name = users.name;
-            const email = users.email;
-            console.log(newUserNif);
-            console.log(name);
-            console.log(email);
-            if(!checkPass){
-                res.json({msg: "Invalid Password"});
-            } else {
-                res.json({msg: "Logged Succesfully"});
+        const checkPass = await bcrypt.compare(password, users.password);
+        const name = users.name;
+        const email = users.email;
+        console.log(newUserNif);
+        console.log(name);
+        console.log(email);
+        if (!checkPass) {
+            return res.json({ msg: "Invalid Password" });
+        } else {
+            const accessToken = jwt.sign(
+            { newUserNif, name, email },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+                expiresIn: "15s",
             }
-            console.log("PreACCES");
-            const accessToken = jwt.sign({newUserNif, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-                expiresIn: '15s'
+            );
+            const refreshToken = jwt.sign(
+            { newUserNif, name, email },
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+                expiresIn: "1d",
+            }
+            );
+            await users.update(
+            { refreshToken: refreshToken },
+            {
+                where: {
+                userNIF: newUserNif,
+                },
+            }
+            );
+            res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
             });
-            console.log("PreACCES");
-            const refreshToken = jwt.sign({newUserNif, name, email}, process.env.REFRESH_TOKEN_SECRET,{
-                expiresIn: '1d'
-            });
-            console.log("PreUpdate");
-            await users.update({refreshToken: refreshToken},{
-                where:{
-                    userNIF  : newUserNif
-                }
-            });
-            console.log("PostUpdate");
-            res.cookie('refreshToken', refreshToken,{
-                httpOnly: true,
-                maxAge: 24 * 60 * 60 * 1000
-            });
-            res.json({ accessToken });
+            return res.json({ accessToken }); 
+            }
         }
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const Logout = async(req, res) => {
     const refreshToken = req.cookies.refreshToken;

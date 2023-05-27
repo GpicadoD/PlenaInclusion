@@ -21,7 +21,7 @@ const Login = () => {
                 newUserNif: newUserNif,
                 password: password
             });
-            //history("/protodash", {state:{newUserNif}});
+            history("/protodash", {state:{newUserNif}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
