@@ -46,7 +46,7 @@ const ProtoDash = () => {
     const [endDate, setEndDate] = useState(date);
     
     // This sets the NIF of the user and then finds it in the database
-    const [NifCom, setNifCom] = useState( /*location.state.newUserNif*/);
+    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
     const [idAct, setidAct] = useState("");
     const [actDate, setactDate] = useState("");
 
@@ -122,18 +122,11 @@ const ProtoDash = () => {
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
-                userNIF: decoded.userId,
-                name: decoded.name,
-                lastname:decoded.lastname,
-                email:decoded.email,
-                birthdate:decoded.birthdate,
-                phoneNumber:decoded.phoneNumber,
-                gender:decoded.gender,
-                accessToken:decoded.accessToken
+                userId: decoded.userId,
+                name: decoded.name
             });
-            console.log(decoded.userId);
-            setNifCom(decoded.userId);
             setExpire(decoded.exp);
+            setNifCom(decoded.userId);
         } catch (error) {
             if (error.response) {
                 navigation("/");

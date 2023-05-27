@@ -53,14 +53,49 @@ const AddNewUser = () => {
     }
     const refreshToken = async () => {
         try {
-            const response = await axios.get('/verifyToken');
-            console.log(response);
+            const response = await axios.get('/token');
+            setToken(response.data.accessToken);
+            //console.log(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userId: decoded.userId,
+                name: decoded.name
+            });
+            setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
                 history(-1);
             }
         }
     }
+
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+            const response = await axios.get('/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userNIF: decoded.userNIF,
+            });
+            config.params = {
+                userNIF: decoded.userNIF
+            }
+            setExpire(decoded.exp);
+        } else {
+            config.headers.Authorization = `Bearer ${token}`;
+            config.params = {
+                userNIF: user.userNIF
+            }
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+
     useEffect(() => {   
         console.log("useEffects ok");
         refreshToken();

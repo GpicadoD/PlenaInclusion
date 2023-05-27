@@ -152,7 +152,7 @@ export const Login = async (req, res) => {
             { newUserNif, name, email },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "1d",
+                expiresIn: "30s",
             }
             );
             await users.update(
