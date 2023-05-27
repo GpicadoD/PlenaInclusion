@@ -101,7 +101,7 @@ router.post('/AddnewPublic',verifyToken, Addnewpublic);
 router.post('/Addnewtheme',verifyToken, Addnewtheme);
 
 // Define routes for user list-related actions and for adding new ones
-router.post('/newUser', GetNewUser);
+router.post('/newUser', verifyToken, GetNewUser);
 router.post('/newActivities',verifyToken, AddnewActivities);
 
 //all get//
@@ -168,7 +168,7 @@ router.post('/logout',Logout);
 
 router.post('/registernewuser', RegisterNewUser);
 
-router.post('/getperiodicActsByUserDate',verifyToken,GetperiodicActsByUserDate);
+router.post('/getperiodicActsByUserDate',GetperiodicActsByUserDate);
 
 
 // Export the router object

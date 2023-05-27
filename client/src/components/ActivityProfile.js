@@ -20,7 +20,7 @@ const ActivityProfile = () => {
   const[password,setuserPassword] = useState('');
   const[userGender,setUserGender] = useState('');
   const[msg, setMsg] = useState('');
-  
+  const history = useNavigate();
   const Show = async (e) => {
       e.preventDefault();
       try{
@@ -70,7 +70,9 @@ const LogOut = async (e) => {
       }
     )
     console.log(response.data);
+    history("/login");
   }
+
     catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);

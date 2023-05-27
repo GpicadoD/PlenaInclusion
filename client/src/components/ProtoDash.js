@@ -37,7 +37,7 @@ const ProtoDash = () => {
     const [endDate, setEndDate] = useState(date);
     
     // This sets the NIF of the user and then finds it in the database
-    const [NifCom, setNifCom] = useState(location.state.newUserNif);
+    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
     const [idAct, setidAct] = useState("");
     const [actDate, setactDate] = useState("");
 
@@ -45,6 +45,7 @@ const ProtoDash = () => {
 
     const [join, setJoin] = useState(false);
     
+    const axiosJWT = axios.create();
     const defaultDate = async () => {
         var curr = new Date();
         var startDate = curr.toISOString().substring(0,10);
@@ -65,7 +66,7 @@ const ProtoDash = () => {
     const getComActs = async (e) => {
         console.log("Comacts ok");
         e.preventDefault();
-        const response = await axios.post('/getcompact', {
+        const response = await axiosJWT.post('/getcompact', {
             startDate: startDate,
             endDate: endDate,
             NifCom: NifCom
@@ -78,7 +79,7 @@ const ProtoDash = () => {
     const getPeriodic = async (e) => {
         console.log("Periodic ok");
         e.preventDefault();
-        const response = await axios.post('/getperiodicActsByUserDate', {
+        const response = await axiosJWT.post('/getperiodicActsByUserDate', {
             startDate: startDate,
             endDate: endDate,
             NifCom: NifCom
@@ -86,6 +87,11 @@ const ProtoDash = () => {
         console.log('GetPeriodic:');
         console.log(response.data);
         setperiodicAct(response.data);
+    }
+    const getAct = async (e) => {
+        e.preventDefault();
+        getPeriodic(e);
+        getComActs(e);
     }
     // This adds the ComActs and the users
     const addComActs = async (e, activities) => {
@@ -101,8 +107,9 @@ const ProtoDash = () => {
     }
     const refreshToken = async () => {
         try {
-            const response = await axios.get('http://localhost:3030/token');
+            const response = await axios.get('/token');
             setToken(response.data.accessToken);
+            //console.log(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
@@ -116,7 +123,7 @@ const ProtoDash = () => {
             }
         }
     }
-    const axiosJWT = axios.create();
+    
 
     // Siempre que se realice una peticion segura se ejcuta esta
     // funcion que actualiza el accessToken si es necesario
@@ -124,23 +131,22 @@ const ProtoDash = () => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime() || expire == undefined) {
-            const response = await axios.get('http://localhost:3030/token');
+            const response = await axios.get('/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
-                userId: decoded.userId,
-                name: decoded.name
+                userNIF: decoded.userNIF,
             });
             config.params = {
-                userId: decoded.userId
+                userNIF: decoded.userNIF
             }
             setExpire(decoded.exp);
         } else {
             config.headers.Authorization = `Bearer ${token}`;
             config.params = {
-                userId: user.userId
+                userNIF: user.userNIF
             }
         }
         return config;
@@ -156,8 +162,7 @@ const ProtoDash = () => {
         console.log("useEffects ok");
         refreshToken();
         defaultDate();
-        getComActs(new Event('firstTime'));
-        getPeriodic(new Event('firstTime'));
+        getAct(new Event('firstTime'));
         added();
     }, [join]);
 
@@ -176,7 +181,7 @@ const ProtoDash = () => {
                         navbarScroll
                     >
                     </Nav>
-                    <Form className="d-flex" onSubmit={getComActs}>
+                    <Form className="d-flex" onSubmit={getAct}>
                         {/*Añadir ID de usuario temporal*/}
                         <Form.Control className="me-2" type="date" placeholder="Date" 
                             value={startDate} onChange={(e) => setStartDate(e.target.value)} />
@@ -220,6 +225,11 @@ const ProtoDash = () => {
                             </Col>
                     ))}
                     </Row>}
+                    {comAct.length == 0 && 
+                        <h2 className="noActivity">
+                            No tienes ninguna actividad en las fechas seleccionadas.
+                        </h2>
+                    }
                 </Tab>
                 <Tab eventKey="nearAct" title="Próximas actividades">
                     {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
@@ -240,13 +250,15 @@ const ProtoDash = () => {
                             </Col>
                         ))}
                     </Row>}
+                    {periodicAct.length == 0 && 
+                        <h2 className="noActivity">
+                            No tienes ninguna actividad en las fechas seleccionadas.
+                        </h2>
+                    }
                 </Tab>
+                
             </Tabs>
-            {comAct.length == 0 && 
-                <h2 className="noActivity">
-                    No tienes ninguna actividad en las fechas seleccionadas.
-                </h2>
-            }
+            
         </div>
     )    
 }

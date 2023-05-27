@@ -5,10 +5,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
-    
-
+    const [user, setUser] = useState([]);
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
     const [newUserNif, setnewUserNif] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
@@ -21,10 +23,29 @@ const Login = () => {
                 newUserNif: newUserNif,
                 password: password
             });
+            refreshToken();
             history("/protodash", {state:{newUserNif}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
+            }
+        }
+    }
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('/token');
+            setToken(response.data.accessToken);
+            //console.log(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userId: decoded.userId,
+                name: decoded.name
+            });
+            setExpire(decoded.exp);
+        } catch (error) {
+            if (error.response) {
+                history("/");
             }
         }
     }
