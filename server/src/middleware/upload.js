@@ -1,6 +1,7 @@
 import multer from "multer";
 
 const imageFilter = (req, file, cb) => {
+console.log("Aquí llega.");
 if (file.mimetype.startsWith("image")) {
     cb(null, true);
 } else {
@@ -13,7 +14,7 @@ destination: (req, file, cb) => {
     cb(null, 'resources/statict/assets/uploads');
 },
 filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${file.originalname}`);
 },
 });
 

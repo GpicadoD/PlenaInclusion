@@ -157,7 +157,7 @@ return (
                                     </Card.Body>
                                 </Card>
                             </Col>
-                    ))}
+                        ))}
                     </Row>}
                 </Tab>
                 <Tab eventKey="nearAct" title="Próximas actividades">

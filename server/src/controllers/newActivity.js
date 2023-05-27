@@ -49,7 +49,6 @@ export const DeleteNewActivity = async(req, res) => {
         else{
             if(newActivity.activityId == activityId){
             await newActivity.destroy();
-          
             return res.json({msg: "newActivity successfully delete"});  
             } 
         }

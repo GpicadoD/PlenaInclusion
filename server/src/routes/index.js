@@ -7,7 +7,7 @@ import { DeleteOrganizer, GetOrganizer, UpdateOrganizer, Addneworganizer } from 
 import { DeleteTheme, GetTheme, UpdateTheme, Addnewtheme } from '../controllers/theme.js';
 import { DeleteOrganizerType, GetorgType, UpdateOrgType, AddorgType } from '../controllers/orgType.js';
 import { DeletePeriodAct, GetperiodicActs, Addnewperiodact, GetperiodicActsByUserDate} from '../controllers/periodicActivity.js';
-import { DeleteImgOrg, uploadImgOrg } from '../controllers/imgOrg.js';
+import { DeleteImgOrg, uploadImgOrg, getImg } from '../controllers/imgOrg.js';
 import { DeletePublic, UpdatePublic, Addnewpublic } from '../controllers/public.js';
 import { DeletePeriod, UpdatePeriod, addNewPeriod } from '../controllers/period.js';
 import { DeleteImgAct, uploadImgAct } from '../controllers/imgAct.js';
@@ -168,6 +168,8 @@ router.post('/registernewuser', RegisterNewUser);
 router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
 
 router.post("/upload", uploadFile.single("file"), uploadImgOrg);
+
+router.post("/getImg", uploadFile.single("file"), getImg);
 
 // router.post("/upload", uploadFile.single("file"), uploadImgOrg);
 

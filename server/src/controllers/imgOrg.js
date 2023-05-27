@@ -14,7 +14,7 @@ export const DeleteImgOrg = async(req, res) => {
             if(Imgorg.idImgOrg == idImgOrg){
             await Imgorg.destroy();
             return res.json({msg: "ImgOrg successfully delete"});  
-            } 
+            } sdawd
         }
     } 
     catch (error) {
@@ -32,9 +32,10 @@ export const GetimgOrg  = async(req, res) => {
 
 export const uploadImgOrg = async (req, res) => {
     try {
+        console.log("Llega al controller");
         console.log(req.file);
-    
-        if (req.file == undefined) {
+        
+        if (req.file === undefined) {
         return res.send(`You must select a file.`);
         }
     
@@ -53,4 +54,14 @@ export const uploadImgOrg = async (req, res) => {
         console.log(error);
         return res.send(`Error when trying upload images: ${error}`);
     }
-    };
+};
+
+export const getImg = async (req, res) => {
+    try {
+        const imgList = await ImgOrg.findAll();
+        return res.json(imgList);
+    } catch (error) {
+        console.log(error);
+        return res.json({ error: "An error occurred while retrieving the ImgOrg" });
+    }
+};
