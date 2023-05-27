@@ -1,6 +1,8 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import cron from 'node-cron';
+import { startWeeklyTask } from './nodemailer/EmailSemanal.js';
+
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login, UpdatePassword, RegisterNewUser} from '../controllers/newUser.js';
