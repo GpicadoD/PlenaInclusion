@@ -28,7 +28,7 @@ const ActivityInfo = () => {
       console.log("NewActivityOK")
       e.preventDefault();
       try{
-        const response = await axios.post('/ActivityInfo', {
+        const response = await axios.post('/getnewAct', {
           activityId: activityId
         }
         )

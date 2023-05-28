@@ -29,6 +29,7 @@ export const AddnewActivities = async(req, res) => {
 // This code defines a controller function called "GetnewActivities" that uses the "findAll" method to retrieve all new activities from the database
 // It then sends the activities data as a JSON response to the client
 export const GetnewActivities = async(req, res) => {
+    
     try {
         const activities = await newActivities.findAll({});
         res.json(activities);
@@ -49,7 +50,6 @@ export const DeleteNewActivity = async(req, res) => {
         else{
             if(newActivity.activityId == activityId){
             await newActivity.destroy();
-          
             return res.json({msg: "newActivity successfully delete"});  
             } 
         }
@@ -85,7 +85,6 @@ export const UpdateActivities = async(req, res) => {
             finishDate: finishDate,
             idPeriod: idPeriod,
             idCreator: idCreator
-
         });
         await activity.save();
         res.json({msg: "Activity Registration Successful"});

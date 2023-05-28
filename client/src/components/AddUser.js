@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +5,20 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
+import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from 'react'
 
 const AddNewUser = () => {
+    const [user, setUser] = useState({
+        userNIF: '1',
+        name: '',
+        lastname:'',
+        email:'',
+        birthdate:'',
+        phoneNumber:'',
+        gender:'',
+        accessToken:''
+    });
     const [userNIF, setUserNif] = useState('');
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -16,6 +27,8 @@ const AddNewUser = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
     const [msg, setMsg] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
     const history = useNavigate();
 
     const Add = async (e) => {
@@ -30,6 +43,7 @@ const AddNewUser = () => {
                 phoneNumber: phoneNumber,
                 gender: gender,
             });
+            refreshToken();
             console.log({newPassword});
             } catch (error) {
             if (error.response) {
@@ -37,6 +51,55 @@ const AddNewUser = () => {
             }
         }
     }
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('/token');
+            setToken(response.data.accessToken);
+            //console.log(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userNIF: decoded.userNIF,
+                name: decoded.name
+            });
+            setExpire(decoded.exp);
+        } catch (error) {
+            if (error.response) {
+                history(-1);
+            }
+        }
+    }
+    const axiosJWT = axios.create();
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+            const response = await axios.get('/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userNIF: decoded.userNIF,
+            });
+            config.params = {
+                userNIF: decoded.userNIF
+            }
+            setExpire(decoded.exp);
+        } else {
+            config.headers.Authorization = `Bearer ${token}`;
+            config.params = {
+                userNIF: user.userNIF
+            }
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+
+    useEffect(() => {   
+        console.log("useEffects ok");
+        refreshToken();
+    }, []);
         
     return (
         <div style={{ 
