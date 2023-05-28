@@ -69,12 +69,15 @@ const Dashboard = () => {
     }, []);
 
     const defaultDate = async () => {
+        try {
         var curr = new Date();
         var startDate = curr.toISOString().substring(0,10);
         curr.setDate(curr.getDate() + 7);
         var endDate = curr.toISOString().substring(0,10);
         setStartDate(startDate); setEndDate(endDate);
-    }
+    } catch (error) {
+        console.log(error);
+    }};
 
     const refreshToken = async () => {
         try {
@@ -146,37 +149,45 @@ const Dashboard = () => {
     // }
 
     const getActivitiesByUserDate = async (e) => {
+        try {
         e.preventDefault();
-        const response = await axiosJWT.post('http://localhost:5050/activitiesByUserDate',
-            {
-                params: { 
-                    startDate: startDate, endDate: endDate 
-                } 
-            }
-        );
+        const response = await axiosJWT.post('http://localhost:5050/activitiesByUserDate', {
+        params: {
+            startDate: startDate,
+            endDate: endDate
+        }
+        });
         // response.data[0].prueba = "Hola";
         console.log(response.data);
         const parsedActivities = await ParseActivities(response.data);
         setActivitiesByUserDate(parsedActivities);
-    }
+    } catch (error) {
+        console.log(error);
+    }};
 
     // Calculate how many days remain/have passed from today's date
     // and parse date and other parameters for a better compression
     const ParseActivities = async (participants) => {
+        try {
         var currDate = new Date();
         participants.forEach(participant => {
             participant.activity.countdown = days(new Date(participant.activity.date), currDate);
             participant.activity.date = participant.activity.date.substring(0,10);
         });
         return participants;
-    }
+    } catch (error) {
+        console.log(error);
+    }};
 
     // Difference between 2 dates in days
     const days = (date_1, date_2) =>{
+        try {
         let difference = date_1.getTime() - date_2.getTime();
         let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
         return TotalDays;
-    }
+    } catch (error) {
+        console.log(error);
+    }};
 
     const DeleteParticipant = async (e, activityId) => {
         try {
@@ -192,10 +203,13 @@ const Dashboard = () => {
     }
 
     const OpenActivityProfile = async (e, activityId, countdown) => {
+        try {
         if(e.target == null || e.target.name != 'deleteButton' && countdown > 0) {
             navigation('/activityProfile/' + activityId);
         }
-    }
+    } catch (error) {
+        console.log(error);
+    }};
 
     /*const BeforeDeleteAlert = (e, activityId) => {
         confirmAlert({
