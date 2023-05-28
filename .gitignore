@@ -1,4 +1,3 @@
 node_modules/
 server/node_modules/
-server\resources\statict\assets\uploads\*.jpg
-server\resources\statict\assets\uploads\*.png
+server\resources\statict\assets\uploads\*
