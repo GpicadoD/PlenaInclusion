@@ -53,6 +53,7 @@ const ProtoDash = () => {
     const navigation = useNavigate();
 
     const [join, setJoin] = useState(false);
+    const [joinT, setJoinT] = useState(false);
     
     const axiosJWT = axios.create();
     const defaultDate = async () => {
@@ -167,14 +168,30 @@ const ProtoDash = () => {
     const added = async (e) => {
         setJoin(false);
     }
+
+    const test = async (e) => {
+        setJoin(true);
+    }
     
     useEffect(() => {   
         console.log("useEffects ok");
         refreshToken();
         defaultDate();
+    }, []);
+
+    useEffect(() => {   
+        console.log("JoinT ok");
+        refreshToken();
+    }, [joinT]);
+
+    useEffect(() => {   
+        console.log("Join ok");
+        defaultDate();
         getAct(new Event('firstTime'));
         added();
     }, [join]);
+
+
 
     return (
         <div className="container mt-5 top">
@@ -191,6 +208,9 @@ const ProtoDash = () => {
                         navbarScroll
                     >
                     </Nav>
+                    <div className='mt-4 text-center'>
+                        <button className='Espero acordarme de cambiar esto' onClick={e=>test(e) }>Reset</button>
+                    </div>
                     <Form className="d-flex" onSubmit={getAct}>
                         {/*Añadir ID de usuario temporal*/}
                         <Form.Control className="me-2" type="date" placeholder="Date" 
