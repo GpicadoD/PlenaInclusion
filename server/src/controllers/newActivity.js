@@ -29,9 +29,10 @@ export const AddnewActivities = async(req, res) => {
 // This code defines a controller function called "GetnewActivities" that uses the "findAll" method to retrieve all new activities from the database
 // It then sends the activities data as a JSON response to the client
 export const GetnewActivities = async(req, res) => {
-    
+    const { activityId } = req.body;
+    console.log(activityId);
     try {
-        const activities = await newActivities.findAll({});
+        const activities = await newActivities.findByPk(activityId);
         res.json(activities);
     } catch (error) {
         console.log(error);

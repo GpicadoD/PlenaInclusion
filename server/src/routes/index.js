@@ -1,4 +1,8 @@
 import express from 'express';
+import nodemailer from 'nodemailer';
+import cron from 'node-cron';
+import { startWeeklyTask } from './nodemailer/EmailSemanal.js';
+
 import { AddnewList, DeleteCompAct, GetComAct } from '../controllers/comAct.js';
 import { AddnewActivities, DeleteNewActivity, GetnewActivities, UpdateActivities} from '../controllers/newActivity.js';
 import { DeleteNewUser, GetNewUser, AddNewUser, UpdateUser, ResetPassword, Login, UpdatePassword, RegisterNewUser, Logout} from '../controllers/newUser.js';
@@ -17,6 +21,7 @@ import {uploadFiles} from "../controllers/upload.js";
 import {uploadFile} from "../middleware/upload.js";
 
 const router = express.Router();
+
 
 // Define a route for the home page
 router.get('/', (req, res) => {
@@ -79,6 +84,61 @@ router.post('/ShowList', (req, res) => {
         list: list,
     })
 });
+
+router.post('/sendMail', async (req, res) => {
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'lacalrodrigo8@gmail.com',
+            pass: 'vodkockdmpdcuuem'
+        }
+    });
+
+    const info = await transporter.sendMail({
+        from: "lacalrodrigo8@gmail.com",
+        to: "lacalrodrigo8@gmail.com",
+        subject: "Prueba Nodemailer",
+        text: "Este correo fue enviado por Rodrigo",
+        html: "<h1>EL MENSAJE ES:</h1><br><p>Mensaje enviado</p>"
+    });
+
+    console.log('Message sent', info.messageId);
+    res.send('received');
+});
+
+router.post('/register', async (req, res) => {
+    // Aquí se genera el nuevo usuario y se obtiene el email y la contraseña generada
+
+    // Código para generar el usuario y obtener el email y la contraseña
+    const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+        password: generatePassword() // Función para generar la contraseña
+    };
+
+    // Aquí se envía el correo electrónico al nuevo usuario
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'lacalrodrigo8@gmail.com',
+            pass: 'vodkockdmpdcuuem'
+        }
+    });
+
+    const info = await transporter.sendMail({
+        from: 'lacalrodrigo8@gmail.com',
+        to: newUser.email,
+        subject: 'Bienvenido a nuestro sitio',
+        text: `¡Hola ${newUser.name}! Tu contraseña es: ${newUser.password}. Guárdala en un lugar seguro.`,
+        html: `<h1>Bienvenido a nuestro sitio</h1>
+               <p>¡Hola ${newUser.name}!</p>
+               <p>Tu contraseña es: <strong>${newUser.password}</strong>. Guárdala en un lugar seguro.</p>`
+    });
+
+    console.log('Message sent', info.messageId);
+    res.send('User registered');
+});
+
 
 // Define routes for user-related actions
 
@@ -164,11 +224,12 @@ router.post('/resetPassword',verifyToken, ResetPassword);
 
 router.post('/loginNewUser', Login);
 
+router.post('/updatePassword', UpdatePassword);
+router.post('/registernewuser', RegisterNewUser);
+router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
 router.post('/updatePassword',verifyToken, UpdatePassword);
 
 router.post('/logout',Logout);
-
-router.post('/registernewuser', RegisterNewUser);
 
 router.post('/getperiodicActsByUserDate',GetperiodicActsByUserDate);
 router.get('/verifyToken', verifyToken);

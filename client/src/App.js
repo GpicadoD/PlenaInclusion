@@ -8,8 +8,13 @@ import Barra from "./components/Navbar.js";
 import ActivityProfile from "./components/ActivityProfile.js";
 import UserProfile from "./components/UserProfile.js";
 import AddNewUser from "./components/AddUser.js";
+
+//Lacal
+import AddNewActivity from "./components/AddActivity.js";
+
 import AddImage from "./components/AddImage.js";
 import ShowImage from "./components/ShowImage.js";
+
 import ActivityInfo from "./components/ActivityInfo.js";
 import AddNewActivity from "./components/AddActivity.js";
 import Pie from "./components/Footer.js";
@@ -25,13 +30,15 @@ function App() {
           <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
           <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
+//lacal
+          <Route path="/addnewActivity" element={<><Barra/><AddNewActivity/></>} />
+
           <Route path="/addnewactivity" element={<><Barra/><AddNewActivity/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/><Pie/></>} />
           <Route path="/addImage" element={<><Barra/><AddImage/></>} />
           <Route path="/showImage" element={<><Barra/><ShowImage/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
           <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
-
           {/*Medio apaño para hacer funcionar el login como primera página de React*/}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>

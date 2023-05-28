@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #062563;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -69,10 +69,14 @@ a.nav-link:active{
   color: #89c865;
 }
 
+.card-body {
+  border-radius: 20px;
+  color: white;
+  background-color: #4fa364;
+  box-shadow: 5px 6px 8px 1px rgba(6, 235, 13, 0.4)
 img.imagen_profile {
   width: 50px;
 }
-
 .card {
   background-color: #ffffff;
 }
@@ -106,6 +110,11 @@ img.imagen_profile {
   margin-top: 15px;
 }
 
+input.form-check-input{
+  border-color: #00820B;
+  border-radius: 10px; 
+  border-width: 2px;
+}
 .btn.btn-success {
   border: 3px solid #0d4912;
   box-sizing: border-box;
