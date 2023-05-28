@@ -115,20 +115,19 @@ const ProtoDash = () => {
     }
     // This adds the ComActs and the users
     const addComActs = async (e, activities) => {
-    try {
-        console.log("AddedComacts ok");
-        e.preventDefault();
-        console.log(activities.actDate);
-        await axios.post('/insertCompact', {
-            idAct: activities.activityId,
-            idUser: NifCom,
-            actDate: activities.actDate
-        });
-        setJoin(true);
-    } catch (error) {
+        try {
+            console.log("AddedComacts ok");
+            e.preventDefault();
+            console.log(activities.actDate);
+            await axios.post('/insertCompact', {
+                idAct: activities.activityId,
+                idUser: NifCom,
+                actDate: activities.actDate
+            });
+            setJoin(true);
+        } catch (error) {
         console.log(error);
-    }};
-    }
+        }};
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -186,13 +185,7 @@ const ProtoDash = () => {
     const test = async (e) => {
         setJoin(true);
     }
-    
-    useEffect(() => {   
-        console.log("useEffects ok");
-        refreshToken();
-        defaultDate();
-    }, []);
-    
+
     const LogOut = async (e) => {
         e.preventDefault();
         try{
@@ -210,12 +203,11 @@ const ProtoDash = () => {
             }      
         } 
     };
-
     useEffect(() => {   
-        console.log("JoinT ok");
+        console.log("useEffects ok");
         refreshToken();
-    }, [joinT]);
-
+        defaultDate();
+    }, []);
     useEffect(() => {   
         console.log("Join ok");
         defaultDate();
@@ -310,7 +302,7 @@ return (
             </h2>
         }
     </div>
-      {/*
+    /*
         <div className="container mt-5 top">
             <div className='p-5 text-center'>
                 <h1 className='mb-3' style={{ fontSize: 30, fontWeight: 'bold' }}>Mis actividades</h1>
@@ -405,7 +397,7 @@ return (
                 
             </Tabs>
             
-        </div>*/}
+        </div>*/
     )    
 }
 export default ProtoDash;

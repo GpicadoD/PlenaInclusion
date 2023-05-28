@@ -141,39 +141,8 @@ return(
                         <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setuserPassword(e.target.value)} />
                         <Button className='w-100 rounded-10 boton-naranja' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>CAMBIAR CONTRASEÑA</Button>{' '}
                       </Col>
-                      {/*<Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
-                            <Form.Group className="field mt-4 mb-4">
-                              <div className="container pl-2 ">
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
-                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
-                                <Button variant="success" type="submit" className= "border-dark w-100">
-                                    Entrar
-                                </Button> 
-                              </div>
-                            </Form.Group> 
-                          </Form>
-
-                          <Form onSubmit={Update} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
-                            <Form.Group className="field mt-4 mb-4">
-                              <div className="container pl-2 ">
-                                
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
-                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
-                                
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>userEmail</Form.Label>
-                                <Form.Control type="username" placeholder="12345678A" value={email} onChange={(e) => setUserEmail(e.target.value)} />
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>userPassword</Form.Label>
-                                <Form.Control type="username" placeholder="12345678A" value={password} onChange={(e) => setuserPassword(e.target.value)} />
-                                <Button variant="success" type="submit" className= "border-dark w-100">
-                                    Actualizar
-                                </Button> 
-                              </div>
-                            </Form.Group> 
-                          </Form>*/}
                     </Row>
-                          </Form>
-
-                          <Form onSubmit={LogOut} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                          {/* <Form onSubmit={LogOut} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                             <Form.Group className="field mt-4 mb-4">
                               <div className="container pl-2 ">
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
@@ -183,9 +152,7 @@ return(
                                 </Button> 
                               </div>
                             </Form.Group> 
-                          </Form>
-                      </div>
-                    </div>
+                          </Form> */}
                   </Card.Body>
                 </Card>
               </Col>
