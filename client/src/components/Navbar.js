@@ -10,25 +10,25 @@ import Image from 'react-bootstrap/Image';
 // The function Barra with the elements that make it works, with an exported CSS to have style
 const Barra = () => {
     return (
-        <Navbar className='Barra' sticky="top" bg="success" expand="lg">
-        <Container className='Barra_menu'>
+        <Navbar className='Barra' sticky="top" expand="lg">
+        <Container className='Barra_menu w-75 ms-5'>
             <Navbar.Brand href='/'>
-                <Image src="./logo_plena_inclusion.png" alt="" height={30}/>
+                <Image className='me-4' src="./logo_plena_inclusion.png" alt="" height={30}/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-75">
-                <Nav.Link href="/dashboard">DASHBOARD</Nav.Link>
-                <Nav.Link href="/addnewuser">ADD USER</Nav.Link>
-                <Nav.Link href="/addactivity">ADD ACTIVITY</Nav.Link>
+            <Nav className="">
+                <Nav.Link className='me-4' href="/dashboard">DASHBOARD</Nav.Link>
+                <Nav.Link className='me-4' href="/addnewuser">ADD USER</Nav.Link>
+                <Nav.Link href="/addnewactivity">ADD ACTIVITY</Nav.Link>
             </Nav>
             </Navbar.Collapse>
         </Container>
-        <Container>
-            <Navbar.Brand href='/'>
-                <img src="../img/logo_plena-inclusion.png" alt=""/>
+        <Container className='profile w-25 me-5 flex-row-reverse'>
+            <Nav className="align-items-center">
+            <Navbar.Brand href='/' className='me-1'>
+                <img className='imagen_profile' src="./avatar_default.png" alt=""/>
             </Navbar.Brand>
-            <Nav className="me-25">
                 <Nav.Link href="/activityprofile">PROFILE</Nav.Link>
             </Nav>
         </Container>

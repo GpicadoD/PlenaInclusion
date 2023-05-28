@@ -74,73 +74,103 @@ const ActivityInfo = () => {
     // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
     // 'nameAct', and 'Description' state variables. It also displays the 'msg' state variable if there is an error.
   return (
-    <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
+    <div className="" style={{ backgroundColor: '#dde8e8' }}>
       <Container>
         <Row className="justify-content-center">
-          <Col md="9" lg="7" xl="5" className="mt-5">
-            <Card style={{ borderRadius: '15px' }}>
-              <Card.Body className="p-4">
-                <div className="d-flex text-black" style={{display: 'flex'}}>
-                  <div className="flex-shrink-0">
-                    <CardImg
-                      style={{ width: '180px', borderRadius: '10px' }}
+          <Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-5 mb-5">
+            <Card className='' style={{ borderRadius: '100px', boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+            <Card.Img  className='card-img-top rounded-bottom p-0'
+                      style={{ borderRadius: '100px',
+                      objectFit: 'cover',
+                      height: '250px',
+                      zIndex: 1 }}
                       src={futbol}
                       alt="Activity image"
                       fluid
                     />
-                  </div>
-                  <div className="flex-grow-1 ms-3">
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>NameAct:</span> {nameAct}</Card.Text>
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>Description:</span> {Description}</Card.Text>
-                        <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
-                          style={{ backgroundColor: '#efefef' }}>
-                          <div>
-                            <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>startDate:</span> {startDate}</p>    
-                          </div>
-                          <div className="px-3">
-                            <p className="small text-muted mb-1"><span style={{ fontWeight: 'bold' }}>finishDate:</span> {finishDate}</p>    
-                          </div>
-                    </div>
-                    <div>
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>Limit:</span> {Limit}</Card.Text>
-                    </div>
-                    <Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
-                            <Form.Group className="field mt-4 mb-4">
-                              <div className="container pl-2 ">
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>ActivityId</Form.Label>
-                                <Form.Control type="username" placeholder="1" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
-                                <Button variant="success" type="submit" className= "border-dark w-100">
-                                    Entrar
-                                </Button> 
-                              </div>
-                            </Form.Group> 
+              <Card.Body className="p-5">
+                <Row className="d-flex text-black px-5" style={{display: 'flex'}}>
+                  <Col className="d-flex flex-column mb-3 col-md-12 col-12">
+                    <Row className='justify-content-center mb-4'>
+                      <Card.Text className='col-md-7 col-12 mb-0'><span style={{ fontWeight: '600', fontStyle: 'italic', fontSize: '30px' }}>NAMEACT:</span> {nameAct}</Card.Text>
+                      <Button variant="success col-md-5 col-12" style={{ fontWeight: '600', fontStyle: 'italic' }}>CAMBIAR FOTO DE PERFIL</Button>{' '}
+                    </Row>
+                    <Row className='fs-4 fs-md-5 fs-lg-6 mb-1'>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>NIF:</span> {setStartDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Gender:</span> {setFinishDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>  
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Email:</span> {setActivityId}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Email:</span> {setActivityId}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                    </Row>
+                    <Row className='fs-4 fs-md-5 fs-lg-6 fs-xl-7'>
+                      <Col className="lg-9 col-md-9 sm-9 col-12">
+                        <p className="text-muted mb-0"><span>Descripción:</span> {setStartDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Gender:</span> {setFinishDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>  
+                      </Col>
+                    </Row>
+                    <Row className='fs-4 fs-md-5 fs-lg-6 fs-xl-7'>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>NIF:</span> {setStartDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Gender:</span> {setFinishDate}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>  
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                        <p className="text-muted mb-0"><span>Email:</span> {setActivityId}</p>
+                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                      </Col>
+                      <Col className="lg-3 col-md-3 sm-3 col-12">
+                      <Button className="flex-grow-1 w-100">Follow</Button>
+                      </Col>
+                    </Row>
+                    {/*<Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                      <Form.Group className="field mt-4 mb-4">
+                        <div className="container pl-2 ">
+                          <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>ActivityId</Form.Label>
+                          <Form.Control type="username" placeholder="1" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
+                          <Button variant="success" type="submit" className= "border-dark w-100">
+                              Entrar
+                          </Button> 
+                        </div>
+                      </Form.Group> 
                     </Form>
                     <Form onSubmit={Update} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
-                            <Form.Group className="field mt-4 mb-4">
-                              <div className="container pl-2 ">
-                                
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>activityId</Form.Label>
-                                <Form.Control type="username" placeholder="1" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
-                                
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NameAct</Form.Label>
-                                <Form.Control type="username" placeholder="Futbol" value={nameAct} onChange={(e) => setNameAct(e.target.value)} />
+                      <Form.Group className="field mt-4 mb-4">
+                        <div className="container pl-2 ">
+                          
+                          <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>activityId</Form.Label>
+                          <Form.Control type="username" placeholder="1" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
+                          
+                          <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NameAct</Form.Label>
+                          <Form.Control type="username" placeholder="Futbol" value={nameAct} onChange={(e) => setNameAct(e.target.value)} />
 
-                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Description</Form.Label>
-                                <Form.Control type="username" placeholder="*" value={Description} onChange={(e) => setDescription(e.target.value)} />
-                                <Button variant="success" type="submit" className= "border-dark w-100">
-                                    Actualizar
-                                </Button> 
-                              </div>
-                            </Form.Group> 
-                      </Form>
-                    <div className="d-flex pt-1">
-                      <Button outline className="me-1 flex-grow-1">
-                        Chat
-                      </Button>
-                      <Button className="flex-grow-1">Follow</Button>
-                    </div>
-                  </div>
-                </div>
+                          <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>Description</Form.Label>
+                          <Form.Control type="username" placeholder="*" value={Description} onChange={(e) => setDescription(e.target.value)} />
+                          <Button variant="success" type="submit" className= "border-dark w-100">
+                              Actualizar
+                          </Button> 
+                        </div>
+                      </Form.Group>
+                    </Form>*/}
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           </Col>
