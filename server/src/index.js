@@ -2,20 +2,22 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
-
+import dotenv from "dotenv";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 // Create an instance of the express application
 const app = express();
-
+dotenv.config();
 //configurations
 // Configure the application settings
 app.set('port', process.env.PORT || 5050);
-app.set('json spaces', 2);
-
 //routes
-// Set the view engine to ejs
-app.set('view engine', 'ejs');
+
 // Use bodyParser to parse incoming requests
 app.use(bodyParser.json());
+app.use(cors({ credentials:true, origin:'http://localhost:3000/' }));
+app.use(cookieParser());
+
 app.use(bodyParser.urlencoded({
     extended: true //the two body parsers are so that you can accept form requests from an html
 }));

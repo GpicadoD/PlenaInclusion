@@ -3,6 +3,8 @@ import newUsers from "../models/newUserModel.js";
 
 import bcrypt from "bcrypt";
 
+import jwt from "jsonwebtoken";
+
 // This code defines a controller function called "GetNewUser" that uses the "findAll" method to retrieve all new users from the database
 // It then sends the usersData data as a JSON response to the client
 export const GetNewUser = async(req, res) => {
@@ -32,8 +34,7 @@ export const DeleteNewUser = async(req, res) => {
         } 
         else{
             if(newUser.userNIF == userNIF){
-            await newUser.destroy();
-          
+            await newUser.destroy();  
             return res.json({msg: "newUser successfully delete"});  
             } 
         }
@@ -122,27 +123,76 @@ export const ResetPassword = async(req, res) => {
     }
 }
 
-export const Login  = async(req, res) => {
-    const {newUserNif, password} = req.body;
+export const Login = async (req, res) => {
+    const { newUserNif, password } = req.body;
     console.log(newUserNif);
     try {
         let users = await newUsers.findByPk(newUserNif);
-        if(users.userNIF != newUserNif){
-            res.status(404);
-            res.json({msg: "User Not found"});
-            return;
+        if (users.userNIF != newUserNif) {
+        res.status(404);
+        return res.json({ msg: "User Not found" });
         } else {
-            const checkPass = await bcrypt.compare(password, users.password);
-
-            if(!checkPass){
-                res.json({msg: "Invalid Password"});
-            } else {
-                res.json({msg: "Logged Succesfully"});
+        const checkPass = await bcrypt.compare(password, users.password);
+        const name = users.name;
+        const email = users.email;
+        console.log(newUserNif);
+        console.log(name);
+        console.log(email);
+        if (!checkPass) {
+            return res.json({ msg: "Invalid Password" });
+        } else {
+            const accessToken = jwt.sign(
+            { newUserNif, name, email },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+                expiresIn: "15s",
+            }
+            );
+            const refreshToken = jwt.sign(
+            { newUserNif, name, email },
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+                expiresIn: "1d",
+            }
+            );
+            await users.update(
+            { refreshToken: refreshToken },
+            {
+                where: {
+                userNIF: newUserNif,
+                },
+            }
+            );
+            res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
+            });
+            return res.json({ accessToken }); 
             }
         }
     } catch (error) {
         console.log(error);
     }
+};
+
+export const Logout = async(req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    console.log(refreshToken);
+    if(!refreshToken) return res.sendStatus(204);
+    const user = await newUsers.findAll({
+        where:{
+            refreshToken: refreshToken
+        }
+    });
+    if(!user[0]) return res.sendStatus(204);
+    const userId = user[0].id;
+    await newUsers.update({refresh_token: null},{
+        where:{
+            id: userId
+        }
+    });
+    res.clearCookie('refreshToken');
+    return res.sendStatus(200);
 }
 
 export const UpdatePassword  = async(req, res) => {

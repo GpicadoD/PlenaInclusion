@@ -20,7 +20,7 @@ const ActivityProfile = () => {
   const[password,setuserPassword] = useState('');
   const[userGender,setUserGender] = useState('');
   const[msg, setMsg] = useState('');
-  
+  const history = useNavigate();
   const Show = async (e) => {
       e.preventDefault();
       try{
@@ -62,6 +62,24 @@ const Update = async (e) => {
       }      
   } 
 }
+const LogOut = async (e) => {
+  e.preventDefault();
+  try{
+    const response = await axios.post('/logout',{
+          userNIF: userNIF
+      }
+    )
+    console.log(response.data);
+    history("/login");
+  }
+
+    catch (error) {
+      if (error.response) {
+        setMsg(error.response.data.msg);
+      }      
+  } 
+};
+
 return(
       <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
         <Container>
@@ -118,6 +136,18 @@ return(
                                 <Form.Control type="username" placeholder="12345678A" value={password} onChange={(e) => setuserPassword(e.target.value)} />
                                 <Button variant="success" type="submit" className= "border-dark w-100">
                                     Actualizar
+                                </Button> 
+                              </div>
+                            </Form.Group> 
+                          </Form>
+
+                          <Form onSubmit={LogOut} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
+                            <Form.Group className="field mt-4 mb-4">
+                              <div className="container pl-2 ">
+                                <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
+                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
+                                <Button variant="success" type="submit" className= "border-dark w-100">
+                                    Cerrar Sesion
                                 </Button> 
                               </div>
                             </Form.Group> 

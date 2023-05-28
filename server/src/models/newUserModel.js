@@ -32,6 +32,9 @@ const newUsers = db.define('newusers', {
     },
     gender:{
         type: DataTypes.STRING
+    },
+    refreshToken:{
+        type: DataTypes.STRING
     }
 },{
     freezeTableName: true,

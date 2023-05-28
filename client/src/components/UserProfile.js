@@ -67,6 +67,22 @@ const Update = async (e) => {
       }      
   } 
 }
+
+const LogOut = async (e) => {
+  e.preventDefault();
+  try{
+    const response = await axios.post('/logout',{
+          userNIF: userNIF,
+      }
+    )
+    console.log(response.data);
+  }
+    catch (error) {
+      if (error.response) {
+        setMsg(error.response.data.msg);
+      }      
+  } 
+}
 return(
       <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
         <Container>
@@ -109,7 +125,7 @@ return(
                               </div>
                             </Form.Group> 
                           </Form>
-
+                          
                           <Form onSubmit={Update} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                             <Form.Group className="field mt-4 mb-4">
                               <div className="container pl-2 ">
