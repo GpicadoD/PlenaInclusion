@@ -74,6 +74,7 @@ a.nav-link:active{
   color: white;
   background-color: #4fa364;
   box-shadow: 5px 6px 8px 1px rgba(6, 235, 13, 0.4)
+}
 img.imagen_profile {
   width: 50px;
 }

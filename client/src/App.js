@@ -9,9 +9,6 @@ import ActivityProfile from "./components/ActivityProfile.js";
 import UserProfile from "./components/UserProfile.js";
 import AddNewUser from "./components/AddUser.js";
 
-//Lacal
-import AddNewActivity from "./components/AddActivity.js";
-
 import AddImage from "./components/AddImage.js";
 import ShowImage from "./components/ShowImage.js";
 
