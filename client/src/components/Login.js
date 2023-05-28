@@ -7,8 +7,9 @@ import { Image } from 'react-bootstrap';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
 import PlenaInclusionLogo from '../../src/img/logo_plena-inclusion.png';
+import {Link} from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
     const [newUserNif, setnewUserNif] = useState('');
@@ -23,14 +24,14 @@ const Login = () => {
                 newUserNif: newUserNif,
                 password: password
             });
-            history("/protodash", { state: { newUserNif } });
+            history("/protodash", {state:{newUserNif}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
             }
         }
     }
-
+    
     return (
         {/*<section className="hero has-background-grey-light is-fullheight is-fullwidth">
             <div className="hero-body">

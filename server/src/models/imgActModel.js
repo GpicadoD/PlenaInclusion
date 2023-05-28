@@ -17,7 +17,10 @@ const ImgAct = db.define('imgAct', {
         type: DataTypes.STRING
     },
     ImgAct:{
-        type: DataTypes.BLOB
+        type: DataTypes.BLOB("long"),
+    },
+    type:{
+        type: DataTypes.STRING,
     }
 },{
     freezeTableName: true,

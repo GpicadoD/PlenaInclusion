@@ -51,7 +51,6 @@ export const DeleteNewActivity = async(req, res) => {
         else{
             if(newActivity.activityId == activityId){
             await newActivity.destroy();
-          
             return res.json({msg: "newActivity successfully delete"});  
             } 
         }
@@ -87,7 +86,6 @@ export const UpdateActivities = async(req, res) => {
             finishDate: finishDate,
             idPeriod: idPeriod,
             idCreator: idCreator
-
         });
         await activity.save();
         res.json({msg: "Activity Registration Successful"});
