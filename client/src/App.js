@@ -8,6 +8,8 @@ import Barra from "./components/Navbar.js";
 import ActivityProfile from "./components/ActivityProfile.js";
 import UserProfile from "./components/UserProfile.js";
 import AddNewUser from "./components/AddUser.js";
+import AddImage from "./components/AddImage.js";
+import ShowImage from "./components/ShowImage.js";
 import ActivityInfo from "./components/ActivityInfo.js";
 
 // App has many components like Login or Dashboard inside so it can be reached with the url or buttons with their links
@@ -21,6 +23,8 @@ function App() {
           <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
           <Route path="/dashboard" element={<><Barra/><Dashboard/></>} />
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
+          <Route path="/addImage" element={<><Barra/><AddImage/></>} />
+          <Route path="/showImage" element={<><Barra/><ShowImage/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
           <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
 

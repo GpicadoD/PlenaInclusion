@@ -19,7 +19,7 @@ app.use(cors({ credentials:true, origin:'http://localhost:3000/' }));
 app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({
-    extended: true //the two body parsers are so that you can accept form requests from an html
+    extended: true, parameterLimit:100000, limit: "500mb" //the two body parsers are so that you can accept form requests from an html
 }));
 // Use the router module for routing requests
 app.use(router);

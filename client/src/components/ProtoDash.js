@@ -209,9 +209,7 @@ const ProtoDash = () => {
         added();
     }, [join]);
 
-
-
-    return (
+return (
         <div className="container mt-5 top">
             <div className='p-5 text-center'>
                 <h1 className='mb-3' style={{ fontSize: 30, fontWeight: 'bold' }}>Mis actividades</h1>
@@ -271,7 +269,7 @@ const ProtoDash = () => {
                                     </Card.Body>
                                 </Card>
                             </Col>
-                    ))}
+                        ))}
                     </Row>}
                     {comAct.length == 0 && 
                         <h2 className="noActivity">
