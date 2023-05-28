@@ -100,3 +100,11 @@ a.nav-link:active{
 .Formulario_usuario label.d-flex.justify-content-center.form-label {
   margin-top: 15px;
 }
+
+input.form-check-input{
+  border-color: #00820B;
+  border-radius: 10px; 
+  border-width: 2px;
+}
+
+
