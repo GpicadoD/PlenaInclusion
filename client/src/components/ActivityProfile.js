@@ -78,7 +78,7 @@ const LogOut = async (e) => {
         setMsg(error.response.data.msg);
       }      
   } 
-}
+};
 
 return(
       <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>

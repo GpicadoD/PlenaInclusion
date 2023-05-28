@@ -181,7 +181,7 @@ export const Logout = async(req, res) => {
     if(!refreshToken) return res.sendStatus(204);
     const user = await newUsers.findAll({
         where:{
-            refresh_token: refreshToken
+            refreshToken: refreshToken
         }
     });
     if(!user[0]) return res.sendStatus(204);

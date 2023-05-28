@@ -178,6 +178,24 @@ const ProtoDash = () => {
         refreshToken();
         defaultDate();
     }, []);
+    
+    const LogOut = async (e) => {
+        e.preventDefault();
+        try{
+          const response = await axios.post('/logout',{
+                userNIF: NifCom
+            }
+          )
+          console.log(response.data);
+          navigation("/login");
+        }
+      
+          catch (error) {
+            if (error.response) {
+              console.log(error.response.data.msg);
+            }      
+        } 
+    };
 
     useEffect(() => {   
         console.log("JoinT ok");
@@ -209,7 +227,7 @@ const ProtoDash = () => {
                     >
                     </Nav>
                     <div className='mt-4 text-center'>
-                        <button className='Espero acordarme de cambiar esto' onClick={e=>test(e) }>Reset</button>
+                        <button className='Espero acordarme de cambiar esto' onClick={e=>LogOut(e) }>Reset</button>
                     </div>
                     <Form className="d-flex" onSubmit={getAct}>
                         {/*Añadir ID de usuario temporal*/}

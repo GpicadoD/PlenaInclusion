@@ -59,7 +59,7 @@ const AddNewUser = () => {
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
-                userId: decoded.userId,
+                userNIF: decoded.userNIF,
                 name: decoded.name
             });
             setExpire(decoded.exp);
