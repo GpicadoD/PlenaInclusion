@@ -107,12 +107,11 @@ const ProtoDash = () => {
     } catch (error) {
         console.log(error);
     }};
-    }
     const getAct = async (e) => {
         e.preventDefault();
         getPeriodic(e);
         getComActs(e);
-    }
+    };
     // This adds the ComActs and the users
     const addComActs = async (e, activities) => {
         try {
@@ -136,11 +135,13 @@ const ProtoDash = () => {
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
                 ...user, // Copy other fields
-                userId: decoded.userId,
+                userNIF: decoded.userNIF,
                 name: decoded.name
             });
             setExpire(decoded.exp);
-            setNifCom(decoded.userId);
+            console.log(decoded.userNIF);
+            setNifCom("NifCom:");
+            setNifCom(decoded.userNIF);
         } catch (error) {
             if (error.response) {
                 navigation("/");
