@@ -71,10 +71,16 @@ a.nav-link:active{
 
 .card-body {
   border-radius: 20px;
-  color: white;
-  background-color: #4fa364;
-  box-shadow: 5px 6px 8px 1px rgba(6, 235, 13, 0.4)
+  color: #3b6060;
+  border-width: 0px;
 }
+
+.card-activity-protodash {
+  border-radius: 50px;
+  background-color: #ffffff;
+  box-shadow: 5px 6px 8px 1px rgba(2, 25, 3, 0.4)
+}
+
 img.imagen_profile {
   width: 50px;
 }
@@ -83,9 +89,9 @@ img.imagen_profile {
 }
 
 .box-shadow.card {
-  border-radius: 20px;
-  border-width: 2px;
-  border: var(--bs-card-border-width) solid rgb(8 100 43);
+  border-radius: 50px;
+  border-width: 0px;
+  border: var(--bs-card-border-width) solid rgba(8, 100, 43, 0);
 }
 
 .danger {
@@ -130,6 +136,43 @@ input.form-check-input{
 .boton-naranja:hover {
   background-color: #c97719;
   border: 3px solid #8c5311!important;
+}
+
+button#uncontrolled-tab-example-tab-nearAct {
+  background-color: #dde8e8;
+  margin-bottom: -2px;
+}
+
+button#uncontrolled-tab-example-tab-signedAct {
+  background-color: #dde8e8;
+  margin-bottom: -2px;
+}
+
+.nav-tabs .nav-link {
+  color: rgba(85, 85, 85, 0.4);
+}
+
+ul.mb-3.nav.nav-tabs {
+  border: 2px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: #3b6060;
+  background-color: #ffffff00;
+}
+
+.nav-tabs .nav-link.active {
+  border: 2px solid;
+  border-radius: 20px 20px 0 0px;
+  border-bottom-color: #dde8e8!important;
+  border-color: #3b6060;
+  background-color: #ffffff00;
+}
+
+input.me-2.form-control {
+  border: 2px solid;
+  border-color: #2e6126;
+  background-color: #ffffff00;
 }
 
 @media  (min-width: 426px) and (max-width: 1024px) {

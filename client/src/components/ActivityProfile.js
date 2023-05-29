@@ -97,7 +97,7 @@ return(
                         <Button variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic' }}>CAMBIAR FOTO DE PERFIL</Button>{' '}
                     </Col>
                     <Col className='col-md-9 col-sm-12 xs-12 fs-4 fs-md-5 fs-lg-6 fs-xl-7'>
-                      <div className="flex-grow-1 xl-5 lg-5 ms-0 ms-md-5" style={{ color: '#3b6060', fontStyle: 'italic' }}>
+                      <div className="flex-grow-1 xl-5 lg-5 ms-0 ms-md-5" style={{ fontStyle: 'italic' }}>
                         <Card.Text className='fs-1'>
                           <span style={{ fontWeight: 'bold' }}>Name:</span><span style={{ fontWeight: 'bold' }}>{userName}</span>
                           <span style={{ fontWeight: 'bold' }}>lastname:</span><span style={{ fontWeight: 'bold' }}>{userLastName}</span>
