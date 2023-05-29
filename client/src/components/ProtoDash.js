@@ -190,17 +190,14 @@ const ProtoDash = () => {
     const LogOut = async (e) => {
         e.preventDefault();
         try{
-          const response = await axios.post('/logout',{
-                userNIF: NifCom
-            }
-          )
-          console.log(response.data);
-          navigation("/login");
+            const response = await axios.post('/logout')
+            console.log("log 1");
+            console.log(response.data);
+            navigation("/login");
         }
-      
-          catch (error) {
+        catch (error) {
             if (error.response) {
-              console.log(error.response.data.msg);
+                console.log(error.response.data.msg);
             }      
         } 
     };
