@@ -4,15 +4,28 @@
 //components from the 'react-bootstrap' library, an image, and the 'axios' library for 
 //making API requests. It also defines a functional component called 'ActivityInfo', 
 //which renders some HTML elements and defines two functions: 'Show' and 'Update'.
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, CardImg, Button, Form } from 'react-bootstrap';
 import futbol from '../../src/img/futbol.jpeg'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 const ActivityInfo = () => {
   // The 'useState' hooks initialize state variables for 'activityId', 
   // 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' respectively
+    const [user, setUser] = useState({
+      userNIF: '1',
+      name: '',
+      lastname:'',
+      email:'',
+      birthdate:'',
+      phoneNumber:'',
+      gender:'',
+      accessToken:''
+    });
+    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -20,6 +33,9 @@ const ActivityInfo = () => {
     const [Description, setDescription] = useState('');
     const [Limit, setLimit] = useState('');
     const [msg, setMsg] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
+    const navigation = useNavigate();
 
     // The 'Show' function makes an API request to the server with the 'activityId' state as a parameter, 
     //and sets the state variables for 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' with the returned data if the request is successful. 
@@ -45,8 +61,7 @@ const ActivityInfo = () => {
             setMsg(error.response.data.msg);
           }      
       }  
-
-      }
+    }
     
       // The 'Update' function makes an API request to the server with the 'activityId', 'nameAct', and 'Description' states as parameters,
       //and sets the state variables for 'nameAct' and 'Description' with the returned data if the request is successful. 
@@ -70,6 +85,30 @@ const ActivityInfo = () => {
           }      
       } 
     }
+    const refreshToken = async () => {
+      try {
+          const response = await axios.get('/token');
+          setToken(response.data.accessToken);
+          //console.log(response.data.accessToken);
+          const decoded = jwt_decode(response.data.accessToken);
+          setUser({
+              ...user, // Copy other fields
+              userNIF: decoded.userNIF,
+              name: decoded.name
+          });
+          setExpire(decoded.exp);
+          console.log(decoded.userNIF);
+          setNifCom("NifCom:");
+          setNifCom(decoded.userNIF);
+      } catch (error) {
+          if (error.response) {
+              navigation("/");
+          }
+      }
+  }
+  useEffect(() => {   
+    refreshToken();
+}, []);
 
     // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
     // 'nameAct', and 'Description' state variables. It also displays the 'msg' state variable if there is an error.

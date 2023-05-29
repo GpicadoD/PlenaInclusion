@@ -9,6 +9,21 @@ import Image from 'react-bootstrap/Image';
 
 // The function Barra with the elements that make it works, with an exported CSS to have style
 const Barra = () => {
+    const navigation = useNavigate();
+    const LogOut = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await axios.post('/logout')
+            console.log("log 1");
+            console.log(response.data);
+            navigation("/login");
+        }
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.msg);
+            }      
+        } 
+    };
     return (
         <Navbar className='Barra' sticky="top" expand="lg">
         <Container className='Barra_menu w-75 ms-5'>
@@ -26,6 +41,7 @@ const Barra = () => {
         </Container>
         <Container className='profile w-25 me-5 flex-row-reverse'>
             <Nav className="align-items-center">
+            <Nav.Link onClick={LogOut}>LOGOUT</Nav.Link>
             <Navbar.Brand href='/' className='me-1'>
                 <img className='imagen_profile' src="./avatar_default.png" alt=""/>
             </Navbar.Brand>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +6,19 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
+import jwt_decode from "jwt-decode";
 
 const AddNewActivity = () => {
+    const [user, setUser] = useState({
+        userNIF: '1',
+        name: '',
+        lastname:'',
+        email:'',
+        birthdate:'',
+        phoneNumber:'',
+        gender:'',
+        accessToken:''
+    });
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [idPublicType, setIdPublicType] = useState('');
@@ -18,7 +29,10 @@ const AddNewActivity = () => {
     const [idPeriod, setIdPeriod] = useState('');
     const [idCreator, setIdCreator] = useState('');
     const [msg, setMsg] = useState('');
-    const history = useNavigate();
+    const navigation = useNavigate();
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
+    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
 
     const Add = async (e) => {
         e.preventDefault();
@@ -39,6 +53,27 @@ const AddNewActivity = () => {
             console.log(error);
         }
     };
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('/token');
+            setToken(response.data.accessToken);
+            //console.log(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setUser({
+                ...user, // Copy other fields
+                userNIF: decoded.userNIF,
+                name: decoded.name
+            });
+            setExpire(decoded.exp);
+            console.log(decoded.userNIF);
+            setNifCom("NifCom:");
+            setNifCom(decoded.userNIF);
+        } catch (error) {
+            if (error.response) {
+                navigation("/");
+            }
+        }
+    }
 
     return (
         <div style={{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -54,7 +54,6 @@ const ProtoDash = () => {
     const navigation = useNavigate();
 
     const [join, setJoin] = useState(false);
-    const [joinT, setJoinT] = useState(false);
     
     const axiosJWT = axios.create();
     const defaultDate = async () => {
@@ -191,16 +190,16 @@ const ProtoDash = () => {
     const LogOut = async (e) => {
         e.preventDefault();
         try{
-            const response = await axios.post('/logout',{
-            userNIF: NifCom
-        })
-        console.log(response.data);
-        navigation("/login");
+            const response = await axios.post('/logout')
+            console.log("log 1");
+            console.log(response.data);
+            navigation("/login");
         }
         catch (error) {
-        if (error.response) {
-            console.log(error.response.data.msg);
-        }} 
+            if (error.response) {
+                console.log(error.response.data.msg);
+            }      
+        } 
     };
     useEffect(() => {   
         console.log("useEffects ok");
@@ -239,10 +238,11 @@ return (
             </Container>
         </Navbar>
         <Tabs
-            defaultActiveKey="signedAct"
+            defaultActiveKey="nearAct"
             id="uncontrolled-tab-example"
             className="mb-3 px-5"
             >
+
             <Tab eventKey="signedAct" title="Apuntado">
                 <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
                     {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
@@ -305,12 +305,51 @@ return (
                 </Row>}
                 </Col>
             </Tab>
-        </Tabs>
-        {comAct.length == 0 && 
+            {periodicAct.length == 0 && 
             <h2 className="noActivity">
                 No tienes ninguna actividad en las fechas seleccionadas.
             </h2>
+            }
+            <Tab eventKey="signedAct" title="Apuntado">
+                <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
+                    {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
+                        {comAct.map((activities) => (//Es un for each no se asusten
+                            <Col key={activities.activityId + activities.ActDate}>
+                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+                                <Card.Img  className='card-img-top rounded-bottom p-0'
+                                    style={{ borderRadius: '50px',
+                                    objectFit: 'cover',
+                                    height: '180px',
+                                    zIndex: 1 }}
+                                    src={futbol}
+                                    alt="Activity image"
+                                    fluid
+                                    />
+                                    <Card.Body>
+                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
+                                        <div className='mt-4 text-center'>
+                                        <Col className="lg-3 col-md-3 sm-3 col-12">
+                                            <Button className="flex-grow-1 w-100">Follow</Button>
+                                        </Col>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                    ))}
+                    </Row>}
+                    {comAct.length == 0 && 
+                        <h2 className="noActivity">
+                            No tienes ninguna actividad en las fechas seleccionadas.
+                        </h2>
         }
+                </Col>
+            </Tab>
+        </Tabs>
+        
     </div>
     /*
         <div className="container mt-5 top">
