@@ -53,7 +53,6 @@ const ProtoDash = () => {
     const navigation = useNavigate();
 
     const [join, setJoin] = useState(false);
-    const [joinT, setJoinT] = useState(false);
     
     const axiosJWT = axios.create();
     const defaultDate = async () => {

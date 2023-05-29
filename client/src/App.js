@@ -24,18 +24,20 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/activityprofile" element={<><Barra/><ActivityProfile/><Pie/></>} />
-          <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
-          <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
-          <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
-//lacal
-          <Route path="/addnewActivity" element={<><Barra/><AddNewActivity/></>} />
 
+          <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
+
+          <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
           <Route path="/addnewactivity" element={<><Barra/><AddNewActivity/></>} />
+          
+          <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
+          <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
+
           <Route path="/protodash" element={<><Barra/><ProtoDash/><Pie/></>} />
           <Route path="/addImage" element={<><Barra/><AddImage/></>} />
           <Route path="/showImage" element={<><Barra/><ShowImage/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
-          <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
+
           {/*Medio apaño para hacer funcionar el login como primera página de React*/}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
