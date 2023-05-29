@@ -229,13 +229,11 @@ return (
                     navbarScroll
                 >
                 </Nav>
-                <Form className="d-flex px-5" onSubmit={getComActs}>
-                    {/*Añadir ID de usuario temporal*/}
-                    <Form.Control className="me-2" type="date" placeholder="Date" 
-                        value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                    <Form.Control className="me-2" type="date" placeholder="Date" 
-                        value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                    <Button variant="outline-success" type="submit">Buscar</Button>
+                <Form className="d-flex flex-column flex-md-row">
+  {/* Añadir ID de usuario temporal */}
+                    <Form.Control className="me-md-2 mb-2 mb-md-0" type="date" placeholder="Fecha de inicio" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <Form.Control className="me-md-2" type="date" placeholder="Fecha de fin" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    <Button className="mt-2 mt-md-0" variant="outline-success" type="submit">Buscar</Button>
                 </Form>
                 </Navbar.Collapse>
             </Container>
@@ -268,7 +266,7 @@ return (
                                         <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
                                         <div className='mt-4 text-center'>
                                         <Col className="lg-3 col-md-3 sm-3 col-12">
-                                            <Button className="flex-grow-1 w-100">Follow</Button>
+                                        <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>{' '}
                                         </Col>
                                         </div>
                                     </Card.Body>
@@ -299,9 +297,7 @@ return (
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.actDate.substring(11,16)}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
-                                    <Col className="lg-3 col-md-3 sm-3 col-12">
-                                        <Button className="flex-grow-1 w-100">Follow</Button>
-                                    </Col>
+                                    <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>{' '}
                                 </Card.Body>
                             </Card>
                         </Col>
