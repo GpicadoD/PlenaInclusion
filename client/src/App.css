@@ -53,13 +53,13 @@ body {
   margin-left: 10px;
 }
 
-a.nav-link{
+a.me-3.link_nav.nav-link{
   color: rgb(255, 255, 255);
   box-shadow: inset 0 -5px 0 0 #bbb3ab00;
   transition: 0.3s;
 }
 
-a.nav-link:hover{
+a.me-3.link_nav.nav-link:hover{
   color: rgb(62, 87, 66);
   box-shadow: inset 0 -5px 0 0 #ff8b02;
   transition: 0.3s;
@@ -67,6 +67,44 @@ a.nav-link:hover{
 
 a.nav-link:active{
   color: #89c865;
+}
+
+div#basic-navbar-nav {
+justify-content: space-between;
+}
+
+button#dropdown-basic {
+  display: flex;
+  align-items: center;
+  border-width: 0px;
+}
+
+.dropdown-menu.show {
+  background-color: #ffffff;
+}
+
+.dropdown-menu.show:hover {
+  background-color: #ffffff;
+}
+
+a.dropdown-item:hover {
+  background-color: #ffffff;
+}
+
+a.submenu.dropdown-item:hover {
+  color: rgb(62, 87, 66)!important;
+  box-shadow: inset 0 -5px 0 0 #ff8b02;
+  transition: 0.3s;
+}
+
+a.submenu.nav-link {
+  color: rgb(208, 208, 208);
+}
+
+a.submenu.nav-link:hover {
+  color: rgb(62, 87, 66);
+  box-shadow: inset 0 -5px 0 0 #ff8b02;
+  transition: 0.3s;
 }
 
 .card-body {
@@ -175,6 +213,18 @@ input.me-2.form-control {
   background-color: #ffffff00;
 }
 
+input.me-md-2.mb-2.mb-md-0.form-control {
+  background-color: #ffffff00;
+  border-color: #2e6126!important;
+  border-width: 2px;
+}
+
+input.me-md-2.form-control {
+  background-color: #ffffff00;
+  border-color: #2e6126;
+  border-width: 2px;
+}
+
 @media  (min-width: 426px) and (max-width: 1024px) {
   button.w-100.btn.btn-success.mt-3 {
     font-size: 11px;
@@ -185,5 +235,21 @@ input.me-2.form-control {
 @media  (max-width: 426px) {
   .p-md-0.p-5.card-body {
     text-align: center;
+  }
+}
+
+@media  (max-width: 426px) {
+  .pt-4.pb-4.px-5.card-body {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .px-5.col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12 {
+    padding: 0px!important;
+  }
+
+  .card-title.h5 {
+    font-size: 20px;
+    padding: 10px;
   }
 }

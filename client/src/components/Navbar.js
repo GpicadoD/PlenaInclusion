@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import Image from 'react-bootstrap/Image';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 // The function Barra with the elements that make it works, with an exported CSS to have style
 const Barra = () => {
@@ -26,27 +27,33 @@ const Barra = () => {
     };
     return (
         <Navbar className='Barra' sticky="top" expand="lg">
-        <Container className='Barra_menu w-75 ms-5'>
+        <Container className='Barra_menu w-100 ms-5'>
             <Navbar.Brand href='/'>
-                <Image className='me-4' src="./logo_plena_inclusion.png" alt="" height={30}/>
+                <Image className='me-2' src="./logo_plena_inclusion.png" alt="" height={30}/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="">
-                <Nav.Link className='me-4' href="/dashboard">DASHBOARD</Nav.Link>
-                <Nav.Link className='me-4' href="/addnewuser">ADD USER</Nav.Link>
-                <Nav.Link href="/addnewactivity">ADD ACTIVITY</Nav.Link>
+                <Nav.Link className='me-3 link_nav' href="/dashboard">DASHBOARD</Nav.Link>
+                <Nav.Link className='me-3 link_nav' href="/addnewuser">ADD USER</Nav.Link>
+                <Nav.Link className='me-3 link_nav' href="/addnewactivity">ADD ACTIVITY</Nav.Link>
             </Nav>
+            <Nav className=''>
+            <Dropdown>
+                <Dropdown.Toggle variant="" id="dropdown-basic">
+                    <Navbar.Brand href='/' className='me-1'>
+                        <img className='imagen_profile' src="./avatar_default.png" alt=""/>
+                    </Navbar.Brand>
+                    <Nav.Link className='white fs-5 me-3 link_nav' style={{fontWeight: 600}}>USER</Nav.Link>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="/activityprofile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
+                    <Dropdown.Item href="#/action-1" style={{fontWeight: 600}}><Nav.Link className='submenu' onClick={LogOut}>LOGOUT</Nav.Link></Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+                </Nav>
             </Navbar.Collapse>
-        </Container>
-        <Container className='profile w-25 me-5 flex-row-reverse'>
-            <Nav className="align-items-center">
-            <Nav.Link onClick={LogOut}>LOGOUT</Nav.Link>
-            <Navbar.Brand href='/' className='me-1'>
-                <img className='imagen_profile' src="./avatar_default.png" alt=""/>
-            </Navbar.Brand>
-                <Nav.Link href="/activityprofile">PROFILE</Nav.Link>
-            </Nav>
         </Container>
         </Navbar>
     )

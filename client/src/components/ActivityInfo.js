@@ -175,8 +175,8 @@ const ActivityInfo = () => {
                         <p className="text-muted mb-0"><span>Email:</span> {setActivityId}</p>
                         <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
                       </Col>
-                      <Col className="lg-3 col-md-3 sm-3 col-12">
-                      <Button className="flex-grow-1 w-100">Follow</Button>
+                      <Col className="lg-3 col-md-3 sm-3 col-12 d.flex justify-content-end">
+                        <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>{' '}
                       </Col>
                     </Row>
                     {/*<Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
