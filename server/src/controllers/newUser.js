@@ -188,7 +188,6 @@ export const Logout = async(req, res) => {
     });
     if(!user[0]) return res.sendStatus(204);
     const userId = user[0].userNIF;
-    console.log("Entra al update\n ----------------------------------------------------");
     console.log(refreshToken);
     await newUsers.update({refreshToken: null},{
         where:{

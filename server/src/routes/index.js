@@ -95,7 +95,7 @@ router.post('/sendMail', async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-        from: "lacalrodrigo8@gmail.com",
+        from: "lacalrodrigo8@gmail.com", //Cambiarlo por el correo de la empresa
         to: "lacalrodrigo8@gmail.com",
         subject: "Prueba Nodemailer",
         text: "Este correo fue enviado por Rodrigo",

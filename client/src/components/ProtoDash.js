@@ -47,7 +47,7 @@ const ProtoDash = () => {
     const [endDate, setEndDate] = useState(date);
     
     // This sets the NIF of the user and then finds it in the database
-    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
+    const [NifCom, setNifCom] = useState( 1/*location.state.newUserNif*/);
     const [idAct, setidAct] = useState("");
     const [actDate, setactDate] = useState("");
 
@@ -89,14 +89,14 @@ const ProtoDash = () => {
         console.log(response.data);
         setComAct(response.data);
     } catch (error) {
-        console.log(error);
+        //console.log(error);
     }};
     // This choose the period of dates for the user
     const getPeriodic = async (e) => {
     try {
         console.log("Periodic ok");
         e.preventDefault();
-        const response = await axiosJWT.post('/getperiodicActsByUserDate', {
+        const response = await axios.post('/getperiodicActsByUserDate', {
             startDate: startDate,
             endDate: endDate,
             NifCom: NifCom
@@ -105,6 +105,7 @@ const ProtoDash = () => {
         console.log(response.data);
         setperiodicAct(response.data);
     } catch (error) {
+        setNifCom("ErrorPeriodict:");
         console.log(error);
     }};
     const getAct = async (e) => {
@@ -143,9 +144,7 @@ const ProtoDash = () => {
             setNifCom("NifCom:");
             setNifCom(decoded.userNIF);
         } catch (error) {
-            if (error.response) {
-                navigation("/");
-            }
+            console.log(error);
         }
     }
     
@@ -212,6 +211,9 @@ const ProtoDash = () => {
         getAct(new Event('firstTime'));
         added();
     }, [join]);
+    useEffect(() => {   
+        getAct(new Event('firstTime'));
+    }, [startDate, endDate]);
 
 return (
     <div className="container p-5 mw-100" style={{ backgroundColor: '#dde8e8', color: '#3b6060' }}>
@@ -229,10 +231,9 @@ return (
                 >
                 </Nav>
                 <Form className="d-flex flex-column flex-md-row">
-  {/* Añadir ID de usuario temporal */}
+                    {/* Añadir ID de usuario temporal */}
                     <Form.Control className="me-md-2 mb-2 mb-md-0" type="date" placeholder="Fecha de inicio" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                    <Form.Control className="me-md-2" type="date" placeholder="Fecha de fin" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                    <Button className="mt-2 mt-md-0" variant="outline-success" type="submit">Buscar</Button>
+                    <Form.Control className="me-md-2" type="date" placeholder="Fecha de fin" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                 </Form>
                 </Navbar.Collapse>
             </Container>
@@ -242,40 +243,7 @@ return (
             id="uncontrolled-tab-example"
             className="mb-3 px-5"
             >
-
-            <Tab eventKey="signedAct" title="Apuntado">
-                <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
-                    {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
-                        {comAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.ActDate}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
-                                <Card.Img  className='card-img-top rounded-bottom p-0'
-                                    style={{ borderRadius: '50px',
-                                    objectFit: 'cover',
-                                    height: '180px',
-                                    zIndex: 1 }}
-                                    src={futbol}
-                                    alt="Activity image"
-                                    fluid
-                                    />
-                                    <Card.Body>
-                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
-                                        <div className='mt-4 text-center'>
-                                        <Col className="lg-3 col-md-3 sm-3 col-12">
-                                        <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>{' '}
-                                        </Col>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                    ))}
-                    </Row>}
-                </Col>
-            </Tab>
+            
             <Tab eventKey="nearAct" title="Próximas actividades">
             <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>   
                 {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
@@ -304,50 +272,52 @@ return (
                     ))}
                 </Row>}
                 </Col>
+                    {periodicAct.length == 0 && 
+                        <h2 className="noActivity">
+                            No tienes ninguna actividad en las fechas seleccionadas.
+                        </h2>
+                    }
             </Tab>
-            {periodicAct.length == 0 && 
-            <h2 className="noActivity">
-                No tienes ninguna actividad en las fechas seleccionadas.
-            </h2>
-            }
-            <Tab eventKey="signedAct" title="Apuntado">
-                <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
-                    {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
-                        {comAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.ActDate}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
-                                <Card.Img  className='card-img-top rounded-bottom p-0'
-                                    style={{ borderRadius: '50px',
-                                    objectFit: 'cover',
-                                    height: '180px',
-                                    zIndex: 1 }}
-                                    src={futbol}
-                                    alt="Activity image"
-                                    fluid
-                                    />
-                                    <Card.Body>
-                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
-                                        <div className='mt-4 text-center'>
-                                        <Col className="lg-3 col-md-3 sm-3 col-12">
-                                            <Button className="flex-grow-1 w-100">Follow</Button>
-                                        </Col>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                    ))}
-                    </Row>}
+            {NifCom != 1 &&
+                <Tab eventKey="signedAct" title="Apuntado">
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
+                            {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
+                                {comAct.map((activities) => (//Es un for each no se asusten
+                                    <Col key={activities.activityId + activities.ActDate}>
+                                        <Card className={`box-shadow`} key={activities.activityId + activities.ActDate} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+                                        <Card.Img  className='card-img-top rounded-bottom p-0'
+                                            style={{ borderRadius: '50px',
+                                            objectFit: 'cover',
+                                            height: '180px',
+                                            zIndex: 1 }}
+                                            src={futbol}
+                                            alt="Activity image"
+                                            fluid
+                                            />
+                                            <Card.Body>
+                                                <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
+                                                <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
+                                                <div className='mt-4 text-center'>
+                                                <Col className="lg-3 col-md-3 sm-3 col-12">
+                                                <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>{' '}
+                                                </Col>
+                                                </div>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                            ))}
+                            </Row>}
+                        </Col>
                     {comAct.length == 0 && 
                         <h2 className="noActivity">
                             No tienes ninguna actividad en las fechas seleccionadas.
                         </h2>
-        }
-                </Col>
-            </Tab>
+                    }
+                </Tab>
+            }
         </Tabs>
         
     </div>
