@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/esm/Row';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 const ActivityProfile = () => {
