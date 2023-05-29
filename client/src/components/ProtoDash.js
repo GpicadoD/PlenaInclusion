@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import futbol from '../../src/img/futbol.jpeg'
 import '../App.css';
 import {useLocation} from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
@@ -189,17 +190,14 @@ const ProtoDash = () => {
     const LogOut = async (e) => {
         e.preventDefault();
         try{
-          const response = await axios.post('/logout',{
-                userNIF: NifCom
-            }
-          )
-          console.log(response.data);
-          navigation("/login");
+            const response = await axios.post('/logout')
+            console.log("log 1");
+            console.log(response.data);
+            navigation("/login");
         }
-      
-          catch (error) {
+        catch (error) {
             if (error.response) {
-              console.log(error.response.data.msg);
+                console.log(error.response.data.msg);
             }      
         } 
     };
@@ -216,11 +214,11 @@ const ProtoDash = () => {
     }, [join]);
 
 return (
-    <div className="container mt-5 top">
+    <div className="container p-5 mw-100" style={{ backgroundColor: '#dde8e8', color: '#3b6060' }}>
         <div className='p-5 text-center'>
             <h1 className='mb-3' style={{ fontSize: 30, fontWeight: 'bold' }}>Mis actividades</h1>
         </div>
-        <Navbar className="border-bottom border-gray pb-5">
+        <Navbar className="border-bottom border-gray px-5 pb-5">
             <Container fluid>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -230,77 +228,98 @@ return (
                     navbarScroll
                 >
                 </Nav>
-                <Form className="d-flex" onSubmit={getComActs}>
+                <Form className="d-flex px-5" onSubmit={getComActs}>
                     {/*Añadir ID de usuario temporal*/}
                     <Form.Control className="me-2" type="date" placeholder="Date" 
                         value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     <Form.Control className="me-2" type="date" placeholder="Date" 
                         value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                    <Form.Control
-                        type="search"
-                        placeholder="Search by NIF"
-                        className="me-2"
-                        aria-label="Search"
-                        value={NifCom} onChange={(e) => setNifCom(e.target.value)}
-                    />
                     <Button variant="outline-success" type="submit">Buscar</Button>
                 </Form>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
         <Tabs
-            defaultActiveKey="signedAct"
+            defaultActiveKey="nearAct"
             id="uncontrolled-tab-example"
-            className="mb-3"
+            className="mb-3 px-5"
             >
-            <Tab eventKey="signedAct" title="Apuntado">
-                {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                    {comAct.map((activities) => (//Es un for each no se asusten
-                        <Col key={activities.activityId + activities.ActDate}>
-                            <Card className={`box-shadow`} key={activities.activityId + activities.ActDate}>
-                                <Card.Body>
-                                    <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
-                                    <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
-                                    <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
-                                    <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
-                                    <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
-                                    <div className='mt-4 text-center'>
-                                        <Button className='succes'>
-                                            Ver Más
-                                        </Button>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                ))}
-                </Row>}
-            </Tab>
-            <Tab eventKey="nearAct" title="Próximas actividades">
-                {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
+                <Tab eventKey="nearAct" title="Próximas actividades">
+            <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>   
+                {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
                     {periodicAct.map((activities) => (//Es un for each no se asusten
                         <Col key={activities.activityId + activities.actDate +  activities.NifOrg}>
-                            <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct}>
-                                <Card.Body>
+                            <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+                            <Card.Img  className='card-img-top rounded-bottom p-0'
+                                    style={{ borderRadius: '50px',
+                                    objectFit: 'cover',
+                                    height: '180px',
+                                    zIndex: 1 }}
+                                    src={futbol}
+                                    alt="Activity image"
+                                    fluid
+                                    />
+                                <Card.Body className='pt-4 pb-4 px-5'>
                                     <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.newactivity.nameAct}</Card.Title>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.actDate.substring(0,10)}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.actDate.substring(11,16)}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
-                                    <div className='mt-4 text-center'>
-                                        <button className='Espero acordarme de cambiar esto' onClick={e=>addComActs(e, activities) }>¡Apuntate!</button>
-                                    </div>
+                                    <Col className="lg-3 col-md-3 sm-3 col-12">
+                                        <Button className="flex-grow-1 w-100">Follow</Button>
+                                    </Col>
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>}
+                </Col>
             </Tab>
-        </Tabs>
-        {comAct.length == 0 && 
+            {periodicAct.length == 0 && 
             <h2 className="noActivity">
                 No tienes ninguna actividad en las fechas seleccionadas.
             </h2>
+            }
+            <Tab eventKey="signedAct" title="Apuntado">
+                <Col xs="12" sm="12" md="12" lg="12" xl="12" className='px-5'>
+                    {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
+                        {comAct.map((activities) => (//Es un for each no se asusten
+                            <Col key={activities.activityId + activities.ActDate}>
+                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+                                <Card.Img  className='card-img-top rounded-bottom p-0'
+                                    style={{ borderRadius: '50px',
+                                    objectFit: 'cover',
+                                    height: '180px',
+                                    zIndex: 1 }}
+                                    src={futbol}
+                                    alt="Activity image"
+                                    fluid
+                                    />
+                                    <Card.Body>
+                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
+                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
+                                        <div className='mt-4 text-center'>
+                                        <Col className="lg-3 col-md-3 sm-3 col-12">
+                                            <Button className="flex-grow-1 w-100">Follow</Button>
+                                        </Col>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                    ))}
+                    </Row>}
+                    {comAct.length == 0 && 
+                        <h2 className="noActivity">
+                            No tienes ninguna actividad en las fechas seleccionadas.
+                        </h2>
         }
+                </Col>
+            </Tab>
+        </Tabs>
+        
     </div>
     /*
         <div className="container mt-5 top">

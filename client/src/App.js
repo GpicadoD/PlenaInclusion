@@ -26,6 +26,10 @@ function App() {
           <Route path="/activityprofile" element={<><Barra/><ActivityProfile/><Pie/></>} />
 
           <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
+          <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
+          <Route path="/dashboard" element={<><Barra/><ProtoDash/><Pie/></>} />
+          <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
+          <Route path="/addnewActivity" element={<><Barra/><AddNewActivity/></>} />
 
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
           <Route path="/addnewactivity" element={<><Barra/><AddNewActivity/></>} />
