@@ -32,6 +32,7 @@ const AddNewActivity = () => {
     const navigation = useNavigate();
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
+    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
 
     const Add = async (e) => {
         e.preventDefault();
