@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -8,9 +8,21 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 const ActivityProfile = () => {
+  const [user, setUser] = useState({
+    userNIF: '1',
+    name: '',
+    lastname:'',
+    email:'',
+    birthdate:'',
+    phoneNumber:'',
+    gender:'',
+    accessToken:''
+  });
+  const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
   const[userNIF,setUserNif] = useState('');
   const[userName,setUserName] = useState('');
   const[userLastName, setUserLastName] = useState ('');
@@ -20,7 +32,9 @@ const ActivityProfile = () => {
   const[password,setuserPassword] = useState('');
   const[userGender,setUserGender] = useState('');
   const[msg, setMsg] = useState('');
-  const history = useNavigate();
+  const [token, setToken] = useState('');
+  const [expire, setExpire] = useState('');
+  const navigation = useNavigate();
   const Show = async (e) => {
       e.preventDefault();
       try{
@@ -62,23 +76,30 @@ const Update = async (e) => {
       }      
   } 
 }
-const LogOut = async (e) => {
-  e.preventDefault();
-  try{
-    const response = await axios.post('/logout',{
-          userNIF: userNIF
-      }
-    )
-    console.log(response.data);
-    history("/login");
-  }
-
-    catch (error) {
+const refreshToken = async () => {
+  try {
+      const response = await axios.get('/token');
+      setToken(response.data.accessToken);
+      //console.log(response.data.accessToken);
+      const decoded = jwt_decode(response.data.accessToken);
+      setUser({
+          ...user, // Copy other fields
+          userNIF: decoded.userNIF,
+          name: decoded.name
+      });
+      setExpire(decoded.exp);
+      console.log(decoded.userNIF);
+      setNifCom("NifCom:");
+      setNifCom(decoded.userNIF);
+  } catch (error) {
       if (error.response) {
-        setMsg(error.response.data.msg);
-      }      
-  } 
-};
+          navigation("/");
+      }
+  }
+}
+useEffect(() => {   
+refreshToken();
+}, []);
 
 return(
       <div className="" style={{ backgroundColor: '#dde8e8' }}>
