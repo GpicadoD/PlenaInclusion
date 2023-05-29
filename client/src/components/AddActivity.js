@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import jwt_decode from "jwt-decode";
+import { confirmAlert } from 'react-confirm-alert';
 
 const AddNewActivity = () => {
     const [user, setUser] = useState({
@@ -33,10 +34,13 @@ const AddNewActivity = () => {
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
+    const [selectedImages, setSelectedImages] = useState('');
+    const [previewImages, setPreviewImages] = useState('');
 
     const Add = async (e) => {
         e.preventDefault();
         try {
+            //confirmAlert();
             await axios.post('/AddnewActivities', {
                 activityId: activityId,
                 nameAct: nameAct,
@@ -74,6 +78,47 @@ const AddNewActivity = () => {
             }
         }
     }
+    const options = {
+        title: 'Confirmacion',
+        message: '¿Estas seguro de añadir la actividad?',
+        buttons: [
+            {
+            label: 'Si',
+            onClick: Add
+            },
+            {
+            label: 'No',
+            }
+        ],
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        keyCodeForClose: [8, 32],
+        willUnmount: () => {},
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypress: () => {},
+        onKeypressEscape: () => {},
+        overlayClassName: "overlay-custom-class-name"
+    };
+    const AddImage = async (e) => {
+        e.preventDefault();
+        console.log(previewImages);
+        const formData = new FormData();
+        formData.append('file', selectedImages);
+    
+        axios.post('/upload', formData)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
+    useEffect(() => {   
+        refreshToken();
+        }, []);
 
     return (
         <div style={{
@@ -133,9 +178,9 @@ const AddNewActivity = () => {
                                             </Col>
                                             <Col>
                                                 <div className="d-flex flex-column align-items-center">
-                                                    <Button variant="success" type="submit" className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
+                                                    <Form.Control variant="success" type="submit" onClick={(e) => AddImage} className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
                                                         AÑADIR IMAGEN
-                                                    </Button>
+                                                    </Form.Control>
                                                 </div>
                                             </Col>
 
@@ -150,7 +195,7 @@ const AddNewActivity = () => {
                                             <Col>
                                                 <div className="d-flex flex-column align-items-end">
                                                     <Button variant="success" type="submit" className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#00820B', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
-                                                        AÑADIR AACTIVIDAD
+                                                        AÑADIR ACTIVIDAD
                                                     </Button>
                                                 </div>
                                             </Col>
