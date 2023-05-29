@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/activityprofile" element={<><Barra/><ActivityProfile/><Pie/></>} />
           <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
-          <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
+          <Route path="/dashboard" element={<><Barra/><ProtoDash/><Pie/></>} />
           <Route path="/addnewuser" element={<><Barra/><AddNewUser/></>} />
 //lacal
           <Route path="/addnewActivity" element={<><Barra/><AddNewActivity/></>} />
