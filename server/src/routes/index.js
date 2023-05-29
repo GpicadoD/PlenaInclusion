@@ -233,7 +233,7 @@ router.post('/logout',Logout);
 
 router.post('/getperiodicActsByUserDate',GetperiodicActsByUserDate);
 router.get('/verifyToken', verifyToken);
-
+router.post("/uploadImgAct", uploadFile.single("file"), uploadImgAct);
 router.post("/upload", uploadFile.single("file"), uploadImgOrg);
 
 router.post("/getImg", uploadFile.single("file"), getImg);
