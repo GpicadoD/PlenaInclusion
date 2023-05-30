@@ -101,7 +101,7 @@ const refreshToken = async () => {
       setNifCom(decoded.userNIF);
   } catch (error) {
       if (error.response) {
-          navigation("/");
+          navigation(-1);
       }
   }
 }

@@ -97,10 +97,14 @@ const AddNewActivity = () => {
             setNifCom(decoded.userNIF);
         } catch (error) {
             if (error.response) {
-                navigation("/");
+                navigation(-1);
             }
         }
     };
+    useEffect(() => {   
+        console.log("useEffects ok");
+        refreshToken();
+    }, []);
 
     const PreviewImg = async (e) => {
         setSelectedImages(e.target.files[0]);

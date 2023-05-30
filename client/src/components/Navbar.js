@@ -17,7 +17,6 @@ const Barra = () => {
     const navigation = useNavigate();
 
     const LogOut = async (e) => {
-        e.preventDefault();
         console.log('hola');
         try{
             const response = await axios.post('/logout')
@@ -37,13 +36,13 @@ const Barra = () => {
         message: '¿Estas seguro de cerrar sesión?',
         buttons: [
             {
-            label: 'Si',
-            onClick: () => LogOut
+                label: 'Si',
+                onClick: LogOut
             },
             {
-            label: 'No',
-            onClick: () => alert('Click No')
-            }
+                label: 'No',
+                onClick: () => alert('Click No')
+            },
         ],
         closeOnEscape: true,
         closeOnClickOutside: true,
@@ -79,11 +78,11 @@ const Barra = () => {
 
                 <Dropdown.Menu>
                     <Dropdown.Item href="/activityprofile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
-                    <Dropdown.Item href="#/action-1" style={{fontWeight: 600}} type="submit" onClick={(e) => confirmAlert(options)}><Nav.Link className='submenu'>LOGOUT</Nav.Link></Dropdown.Item>
-                     /*
+                    <Dropdown.Item    href="#/action-1" style={{ fontWeight: 600 }} type="submit" onClick={(e) => confirmAlert(options)}  ><Nav.Link className='submenu'>LOGOUT</Nav.Link></Dropdown.Item>
+                     {/*
                     <Dropdown.Item href="/userProfile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
                     <Dropdown.Item href="#/action-1" style={{fontWeight: 600}}><Nav.Link className='submenu' onClick={LogOut}>LOGOUT</Nav.Link></Dropdown.Item>
-                    */
+                    */}
                 </Dropdown.Menu>
             </Dropdown>
                 </Nav>

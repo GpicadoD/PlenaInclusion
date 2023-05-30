@@ -66,7 +66,7 @@ const Login = () => {
                     <Form onSubmit={Auth} className='bg-white text-white bg-opacity-75 p-3 mb-5 lg-10' style={{ borderRadius: '50px', padding: '50px' }}>
                         <Form.Group className="field mt-4 mb-4">
                             <Col className="container pl-2 col-12">
-                                <Row>3
+                                <Row>
                                     <div className="d-flex justify-content-center mt-4 mb-4"> {/* Agregado: Centrar imagen */}
                                         <Image src={PlenaInclusionLogo} alt="" height={70} /> {/* Modificado: Ajustar altura de la imagen */}
                                     </div>
