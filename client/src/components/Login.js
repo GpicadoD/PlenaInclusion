@@ -8,13 +8,10 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PlenaInclusionLogo from '../../src/img/logo_plena-inclusion.png';
-import {Link} from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 
 const Login = () => {
     const [newUserNif, setnewUserNif] = useState('');
     const [password, setPassword] = useState('');
-    const [msg, setMsg] = useState('');
     const history = useNavigate();
 
     const Auth = async (e) => {
@@ -26,37 +23,10 @@ const Login = () => {
             });
             history("/protodash", {state:{newUserNif}});
         } catch (error) {
-            if (error.response) {
-                setMsg(error.response.data.msg);
-            }
         }
     }
     
     return (
-        {/*<section className="hero has-background-grey-light is-fullheight is-fullwidth">
-            <div className="hero-body">
-                <div className="container">
-                    <div className="columns is-centered">
-                        <div className="column is-4-desktop">
-                            <form onSubmit={Auth} className="box">
-                                <div className="field mt-5">
-                                    <label className="label">UserNIF</label>
-                                    <div className="controls">
-                                        <input type="username" className="input" placeholder="Username" value={newUserNif} onChange={(e) => setnewUserNif(e.target.value)} />
-                                    </div>
-                                </div>
-                                <div className="field mt-5">
-                                    <label className="label">Password</label>
-                                    <div className="controls">
-                                        <input type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>*/},
         <div style={{
             backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,
             backgroundSize: "cover",

@@ -1,3 +1,6 @@
+// These lines of code import necessary libraries and modules for the component to work.
+// Specifically, it imports React, useState, and useEffect from the 'react' library,
+// axios for making API requests, and several components from the 'react-bootstrap' library.
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -8,7 +11,10 @@ import Row from 'react-bootstrap/esm/Row';
 import jwt_decode from "jwt-decode";
 import React, { useState, useEffect } from 'react'
 
+// Define the AddNewUser component
 const AddNewUser = () => {
+
+    // Define state variables using the useState hook
     const [user, setUser] = useState({
         userNIF: '1',
         name: '',
@@ -31,6 +37,8 @@ const AddNewUser = () => {
     const [expire, setExpire] = useState('');
     const history = useNavigate();
 
+
+    // Function to add a new user
     const Add = async (e) => {
         e.preventDefault();
         try {
@@ -50,6 +58,8 @@ const AddNewUser = () => {
             }
         }
     }
+
+    // Function to refresh the token
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -68,32 +78,37 @@ const AddNewUser = () => {
             }
         }
     }
+
+      // Create an instance of axios with interceptors for JWT authentication
+
     const axiosJWT = axios.create();
-    axiosJWT.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
-            const response = await axios.get('/token');
-            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            setToken(response.data.accessToken);
-            const decoded = jwt_decode(response.data.accessToken);
-            setUser({
-                ...user, // Copy other fields
-                userNIF: decoded.userNIF,
-            });
-            config.params = {
-                userNIF: decoded.userNIF
-            }
-            setExpire(decoded.exp);
-        } else {
-            config.headers.Authorization = `Bearer ${token}`;
-            config.params = {
-                userNIF: user.userNIF
-            }
-        }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
+axiosJWT.interceptors.request.use(async (config) => {
+  try {
+    const currentDate = new Date();
+    if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+      const response = await axios.get('/token');
+      config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+      setToken(response.data.accessToken);
+      const decoded = jwt_decode(response.data.accessToken);
+      setUser({
+        ...user, // Copy other fields
+        userNIF: decoded.userNIF,
+      });
+      config.params = {
+        userNIF: decoded.userNIF
+      }
+      setExpire(decoded.exp);
+    } else {
+      config.headers.Authorization = `Bearer ${token}`;
+      config.params = {
+        userNIF: user.userNIF
+      }
+    }
+    return config;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+});
 
     useEffect(() => {   
         console.log("useEffects ok");

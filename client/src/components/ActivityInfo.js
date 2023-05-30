@@ -27,7 +27,6 @@ const ActivityInfo = () => {
       gender:'',
       accessToken:''
     });
-    const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -96,15 +95,7 @@ const ActivityInfo = () => {
           setToken(response.data.accessToken);
           //console.log(response.data.accessToken);
           const decoded = jwt_decode(response.data.accessToken);
-          setUser({
-              ...user, // Copy other fields
-              userNIF: decoded.userNIF,
-              name: decoded.name
-          });
           setExpire(decoded.exp);
-          console.log(decoded.userNIF);
-          setNifCom("NifCom:");
-          setNifCom(decoded.userNIF);
       } catch (error) {
           if (error.response) {
               navigation("/");

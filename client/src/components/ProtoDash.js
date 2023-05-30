@@ -1,4 +1,14 @@
-import React, { useState, useEffect } from 'react';
+// These lines of code import necessary libraries and modules for the component to work.
+// Specifically, it imports React, useState, and useEffect from the 'react' library,
+// Form, Button, Col, Row, Card, Container, Nav, and Navbar components from the 'react-bootstrap' library,
+// axios for making API requests, useNavigate from 'react-router-dom',
+// 'bootstrap/dist/css/bootstrap.min.css' for Bootstrap styling,
+// 'bootstrap/dist/css/bootstrap.css' for additional Bootstrap styling,
+// '../App.css' for custom CSS styles,
+// useLocation from 'react-router-dom',
+// Tab and Tabs components from the 'react-bootstrap' library,
+// and jwt_decode for decoding JSON Web Tokens (JWT).
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -37,6 +47,7 @@ const ProtoDash = () => {
     const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
 
     // This sets the current date of the activity and then it adds a week
     var curr = new Date();
@@ -117,21 +128,20 @@ const ProtoDash = () => {
     };
     // This adds the ComActs and the users
     const addComActs = async (e, activities) => {
-        
         try {
             console.log("AddedComacts ok");
-            
+            e.preventDefault();
             console.log(activities);
             await axios.post('/insertCompact', {
                 idAct: activities.activityId,
                 idUser: NifCom,
                 actDate: activities.actDate
             });
-            console.log("post AddedComacts ok");
             setJoin(true);
         } catch (error) {
-        console.log(error);
-    }};
+            console.log(error);
+        }
+    };
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -183,30 +193,49 @@ const ProtoDash = () => {
     // funcion que actualiza el accessToken si es necesario
     // y en config añade los headers y los datos para las queries
     axiosJWT.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+        try {
+          const currentDate = new Date();
+          if (expire * 1000 < currentDate.getTime() || expire == undefined) {
             const response = await axios.get('/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
-                ...user, // Copy other fields
-                userNIF: decoded.userNIF,
+              ...user, // Copy other fields
+              userNIF: decoded.userNIF,
             });
             config.params = {
-                userNIF: decoded.userNIF
+              userNIF: decoded.userNIF
             }
             setExpire(decoded.exp);
-        } else {
+          } else {
             config.headers.Authorization = `Bearer ${token}`;
             config.params = {
-                userNIF: user.userNIF
+              userNIF: user.userNIF
             }
+          }
+          return config;
+        } catch (error) {
+          return Promise.reject(error);
         }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
     });
+
+    const showConfirmation = (e, activities) => {
+        confirmAlert({
+          title: 'Confirmación',
+          message: '¿Estás seguro de unirte a esta actividad?',
+          buttons: [
+            {
+              label: 'Sí',
+              onClick: () => addComActs(e, activities)
+            },
+            {
+              label: 'No',
+              onClick: () => {}
+            }
+          ]
+        });
+    };
     
     const added = async (e) => {
         setJoin(false);
@@ -215,21 +244,6 @@ const ProtoDash = () => {
     const test = async (e) => {
         setJoin(true);
     }
-
-    const LogOut = async (e) => {
-        e.preventDefault();
-        try{
-            const response = await axios.post('/logout')
-            console.log("log 1");
-            console.log(response.data);
-            navigation("/login");
-        }
-        catch (error) {
-            if (error.response) {
-                console.log(error.response.data.msg);
-            }      
-        } 
-    };
     useEffect(() => {   
         console.log("useEffects ok");
         refreshToken();
@@ -237,7 +251,6 @@ const ProtoDash = () => {
     }, []);
     useEffect(() => {   
         console.log("Join ok");
-        defaultDate();
         getAct(new Event('firstTime'));
         added();
     }, [join]);
@@ -296,7 +309,7 @@ return (
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
                                     {NifCom != 1 &&
-                                        <Button onClick={(e)=>confirmAlert(options,activities)} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>
+                                        <Button onClick={e=>addComActs(e, activities)} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>
                                     }
                                 </Card.Body>
                             </Card>
