@@ -150,7 +150,7 @@ router.post('/register', async (req, res) => {
 // Define routes for get the user-activity list-related actions
 
 // Define routes for get activity list-related actions and for adding new ones
-router.post('/getnewAct',verifyToken, GetnewActivities);
+router.post('/getnewAct', GetnewActivities);
 router.post('/AddnewActivities', AddnewActivities);
 
 router.post('/AddorgType',verifyToken, AddorgType);

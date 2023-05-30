@@ -146,6 +146,10 @@ const ProtoDash = () => {
         } catch (error) {
             console.log(error);
         }
+    };
+    const toActivityInfo = async (e) => {
+        console.log(e);
+        navigation("/ActivityInfo", {state:{e}});
     }
     
 
@@ -302,7 +306,7 @@ return (
                                                 <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
                                                 <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
                                                 <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
-                                                <Button onClick={navigation("/ActivityInfo")} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>VER MÁS</Button>
+                                                <Button value={activities.activityId} onClick={(e) => toActivityInfo(e.target.value)} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>VER MÁS</Button>
                                             </Card.Body>
                                         </Card>
                                     </Col>

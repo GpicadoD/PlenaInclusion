@@ -10,9 +10,11 @@ import futbol from '../../src/img/futbol.jpeg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
+import {useLocation} from 'react-router-dom';
 
 
 const ActivityInfo = () => {
+  const location = useLocation();
   // The 'useState' hooks initialize state variables for 'activityId', 
   // 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' respectively
     const [user, setUser] = useState({
@@ -36,7 +38,7 @@ const ActivityInfo = () => {
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const navigation = useNavigate();
-
+    const [actID, setActID] = useState();
     // The 'Show' function makes an API request to the server with the 'activityId' state as a parameter, 
     //and sets the state variables for 'nameAct', 'startDate', 'finishDate', 'Description', 'Limit', and 'msg' with the returned data if the request is successful. 
     //If there is an error, it sets the 'msg' state variable with the error message.
@@ -45,10 +47,9 @@ const ActivityInfo = () => {
       e.preventDefault();
       try{
         const response = await axios.post('/getnewAct', {
-          activityId: activityId
+          activityId: actID
         }
         )
-        console.log(response.data);
         setActivityId(response.data.activityId);
         setNameAct(response.data.nameAct);
         setStartDate(response.data.startDate);
@@ -108,6 +109,8 @@ const ActivityInfo = () => {
   }
   useEffect(() => {   
     refreshToken();
+    setActID(location.state.e);
+    Show(new Event ('First'));
 }, []);
 
     // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
@@ -131,13 +134,13 @@ const ActivityInfo = () => {
                 <Row className="d-flex text-black px-5" style={{display: 'flex'}}>
                   <Col className="d-flex flex-column mb-3 col-md-12 col-12">
                     <Row className='justify-content-center mb-4'>
-                      <Card.Text className='col-md-7 col-12 mb-0'><span style={{ fontWeight: '600', fontStyle: 'italic', fontSize: '30px' }}>NAMEACT:</span> {nameAct}</Card.Text>
+                      <Card.Text className='col-md-7 col-12 mb-0'><span style={{ fontWeight: '600', fontStyle: 'italic', fontSize: '30px' }}>Nombre: {nameAct}</span></Card.Text>
                       <Button variant="success col-md-5 col-12" style={{ fontWeight: '600', fontStyle: 'italic' }}>CAMBIAR FOTO DE PERFIL</Button>{' '}
                     </Row>
                     <Row className='fs-4 fs-md-5 fs-lg-6 mb-1'>
                       <Col className="lg-3 col-md-3 sm-3 col-12">
-                        <p className="text-muted mb-0"><span>NIF:</span> {setStartDate}</p>
-                        <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                        <p className="text-muted mb-0"><span>NIF: {nameAct}</span> {setStartDate}</p>
+                        <p><span style={{ fontWeight: '600' }} >PRUEBA</span></p>
                       </Col>
                       <Col className="lg-3 col-md-3 sm-3 col-12">
                         <p className="text-muted mb-0"><span>Gender:</span> {setFinishDate}</p>
