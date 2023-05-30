@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -83,6 +83,11 @@ const LogOut = async (e) => {
       }      
   } 
 }
+useEffect(() => {   
+  //refreshToken();
+  Show();
+  }, []);
+
 return(
       <div className="vh-100" style={{ backgroundColor: '#9de2ff' }}>
         <Container>
@@ -99,8 +104,8 @@ return(
                         fluid />
                     </div>
                     <div className="flex-grow-1 ms-3">
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>Name:</span> {userName}</Card.Text>
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>lastname:</span> {userLastName}</Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>Name:</span>{userName} </Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>lastname:</span> {userLastName} </Card.Text>
                         <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
                           style={{ backgroundColor: '#efefef' }}>
                           <div>
@@ -111,14 +116,14 @@ return(
                           </div>
                     </div>
                     <div>
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>birthdate:</span> {userBirthDate}</Card.Text>
-                      <Card.Text><span style={{ fontWeight: 'bold' }}>phoneNumber:</span> {phoneNumber}</Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>birthdate:</span> {userBirthDate} </Card.Text>
+                      <Card.Text><span style={{ fontWeight: 'bold' }}>phoneNumber:</span> {phoneNumber} </Card.Text>
                     </div>
                           <Form onSubmit={Show} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                             <Form.Group className="field mt-4 mb-4">
                               <div className="container pl-2 ">
                                 <Form.Label className=" d-flex justify-content-center" style={{fontSize: 20}}>NIF del Usuario</Form.Label>
-                                <Form.Control type="username" placeholder="12345678A" value={userNIF} onChange={(e) => setUserNif(e.target.value)} />
+                                <Form.Control type="username" placeholder="12345678A" value={userNIF}/>
                                 <Button variant="success" type="submit" className= "border-dark w-100">
                                     Entrar
                                 </Button> 

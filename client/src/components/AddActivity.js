@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -178,9 +178,9 @@ const AddNewActivity = () => {
                                             </Col>
                                             <Col>
                                                 <div className="d-flex flex-column align-items-center">
-                                                    <Form.Control variant="success" type="submit" onClick={(e) => AddImage} className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
+                                                    <Button variant="success" type="submit" onClick={(e) => AddImage} className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
                                                         AÑADIR IMAGEN
-                                                    </Form.Control>
+                                                    </Button>
                                                 </div>
                                             </Col>
 
