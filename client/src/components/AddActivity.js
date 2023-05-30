@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import jwt_decode from "jwt-decode";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const AddNewActivity = () => {
     const [user, setUser] = useState({
@@ -43,7 +45,7 @@ const AddNewActivity = () => {
                 nameAct: nameAct,
                 idPublicType: idPublicType,
                 idTheme: idTheme,
-                idImgAct: idImgAct,
+                idImgAct: null,
                 startDate: startDate,
                 finishDate: finishDate,
                 idPeriod: idPeriod,
@@ -53,6 +55,29 @@ const AddNewActivity = () => {
         } catch (error) {
             console.log(error);
         }
+    };
+    const options = {
+        title: 'Confirmacion',
+        message: '¿Estas seguro?',
+        buttons: [
+            {
+            label: 'Yes',
+            onClick: () => Add
+            },
+            {
+            label: 'No',
+            onClick: () => console.log('no')
+            }
+        ],
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        keyCodeForClose: [8, 32],
+        willUnmount: () => {},
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypress: () => {},
+        onKeypressEscape: () => {},
+        overlayClassName: "overlay-custom-class-name"
     };
 
     const refreshToken = async () => {
@@ -107,7 +132,7 @@ const AddNewActivity = () => {
         }}>
             <div className='bg-success bg-opacity-25'>
                 <div className="form-container vh-100 d-flex justify-content-center align-items-center">
-                    <Form onSubmit={Add} className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
+                    <Form onSubmit={(e) => confirmAlert(options)} className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
                         <Form.Group className="field mt-4 mb-4">
                             <div className="Formulario_usuario container pl-2 ">
                                 <div className="d-flex justify-content-center">

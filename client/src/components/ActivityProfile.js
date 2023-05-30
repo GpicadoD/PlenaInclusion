@@ -7,6 +7,7 @@ import CardImg from 'react-bootstrap/esm/CardImg';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import axios from 'axios';
+import {useLocation} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -37,7 +38,9 @@ const ActivityProfile = () => {
   const [token, setToken] = useState('');
   const [expire, setExpire] = useState('');
   const navigation = useNavigate();
+  const location = useLocation();
   const Show = async (e) => {
+    
       e.preventDefault();
       try{
         const response = await axios.post('/newUser',{
@@ -101,6 +104,7 @@ const refreshToken = async () => {
 }
 useEffect(() => {   
 refreshToken();
+Show(new Event("first-time"));
 }, []);
 
 return(
@@ -122,13 +126,13 @@ return(
                     <Col className='col-md-9 col-sm-12 xs-12 fs-4 fs-md-5 fs-lg-6 fs-xl-7'>
                       <div className="flex-grow-1 xl-5 lg-5 ms-0 ms-md-5" style={{ fontStyle: 'italic' }}>
                         <Card.Text className='fs-1'>
-                          <span style={{ fontWeight: 'bold' }}>Name:</span><span style={{ fontWeight: 'bold' }}>{userName}</span>
+                          <span style={{ fontWeight: 'bold' }}>Name:{userName}</span><span style={{ fontWeight: 'bold' }}></span>
                           <span style={{ fontWeight: 'bold' }}>lastname:</span><span style={{ fontWeight: 'bold' }}>{userLastName}</span>
                         </Card.Text>
                         <Row className="d-flex justify-content-start rounded-3 p-1 xs-12">
                           <Col className="lg-4 col-md-4 sm-4 col-12">
                             <p className="text-muted mb-0"><span>NIF:</span> {userNIF}</p>
-                            <p><span style={{ fontWeight: '600' }}>PRUEBA</span></p>
+                            <p><span style={{ fontWeight: '600' }} value = {userNIF} ></span></p>
                           </Col>
                           <Col className="lg-4 col-md-4 sm-4 col-12">
                             <p className="text-muted mb-0"><span>Gender:</span> {userGender}</p>
@@ -165,6 +169,9 @@ return(
                         <Button className='w-100 rounded-10 boton-naranja' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>CAMBIAR CONTRASEÑA</Button>{' '}
                       </Col>
                     </Row>
+
+
+                    
                           {/* <Form onSubmit={LogOut} className='bg-success text-white bg-opacity-50 border border-dark rounded w-25 shadow-lg p-3 mb-5 rounded'style={{minWidth: "250px"}}>
                             <Form.Group className="field mt-4 mb-4">
                               <div className="container pl-2 ">
