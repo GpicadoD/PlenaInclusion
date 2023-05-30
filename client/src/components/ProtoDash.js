@@ -27,6 +27,8 @@ import {useLocation} from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import jwt_decode from "jwt-decode";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 // ProtoDash is a dashboard made from 0 to better understand its function, first it uses the ComAct and set it for later in the return
 const ProtoDash = () => {
@@ -45,6 +47,7 @@ const ProtoDash = () => {
     const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
 
     // This sets the current date of the activity and then it adds a week
     var curr = new Date();
@@ -126,18 +129,19 @@ const ProtoDash = () => {
     // This adds the ComActs and the users
     const addComActs = async (e, activities) => {
         try {
-            console.log("AddedComacts ok");
-            e.preventDefault();
-            console.log(activities);
-            await axios.post('/insertCompact', {
-                idAct: activities.activityId,
-                idUser: NifCom,
-                actDate: activities.actDate
-            });
-            setJoin(true);
+          console.log("AddedComacts ok");
+          e.preventDefault();
+          console.log(activities);
+          await axios.post('/insertCompact', {
+            idAct: activities.activityId,
+            idUser: NifCom,
+            actDate: activities.actDate
+          });
+          setJoin(true);
         } catch (error) {
-        console.log(error);
-    }};
+          console.log(error);
+        }
+      };
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -192,7 +196,24 @@ const ProtoDash = () => {
         } catch (error) {
           return Promise.reject(error);
         }
-      });
+    });
+
+    const showConfirmation = (e, activities) => {
+        confirmAlert({
+          title: 'Confirmación',
+          message: '¿Estás seguro de unirte a esta actividad?',
+          buttons: [
+            {
+              label: 'Sí',
+              onClick: () => addComActs(e, activities)
+            },
+            {
+              label: 'No',
+              onClick: () => {}
+            }
+          ]
+        });
+    };
     
     const added = async (e) => {
         setJoin(false);
@@ -201,21 +222,6 @@ const ProtoDash = () => {
     const test = async (e) => {
         setJoin(true);
     }
-
-    const LogOut = async (e) => {
-        e.preventDefault();
-        try{
-            const response = await axios.post('/logout')
-            console.log("log 1");
-            console.log(response.data);
-            navigation("/login");
-        }
-        catch (error) {
-            if (error.response) {
-                console.log(error.response.data.msg);
-            }      
-        } 
-    };
     useEffect(() => {   
         console.log("useEffects ok");
         refreshToken();
@@ -223,7 +229,6 @@ const ProtoDash = () => {
     }, []);
     useEffect(() => {   
         console.log("Join ok");
-        defaultDate();
         getAct(new Event('firstTime'));
         added();
     }, [join]);
@@ -282,7 +287,12 @@ return (
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
                                     {NifCom != 1 &&
-                                        <Button onClick={e=>addComActs(e, activities)} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>
+                                        <Button
+                                        onClick={(e) => showConfirmation(e, activities)}
+                                        className='w-100 border-3'
+                                        variant="success mt-3"
+                                        style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}
+                                      >APUNTARSE</Button>
                                     }
                                 </Card.Body>
                             </Card>

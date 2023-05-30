@@ -19,6 +19,15 @@ export const GetNewUser = async(req, res) => {
     }
 }
 
+export const GetAllUser = async(req, res) => {
+    try {
+        let usersData = await newUsers.findAll();
+        res.json(usersData);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 // This code defines a controller function called "UpdateUser" that updates an existing user in the database based on the provided userNIF (primary key)
 // If any properties are not provided in the request body, they will default to the current values stored in the database
