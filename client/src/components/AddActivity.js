@@ -11,6 +11,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const AddNewActivity = () => {
+   // Define the state variables using the useState hook
     const [user, setUser] = useState({
         userNIF: '1',
         name: '',
@@ -21,6 +22,7 @@ const AddNewActivity = () => {
         gender:'',
         accessToken:''
     });
+    
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [idPublicType, setIdPublicType] = useState('');
@@ -38,8 +40,10 @@ const AddNewActivity = () => {
     const [previewImages, setPreviewImages] = useState('');
 
     const Add = async (e) => {
+        // Function to add a new activity
         e.preventDefault();
         try {
+            // Make a POST request to add a new activity
             await axios.post('/AddnewActivities', {
                 activityId: activityId,
                 nameAct: nameAct,
@@ -129,6 +133,8 @@ const AddNewActivity = () => {
         setIdImgAct(idimage.idImgAct);
     };
 
+    // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
+    // 'nameAct', and 'Description' state variables. It also displays the 'msg' state variable if there is an error.
     return (
         <div style={{
             backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,

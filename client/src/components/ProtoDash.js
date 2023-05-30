@@ -1,4 +1,14 @@
-import React, { useState, useEffect } from 'react';
+// These lines of code import necessary libraries and modules for the component to work.
+// Specifically, it imports React, useState, and useEffect from the 'react' library,
+// Form, Button, Col, Row, Card, Container, Nav, and Navbar components from the 'react-bootstrap' library,
+// axios for making API requests, useNavigate from 'react-router-dom',
+// 'bootstrap/dist/css/bootstrap.min.css' for Bootstrap styling,
+// 'bootstrap/dist/css/bootstrap.css' for additional Bootstrap styling,
+// '../App.css' for custom CSS styles,
+// useLocation from 'react-router-dom',
+// Tab and Tabs components from the 'react-bootstrap' library,
+// and jwt_decode for decoding JSON Web Tokens (JWT).
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -157,30 +167,32 @@ const ProtoDash = () => {
     // funcion que actualiza el accessToken si es necesario
     // y en config añade los headers y los datos para las queries
     axiosJWT.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+        try {
+          const currentDate = new Date();
+          if (expire * 1000 < currentDate.getTime() || expire == undefined) {
             const response = await axios.get('/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
-                ...user, // Copy other fields
-                userNIF: decoded.userNIF,
+              ...user, // Copy other fields
+              userNIF: decoded.userNIF,
             });
             config.params = {
-                userNIF: decoded.userNIF
+              userNIF: decoded.userNIF
             }
             setExpire(decoded.exp);
-        } else {
+          } else {
             config.headers.Authorization = `Bearer ${token}`;
             config.params = {
-                userNIF: user.userNIF
+              userNIF: user.userNIF
             }
+          }
+          return config;
+        } catch (error) {
+          return Promise.reject(error);
         }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
+      });
     
     const added = async (e) => {
         setJoin(false);

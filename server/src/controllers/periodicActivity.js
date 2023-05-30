@@ -15,6 +15,7 @@ export const GetperiodicActs  = async(req, res) => {
     }
 }
 
+
 export const GetperiodicActsByUserDate  = async(req, res) => {
   const { startDate, endDate, NifCom } = req.body;
   try {
