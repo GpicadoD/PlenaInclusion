@@ -37,8 +37,7 @@ const AddNewActivity = () => {
     const [selectedImages, setSelectedImages] = useState('');
     const [previewImages, setPreviewImages] = useState('');
 
-    const Add = async (e) => {
-        e.preventDefault();
+    const Add = async () => {
         try {
             await axios.post('/AddnewActivities', {
                 activityId: activityId,
@@ -56,29 +55,7 @@ const AddNewActivity = () => {
             console.log(error);
         }
     };
-    const options = {
-        title: 'Confirmacion',
-        message: '¿Estas seguro?',
-        buttons: [
-            {
-            label: 'Yes',
-            onClick: () => Add
-            },
-            {
-            label: 'No',
-            onClick: () => console.log('no')
-            }
-        ],
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-        keyCodeForClose: [8, 32],
-        willUnmount: () => {},
-        afterClose: () => {},
-        onClickOutside: () => {},
-        onKeypress: () => {},
-        onKeypressEscape: () => {},
-        overlayClassName: "overlay-custom-class-name"
-    };
+    
 
     const refreshToken = async () => {
         try {
@@ -136,7 +113,7 @@ const AddNewActivity = () => {
         }}>
             <div className='bg-success bg-opacity-25'>
                 <div className="form-container vh-100 d-flex justify-content-center align-items-center">
-                    <Form onSubmit={(e) => confirmAlert(options)} className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
+                    <Form onSubmit={Add}className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
                         <Form.Group className="field mt-4 mb-4">
                             <div className="Formulario_usuario container pl-2 ">
                                 <div className="d-flex justify-content-center">
