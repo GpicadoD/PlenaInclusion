@@ -105,12 +105,26 @@ const refreshToken = async () => {
       }
   }
 }
-useEffect(() => {   
-
-refreshToken();
-}, []);
+const showConfirmation = (e, activities) => {
+  confirmAlert({
+    title: 'Confirmación',
+    message: '¿Estás seguro de unirte a esta actividad?',
+    buttons: [
+      {
+        label: 'Sí',
+        onClick: () => UpdatePass(e)
+      },
+      {
+        label: 'No',
+        onClick: () => {}
+      }
+    ]
+  });
+};
 useEffect(() => {   
   refreshToken();
+}, []);
+useEffect(() => {   
   Show(new Event ('First'));
 }, [NifCom]);
 
@@ -133,8 +147,8 @@ return(
                     <Col className='col-md-9 col-sm-12 xs-12 fs-4 fs-md-5 fs-lg-6 fs-xl-7'>
                       <div className="flex-grow-1 xl-5 lg-5 ms-0 ms-md-5" style={{ fontStyle: 'italic' }}>
                         <Card.Text className='fs-1'>
-                          <span style={{ fontWeight: 'bold' }}>Name:</span><span style={{ fontWeight: 'bold' }}>{userName}</span>
-                          <span style={{ fontWeight: 'bold' }}>lastname:</span><span style={{ fontWeight: 'bold' }}>{userLastName}</span>
+                          <span style={{ fontWeight: 'bold' }}></span><span style={{ fontWeight: 'bold' }}>{userName}</span>
+                          <span style={{ fontWeight: 'bold' }}> </span><span style={{ fontWeight: 'bold' }}>{userLastName}</span>
                         </Card.Text>
                         <Row className="d-flex justify-content-start rounded-3 p-1 xs-12">
                           <Col className="lg-4 col-md-4 sm-4 col-12">
@@ -173,7 +187,7 @@ return(
                       </Col>
                       <Col className="col-md-4 col-12">
                         <Form.Control type={shown ? 'text' : 'password'} placeholder="Antigua Contraseña" onChange={(e) => setOldPassword(e.target.value)} />
-                        <Button onClick={UpdatePass} className='w-100 rounded-10 boton-naranja' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>CAMBIAR CONTRASEÑA</Button>{' '}
+                        <Button onClick={(e) => showConfirmation(e)} className='w-100 rounded-10 boton-naranja' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>CAMBIAR CONTRASEÑA</Button>{' '}
                       </Col>
                     </Row>
                   </Card.Body>

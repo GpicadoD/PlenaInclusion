@@ -22,7 +22,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login/>} />
-          <Route path="/userprofile" element={<><Barra/><UserProfile/><Pie/></>} />
 
           <Route path="/dashboard" element={<><Barra/><ProtoDash/><Pie/></>} />
           <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
