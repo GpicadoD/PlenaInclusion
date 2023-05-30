@@ -1,7 +1,6 @@
 // This code imports the "Activities" and "Users" models from their respective modules
 import Activities from "../models/activityModel.js";
 import CompAct from "../models/comActModel.js";
-import Users from "../models/userModel.js";
 import { Sequelize } from "sequelize";
 
 
@@ -20,7 +19,6 @@ export const GetActivities = async(req, res) => {
 // If the field is not missing, it creates a new activity record in the database with the provided name and date, and sends a JSON response indicating success or failure
 export const AddActivities = async(req, res) => {
     const {nameAct = null, date = null} = req.body;
-    console.log("pre crear");
     if(date == null) return res.status(400).json({msg: "There is no date in the activity"});
     try {
         await Activities.create({
@@ -30,7 +28,7 @@ export const AddActivities = async(req, res) => {
         res.json({msg: "Activity Registration Successful"});
     } catch (error) {
         console.log(error);
-    }
+  }
 }
 
 // This code defines a controller function called "GetActByDate" that extracts the activity two dates from the request body

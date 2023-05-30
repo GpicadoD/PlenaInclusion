@@ -44,10 +44,8 @@ const ProtoDash = () => {
     });
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
-    const location = useLocation();
     const [comAct, setComAct] = useState([]);
     const [periodicAct, setperiodicAct] = useState([]);
-    const [showAlert, setShowAlert] = useState(false);
 
     // This sets the current date of the activity and then it adds a week
     var curr = new Date();
@@ -61,8 +59,6 @@ const ProtoDash = () => {
     
     // This sets the NIF of the user and then finds it in the database
     const [NifCom, setNifCom] = useState( 1/*location.state.newUserNif*/);
-    const [idAct, setidAct] = useState("");
-    const [actDate, setactDate] = useState("");
 
     const navigation = useNavigate();
 
@@ -79,14 +75,6 @@ const ProtoDash = () => {
     } catch (error) {
         console.log(error);
     }};
-
-    const getUser = async (e) => {
-    e.preventDefault();
-    const response = await axios.post('/getcompact', {
-        userNIF: NifCom
-    });
-    setUser(response.data);
-    }
 
     // This gets the ComActs from the database in the getcompact and then respond with a more specific information
     const getComActs = async (e) => {
@@ -252,7 +240,6 @@ return (
                 >
                 </Nav>
                 <Form className="d-flex flex-column flex-md-row">
-                    {/* Añadir ID de usuario temporal */}
                     <Form.Control className="me-md-2 mb-2 mb-md-0" type="date" placeholder="Fecha de inicio" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     <Form.Control className="me-md-2" type="date" placeholder="Fecha de fin" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                 </Form>
@@ -343,104 +330,7 @@ return (
                 </Tab>
             }
         </Tabs>
-        
     </div>
-    /*
-        <div className="container mt-5 top">
-            <div className='p-5 text-center'>
-                <h1 className='mb-3' style={{ fontSize: 30, fontWeight: 'bold' }}>Mis actividades</h1>
-            </div>
-            <Navbar className="border-bottom border-gray pb-5">
-                <Container fluid>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                    </Nav>
-                    <div className='mt-4 text-center'>
-                        <button className='Espero acordarme de cambiar esto' onClick={e=>LogOut(e) }>Reset</button>
-                    </div>
-                    <Form className="d-flex" onSubmit={getAct}>
-                        <Form.Control className="me-2" type="date" placeholder="Date" 
-                            value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                        <Form.Control className="me-2" type="date" placeholder="Date" 
-                            value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                        <Form.Control
-                            type="search"
-                            placeholder="Search by NIF"
-                            className="me-2"
-                            aria-label="Search"
-                            value={NifCom} onChange={(e) => setNifCom(e.target.value)}
-                        />
-                        <Button variant="outline-success" type="submit">Buscar</Button>
-                    </Form>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <Tabs
-                defaultActiveKey="signedAct"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-                >
-                <Tab eventKey="signedAct" title="Apuntado">
-                    {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                        {comAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.ActDate}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.ActDate}>
-                                    <Card.Body>
-                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.periodicActs[0].newactivity.nameAct}</Card.Title>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.ActDate.substring(0,10)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.ActDate.substring(11,16)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.periodicActs[0].actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.periodicActs[0].Duration}</Card.Text>
-                                        <div className='mt-4 text-center'>
-                                            <Button className='succes'>
-                                                Ver Más
-                                            </Button>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>}
-                    {comAct.length == 0 && 
-                        <h2 className="noActivity">
-                            No tienes ninguna actividad en las fechas seleccionadas.
-                        </h2>
-                    }
-                </Tab>
-                <Tab eventKey="nearAct" title="Próximas actividades">
-                    {<Row xs={1} md={4} className="g-4 mt-1 mb-5">
-                        {periodicAct.map((activities) => (//Es un for each no se asusten
-                            <Col key={activities.activityId + activities.actDate +  activities.NifOrg}>
-                                <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct}>
-                                    <Card.Body>
-                                        <Card.Title><span style={{ fontWeight: 'bold' }}>Nombre:</span> {activities.newactivity.nameAct}</Card.Title>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Fecha:</span> {activities.actDate.substring(0,10)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Hora de inicio:</span> {activities.actDate.substring(11,16)}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
-                                        <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
-                                        <div className='mt-4 text-center'>
-                                            <button className='Espero acordarme de cambiar esto' onClick={e=>addComActs(e, activities) }>¡Apuntate!</button>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>}
-                    {periodicAct.length == 0 && 
-                        <h2 className="noActivity">
-                            No tienes ninguna actividad en las fechas seleccionadas.
-                        </h2>
-                    }
-                </Tab>
-                
-            </Tabs>
-            
-        </div>*/
     )    
 }
 export default ProtoDash;

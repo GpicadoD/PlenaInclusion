@@ -35,8 +35,6 @@ function App() {
           <Route path="/addImage" element={<><Barra/><AddImage/></>} />
           <Route path="/showImage" element={<><Barra/><ShowImage/></>} />
           <Route path="/protodash" element={<><Barra/><ProtoDash/></>} />
-
-          {/*Medio apaño para hacer funcionar el login como primera página de React*/}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
       </BrowserRouter>
