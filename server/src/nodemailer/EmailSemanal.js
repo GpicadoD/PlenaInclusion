@@ -15,13 +15,16 @@ cron.schedule('0 9 * * 1', async () => {
           const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: 'lacalrodrigo8@gmail.com',
-              pass: 'vodkockdmpdcuuem'
+              user: 'lacalrodrigo9@gmail.com',
+              pass: 'zebdedjycreatqom'
+            },
+            tls: {
+              rejectUnauthorized: false
             }
           });
   
           const info = await transporter.sendMail({
-            from: 'lacalrodrigo8@gmail.com',
+            from: 'lacalrodrigo9@gmail.com',
             to: user.email,
             subject: 'Avisos Semanales - Actividades',
             text: emailContent,

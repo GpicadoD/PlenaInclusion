@@ -241,7 +241,7 @@ export const RegisterNewUser = async(req, res) => {
 
     try {
     
-    await newUsers.create({
+    const user = await newUsers.create({
         userNIF: userNIF,
         name: name,
         lastname: lastname,
@@ -251,25 +251,29 @@ export const RegisterNewUser = async(req, res) => {
         password: hashPassword,
         gender: gender
     });
-           // Enviar el correo electrónico al usuario con la contraseña auto-generada
-           const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: 'lacalrodrigo8@gmail.com',
-                pass: 'vodkockdmpdcuuem'
-            }
-        });
-
-        const info = await transporter.sendMail({
-            from: 'lacalrodrigo8@gmail.com',
-            to: 'lacalrodrigo8@gmail.com',
-            subject: 'Registro Exitoso',
-            text: `¡Hola ${name}! Tu contraseña auto-generada es: ${randomPass}. Recuerda cambiarla después de iniciar sesión.`,
-            html: `<h1>Registro Exitoso</h1>
-                   <p>¡Hola ${name}!</p>
-                   <p>Tu contraseña auto-generada es: ${randomPass}.</p>
-                   <p>Recuerda cambiarla después de iniciar sesión.</p>`
-        });
+    console.log("Usuario creado");
+    // Enviar el correo electrónico al usuario con la contraseña auto-generada
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'lacalrodrigo8@gmail.com',
+            pass: 'vodkockdmpdcuuem'
+        },
+        tls: {
+            rejectUnauthorized: false
+        },
+    });
+    
+    const info = await transporter.sendMail({
+        from: 'lacalrodrigo8@gmail.com',
+        to: user.email,
+        subject: 'Registro Exitoso',
+        text: `¡Hola ${name}! Tu contraseña auto-generada es: ${randomPass}. Recuerda cambiarla después de iniciar sesión.`,
+        html: `<h1>Registro Exitoso</h1>
+                <p>¡Hola ${name}!</p>
+                <p>Tu contraseña auto-generada es: ${randomPass}.</p>
+                <p>Recuerda cambiarla después de iniciar sesión.</p>`
+    });
 
         console.log('Registration email sent to:', email, info.messageId);
 
