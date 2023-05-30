@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import jwt_decode from "jwt-decode";
-import { confirmAlert } from 'react-confirm-alert';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const AddNewActivity = () => {
     const [user, setUser] = useState({
@@ -29,7 +30,6 @@ const AddNewActivity = () => {
     const [finishDate, setFinishDate] = useState('');
     const [idPeriod, setIdPeriod] = useState('');
     const [idCreator, setIdCreator] = useState('');
-    const [msg, setMsg] = useState('');
     const navigation = useNavigate();
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
@@ -40,13 +40,12 @@ const AddNewActivity = () => {
     const Add = async (e) => {
         e.preventDefault();
         try {
-            //confirmAlert();
             await axios.post('/AddnewActivities', {
                 activityId: activityId,
                 nameAct: nameAct,
                 idPublicType: idPublicType,
                 idTheme: idTheme,
-                idImgAct: idImgAct,
+                idImgAct: null,
                 startDate: startDate,
                 finishDate: finishDate,
                 idPeriod: idPeriod,
@@ -57,6 +56,30 @@ const AddNewActivity = () => {
             console.log(error);
         }
     };
+    const options = {
+        title: 'Confirmacion',
+        message: '¿Estas seguro?',
+        buttons: [
+            {
+            label: 'Yes',
+            onClick: () => Add
+            },
+            {
+            label: 'No',
+            onClick: () => console.log('no')
+            }
+        ],
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        keyCodeForClose: [8, 32],
+        willUnmount: () => {},
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypress: () => {},
+        onKeypressEscape: () => {},
+        overlayClassName: "overlay-custom-class-name"
+    };
+
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -77,48 +100,30 @@ const AddNewActivity = () => {
                 navigation("/");
             }
         }
-    }
-    const options = {
-        title: 'Confirmacion',
-        message: '¿Estas seguro de añadir la actividad?',
-        buttons: [
-            {
-            label: 'Si',
-            onClick: Add
-            },
-            {
-            label: 'No',
-            }
-        ],
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-        keyCodeForClose: [8, 32],
-        willUnmount: () => {},
-        afterClose: () => {},
-        onClickOutside: () => {},
-        onKeypress: () => {},
-        onKeypressEscape: () => {},
-        overlayClassName: "overlay-custom-class-name"
     };
-    const AddImage = async (e) => {
-        e.preventDefault();
-        console.log(previewImages);
+
+    const PreviewImg = async (e) => {
+        setSelectedImages(e.target.files[0]);
+        const inputFile = e.target.files[0];
+        if (inputFile) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setPreviewImages([e.target.result]);
+            };
+            reader.readAsDataURL(inputFile);
+        }
         const formData = new FormData();
         formData.append('file', selectedImages);
     
-        axios.post('/upload', formData)
+        const idimage = axios.post('/uploadImgAct', formData)
             .then((response) => {
                 console.log(response.data);
             })
             .catch((error) => {
                 console.error(error);
-            });
+        });
+        setIdImgAct(idimage.idImgAct);
     };
-
-
-    useEffect(() => {   
-        refreshToken();
-        }, []);
 
     return (
         <div style={{
@@ -127,7 +132,7 @@ const AddNewActivity = () => {
         }}>
             <div className='bg-success bg-opacity-25'>
                 <div className="form-container vh-100 d-flex justify-content-center align-items-center">
-                    <Form onSubmit={Add} className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
+                    <Form onSubmit={(e) => confirmAlert(options)} className='bg-white text-grey bg-opacity-75 p-3 mb-5' style={{ borderRadius: '50px', padding: '50px' }}>
                         <Form.Group className="field mt-4 mb-4">
                             <div className="Formulario_usuario container pl-2 ">
                                 <div className="d-flex justify-content-center">
@@ -178,9 +183,7 @@ const AddNewActivity = () => {
                                             </Col>
                                             <Col>
                                                 <div className="d-flex flex-column align-items-center">
-                                                    <Button variant="success" type="submit" onClick={(e) => AddImage} className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
-                                                        AÑADIR IMAGEN
-                                                    </Button>
+                                                    <Form.Control className="mb-3" type="file" id="input-files1" onChange={PreviewImg} />
                                                 </div>
                                             </Col>
 

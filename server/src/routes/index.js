@@ -95,7 +95,7 @@ router.post('/sendMail', async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-        from: "lacalrodrigo8@gmail.com",
+        from: "lacalrodrigo8@gmail.com", //Cambiarlo por el correo de la empresa
         to: "lacalrodrigo8@gmail.com",
         subject: "Prueba Nodemailer",
         text: "Este correo fue enviado por Rodrigo",
@@ -150,7 +150,7 @@ router.post('/register', async (req, res) => {
 // Define routes for get the user-activity list-related actions
 
 // Define routes for get activity list-related actions and for adding new ones
-router.post('/getnewAct',verifyToken, GetnewActivities);
+router.post('/getnewAct', GetnewActivities);
 router.post('/AddnewActivities', AddnewActivities);
 
 router.post('/AddorgType',verifyToken, AddorgType);
@@ -233,7 +233,7 @@ router.post('/logout',Logout);
 
 router.post('/getperiodicActsByUserDate',GetperiodicActsByUserDate);
 router.get('/verifyToken', verifyToken);
-
+router.post("/uploadImgAct", uploadFile.single("file"), uploadImgAct);
 router.post("/upload", uploadFile.single("file"), uploadImgOrg);
 
 router.post("/getImg", uploadFile.single("file"), getImg);
