@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login/>} />
-          <Route path="/activityprofile" element={<><Barra/><ActivityProfile/><Pie/></>} />
+          <Route path="/userprofile" element={<><Barra/><UserProfile/><Pie/></>} />
 
           <Route path="/dashboard" element={<><Barra/><Dashboard/><Pie/></>} />
           <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
@@ -35,7 +35,6 @@ function App() {
           <Route path="/addnewactivity" element={<><Barra/><AddNewActivity/></>} />
           
           <Route path="/ActivityInfo" element={<><Barra/><ActivityInfo/></>} />
-          <Route path="/userprofile" element={<><Barra/> <UserProfile/></>} />
 
           <Route path="/protodash" element={<><Barra/><ProtoDash/><Pie/></>} />
           <Route path="/addImage" element={<><Barra/><AddImage/></>} />
