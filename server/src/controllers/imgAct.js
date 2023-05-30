@@ -1,6 +1,7 @@
 // This code imports the "ImgAct" model from its respective module
 import fs from "fs";
 import ImgAct from "../models/imgActModel.js";
+import { where } from "sequelize";
 
 // This is a controller function that retrieves all image activities from the database and sends them as a response to the client
 export const GetimgAct  = async(req, res) => {
@@ -39,22 +40,23 @@ export const DeleteImgAct = async(req, res) => {
 
 export const uploadImgAct = async (req, res) => {
 try {
-    console.log(req.file);  
-
+    let date = (new Date().toJSON()).substring(20);
     if (req.file == undefined) {
     return res.send(`You must select a file.`);
     }
-
     ImgAct.create({
         type: req.file.mimetype,
         name: req.file.originalname,
         ImgAct: fs.readFileSync('resources/statict/assets/uploads/' + req.file.filename
     ),}).then((ImgAct) => {
-    fs.writeFileSync('resources/statict/assets/uploads/' + ImgAct.filename, ImgAct.ImgAct
+    fs.writeFileSync('resources/statict/assets/uploads/' +ImgAct.filename, ImgAct.ImgAct
     );
-
-    return res.send(`File has been uploaded.`);
     });
+    console.log("Pre-busqueda");
+    let ImgActs = await ImgAct.findOne({where:{
+        ImgAct: fs.readFileSync('resources/statict/assets/uploads/' + req.file.filename)
+    }});
+    return res.json(ImgActs);
 } catch (error) {
     console.log(error);
     return res.send(`Error when trying upload images: ${error}`);

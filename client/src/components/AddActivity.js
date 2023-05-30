@@ -28,11 +28,12 @@ const AddNewActivity = () => {
     const [finishDate, setFinishDate] = useState('');
     const [idPeriod, setIdPeriod] = useState('');
     const [idCreator, setIdCreator] = useState('');
-    const [msg, setMsg] = useState('');
     const navigation = useNavigate();
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [NifCom, setNifCom] = useState( '1'/*location.state.newUserNif*/);
+    const [selectedImages, setSelectedImages] = useState('');
+    const [previewImages, setPreviewImages] = useState('');
 
     const Add = async (e) => {
         e.preventDefault();
@@ -53,6 +54,7 @@ const AddNewActivity = () => {
             console.log(error);
         }
     };
+
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -73,7 +75,30 @@ const AddNewActivity = () => {
                 navigation("/");
             }
         }
-    }
+    };
+
+    const PreviewImg = async (e) => {
+        setSelectedImages(e.target.files[0]);
+        const inputFile = e.target.files[0];
+        if (inputFile) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setPreviewImages([e.target.result]);
+            };
+            reader.readAsDataURL(inputFile);
+        }
+        const formData = new FormData();
+        formData.append('file', selectedImages);
+    
+        const idimage = axios.post('/uploadImgAct', formData)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+        });
+        setIdImgAct(idimage.idImgAct);
+    };
 
     return (
         <div style={{
@@ -133,9 +158,7 @@ const AddNewActivity = () => {
                                             </Col>
                                             <Col>
                                                 <div className="d-flex flex-column align-items-center">
-                                                    <Button variant="success" type="submit" className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#ff8b02', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
-                                                        AÑADIR IMAGEN
-                                                    </Button>
+                                                    <Form.Control className="mb-3" type="file" id="input-files1" onChange={PreviewImg} />
                                                 </div>
                                             </Col>
 
@@ -150,7 +173,7 @@ const AddNewActivity = () => {
                                             <Col>
                                                 <div className="d-flex flex-column align-items-end">
                                                     <Button variant="success" type="submit" className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#00820B', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
-                                                        AÑADIR AACTIVIDAD
+                                                        AÑADIR ACTIVIDAD
                                                     </Button>
                                                 </div>
                                             </Col>
