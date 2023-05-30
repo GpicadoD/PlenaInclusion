@@ -164,11 +164,10 @@ return(
                             <p><span style={{ fontWeight: '600' }}>{email}</span></p>
                           </Col>
                         </Row>
-                        <Row className="d-flex justify-content-start rounded-3 p-2 mb-2">
-                          <Col className="col-md-12 px-12">
-                            <p className="text-muted mb-1"><span>Dirección:</span> 
-                            <p><span style={{ fontWeight: '600' }}>{userNIF}</span></p>
-                            </p>    
+                        <Row className="d-flex justify-content-start rounded-3 p-1 xs-12">
+                          <Col className="lg-4 col-md-4 sm-4 col-12">
+                              <p className="text-muted mb-0"><span>Telefono:</span> </p>
+                              <p><span style={{ fontWeight: '600' }}>{phoneNumber}</span></p>
                           </Col>
                         </Row>
                         </div>

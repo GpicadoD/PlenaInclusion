@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import '../App.css';
-import Image from 'react-bootstrap/Image';
 
 const Pie = () => {
     return (

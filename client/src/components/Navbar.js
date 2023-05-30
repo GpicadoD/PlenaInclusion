@@ -79,10 +79,6 @@ const Barra = () => {
                 <Dropdown.Menu>
                     <Dropdown.Item href="/userprofile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/userprofile">PROFILE</Nav.Link></Dropdown.Item>
                     <Dropdown.Item    href="#/action-1" style={{ fontWeight: 600 }} type="submit" onClick={(e) => confirmAlert(options)}  ><Nav.Link className='submenu'>LOGOUT</Nav.Link></Dropdown.Item>
-                     {/*
-                    <Dropdown.Item href="/userProfile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
-                    <Dropdown.Item href="#/action-1" style={{fontWeight: 600}}><Nav.Link className='submenu' onClick={LogOut}>LOGOUT</Nav.Link></Dropdown.Item>
-                    */}
                 </Dropdown.Menu>
             </Dropdown>
                 </Nav>
