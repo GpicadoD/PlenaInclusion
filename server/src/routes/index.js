@@ -163,7 +163,7 @@ router.post('/AddnewPublic',verifyToken, Addnewpublic);
 router.post('/Addnewtheme',verifyToken, Addnewtheme);
 
 // Define routes for user list-related actions and for adding new ones
-router.post('/newUser', verifyToken, GetNewUser);
+router.post('/newUser', GetNewUser);
 router.post('/newActivities',verifyToken, AddnewActivities);
 
 //all get//
@@ -179,7 +179,7 @@ router.post('/getOrganizer',verifyToken, GetOrganizer);
 router.post('/Addcompetitor',verifyToken, AddCompetitor);
 
 router.post('/Addorganizer',verifyToken, Addneworganizer);
-router.post('/insertCompact',verifyToken, AddnewList);
+router.post('/insertCompact', AddnewList);
 
 router.post('/getTheme',verifyToken,GetTheme);
 
@@ -206,7 +206,7 @@ router.post('/deleteTheme',verifyToken,DeleteTheme);
 
 router.post('/updateActivities',verifyToken, UpdateActivities);
 
-router.post('/updateUser',verifyToken, UpdateUser);
+router.post('/updateUser',UpdateUser);
 
 router.post('/updateOrganizer',verifyToken, UpdateOrganizer);
 
@@ -227,7 +227,7 @@ router.post('/loginNewUser', Login);
 router.post('/updatePassword', UpdatePassword);
 router.post('/registernewuser', RegisterNewUser);
 router.post('/getperiodicActsByUserDate', GetperiodicActsByUserDate);
-router.post('/updatePassword',verifyToken, UpdatePassword);
+router.post('/updatePassword', UpdatePassword);
 
 router.post('/logout',Logout);
 

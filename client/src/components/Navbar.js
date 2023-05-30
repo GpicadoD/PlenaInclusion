@@ -48,7 +48,7 @@ const Barra = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="/activityprofile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
+                    <Dropdown.Item href="/userProfile" style={{fontWeight: 600}}><Nav.Link className='submenu' href="/activityprofile">PROFILE</Nav.Link></Dropdown.Item>
                     <Dropdown.Item href="#/action-1" style={{fontWeight: 600}}><Nav.Link className='submenu' onClick={LogOut}>LOGOUT</Nav.Link></Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>

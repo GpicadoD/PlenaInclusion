@@ -199,7 +199,7 @@ export const Logout = async(req, res) => {
 }
 
 export const UpdatePassword  = async(req, res) => {
-    var {newUserNif, actualUserPass, newUserPass, repeat_newUserPass} = req.body;
+    var {newUserNif, oldUserPass, newUserPass, confirmPass} = req.body;
     try {
         const users = await newUsers.findByPk(newUserNif);
         if(users.userNIF != newUserNif){
@@ -207,10 +207,10 @@ export const UpdatePassword  = async(req, res) => {
             res.json({msg: "User Not found"});
             return;
         } else {
-            const checkPass = await bcrypt.compare(actualUserPass, users.password);
+            const checkPass = await bcrypt.compare(oldUserPass, users.password);
             if(!checkPass){
                 res.json({msg: "Invalid Password"});
-            } else if (newUserPass == repeat_newUserPass) {
+            } else if (newUserPass == confirmPass) {
                 const salt = await bcrypt.genSalt();
                 newUserPass = await bcrypt.hash(newUserPass, salt);
                 users.set({
