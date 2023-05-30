@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+// These lines of code import necessary libraries and modules for the component to work.
+// Specifically, it imports React, useState, and useEffect from the 'react' library,
+// axios for making API requests, and several components from the 'react-bootstrap' library.
+import React, { useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -8,6 +11,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 
 const AddNewActivity = () => {
+    // Define the state variables using the useState hook
     const [activityId, setActivityId] = useState('');
     const [nameAct, setNameAct] = useState('');
     const [idPublicType, setIdPublicType] = useState('');
@@ -21,8 +25,10 @@ const AddNewActivity = () => {
     const history = useNavigate();
 
     const Add = async (e) => {
+        // Function to add a new activity
         e.preventDefault();
         try {
+            // Make a POST request to add a new activity
             await axios.post('/AddnewActivities', {
                 activityId: activityId,
                 nameAct: nameAct,
@@ -40,6 +46,8 @@ const AddNewActivity = () => {
         }
     };
 
+    // Finally, the component returns a div that contains several child components that display information and allow the user to input new values for the 'activityId',
+    // 'nameAct', and 'Description' state variables. It also displays the 'msg' state variable if there is an error.
     return (
         <div style={{
             backgroundImage: `url("https://sirc.ca/wp-content/uploads/2020/03/AdobeStock_298604606-scaled.jpeg")`,
@@ -115,7 +123,7 @@ const AddNewActivity = () => {
                                             <Col>
                                                 <div className="d-flex flex-column align-items-end">
                                                     <Button variant="success" type="submit" className="border-dark w-100" style={{ borderColor: '#00820B', borderRadius: '10px', borderWidth: '2px', backgroundColor: '#00820B', fontSize: 15, fontStyle: 'italic', fontWeight: '600', color: 'white' }}>
-                                                        AÑADIR AACTIVIDAD
+                                                        AÑADIR ACTIVIDAD
                                                     </Button>
                                                 </div>
                                             </Col>

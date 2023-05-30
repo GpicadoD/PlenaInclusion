@@ -103,31 +103,33 @@ const Dashboard = () => {
     // funcion que actualiza el accessToken si es necesario
     // y en config añade los headers y los datos para las queries
     axiosJWT.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime() || expire == undefined) {
+        try {
+          const currentDate = new Date();
+          if (expire * 1000 < currentDate.getTime() || expire == undefined) {
             const response = await axios.get('http://localhost:3030/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setUser({
-                ...user, // Copy other fields
-                userId: decoded.userId,
-                name: decoded.name
+              ...user, // Copy other fields
+              userId: decoded.userId,
+              name: decoded.name
             });
             config.params = {
-                userId: decoded.userId
+              userId: decoded.userId
             }
             setExpire(decoded.exp);
-        } else {
+          } else {
             config.headers.Authorization = `Bearer ${token}`;
             config.params = {
-                userId: user.userId
+              userId: user.userId
             }
+          }
+          return config;
+        } catch (error) {
+          return Promise.reject(error);
         }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
+      });
 
     // const getUsers = async () => {
     //     try {

@@ -254,14 +254,14 @@ export const RegisterNewUser = async(req, res) => {
            const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'lacalrodrigo8@gmail.com',
-                pass: 'vodkockdmpdcuuem'
+                user: 'lacalrodrigo9@gmail.com',
+                pass: 'zebdedjycreatqom'
             }
         });
 
         const info = await transporter.sendMail({
-            from: 'lacalrodrigo8@gmail.com',
-            to: 'lacalrodrigo8@gmail.com',
+            from: 'lacalrodrigo9@gmail.com',
+            to: 'lacalrodrigo9@gmail.com',
             subject: 'Registro Exitoso',
             text: `¡Hola ${name}! Tu contraseña auto-generada es: ${randomPass}. Recuerda cambiarla después de iniciar sesión.`,
             html: `<h1>Registro Exitoso</h1>

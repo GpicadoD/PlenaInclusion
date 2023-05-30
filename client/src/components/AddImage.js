@@ -17,31 +17,38 @@ const AddImage = () => {
     const history = useNavigate();
 
     const PreviewImg = async (e) => {
-        setSelectedImages(e.target.files[0]);
-        const inputFile = e.target.files[0];
-        if (inputFile) {
+        try {
+          setSelectedImages(e.target.files[0]);
+          const inputFile = e.target.files[0];
+          if (inputFile) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                setPreviewImages([e.target.result]);
+              setPreviewImages([e.target.result]);
             };
             reader.readAsDataURL(inputFile);
+          }
+        } catch (error) {
+          console.error(error);
         }
-        
     };
 
     const Add = async (e) => {
-        e.preventDefault();
-        console.log(previewImages);
-        const formData = new FormData();
-        formData.append('file', selectedImages);
-    
-        axios.post('/upload', formData)
+        try {
+          e.preventDefault();
+          console.log(previewImages);
+          const formData = new FormData();
+          formData.append('file', selectedImages);
+      
+          axios.post('/upload', formData)
             .then((response) => {
-                console.log(response.data);
+              console.log(response.data);
             })
             .catch((error) => {
-                console.error(error);
+              console.error(error);
             });
+        } catch (error) {
+          console.error(error);
+        }
     };
         
     return (
