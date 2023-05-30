@@ -118,7 +118,7 @@ const ProtoDash = () => {
         try {
             console.log("AddedComacts ok");
             e.preventDefault();
-            console.log(activities.actDate);
+            console.log(activities);
             await axios.post('/insertCompact', {
                 idAct: activities.activityId,
                 idUser: NifCom,
@@ -127,7 +127,7 @@ const ProtoDash = () => {
             setJoin(true);
         } catch (error) {
         console.log(error);
-        }};
+    }};
     const refreshToken = async () => {
         try {
             const response = await axios.get('/token');
@@ -253,7 +253,7 @@ return (
                 {<Row xs={1} md={2} className="g-4 mt-1 mb-5">
                     {periodicAct.map((activities) => (//Es un for each no se asusten
                         <Col key={activities.activityId + activities.actDate +  activities.NifOrg}>
-                            <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct} style={{ boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
+                            <Card className={`box-shadow`} key={activities.activityId + activities.actDate +  activities.NifOrg + activities.CompAct} style={{boxShadow: '13px 18px 8px 1px rgb(104 104 104 / 40%)' }}>
                             <Card.Img  className='card-img-top rounded-bottom p-0'
                                     style={{ borderRadius: '50px',
                                     objectFit: 'cover',
@@ -270,7 +270,7 @@ return (
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Lugar:</span> {activities.actPlace}</Card.Text>
                                     <Card.Text><span style={{ fontWeight: 'bold' }}>Duración:</span> {activities.Duration}</Card.Text>
                                     {NifCom != 1 &&
-                                    <Button className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>
+                                        <Button onClick={e=>addComActs(e, activities)} className='w-100 border-3' variant="success mt-3" style={{ fontWeight: '600', fontStyle: 'italic', borderRadius: '15px' }}>APUNTARSE</Button>
                                     }
                                 </Card.Body>
                             </Card>

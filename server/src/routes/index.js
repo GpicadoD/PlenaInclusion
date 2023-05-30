@@ -179,7 +179,7 @@ router.post('/getOrganizer',verifyToken, GetOrganizer);
 router.post('/Addcompetitor',verifyToken, AddCompetitor);
 
 router.post('/Addorganizer',verifyToken, Addneworganizer);
-router.post('/insertCompact',verifyToken, AddnewList);
+router.post('/insertCompact', AddnewList);
 
 router.post('/getTheme',verifyToken,GetTheme);
 
